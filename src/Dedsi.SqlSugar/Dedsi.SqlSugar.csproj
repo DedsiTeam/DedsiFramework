@@ -6,4 +6,12 @@
 
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="SqlSugarCore" Version="5.1.4.166" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Dedsi.Ddd.Domain\Dedsi.Ddd.Domain.csproj" />
+    </ItemGroup>
+
 </Project>

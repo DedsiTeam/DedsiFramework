@@ -5,8 +5,5 @@
     <PropertyGroup>
 
     </PropertyGroup>
-    
-    <ItemGroup>
-        <PackageReference Include="Volo.Abp.Core" Version="8.2.1" />
-    </ItemGroup>
+
 </Project>
