@@ -6,4 +6,8 @@
 
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Dedsi.SqlSugar\Dedsi.SqlSugar.csproj" />
+    </ItemGroup>
+
 </Project>

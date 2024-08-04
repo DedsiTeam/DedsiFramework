@@ -1,9 +1,10 @@
 using System.Linq.Expressions;
+using Dedsi.Core.DependencyInjections;
 using SqlSugar;
 
 namespace Dedsi.Ddd.Domain.Repositories;
 
-public interface IReadOnlyRepository<TEntity> where TEntity : class
+public interface IReadOnlyRepository<TEntity> : ITransientDependency where TEntity : class
 {
     /// <summary>
     /// 查询单个

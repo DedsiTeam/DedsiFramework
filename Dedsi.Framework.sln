@@ -5,8 +5,6 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E32F98D6-D9D2-4D64-B9F7-EFEB260E9BF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dedsi.CleanArchitecture.Core", "src\Dedsi.CleanArchitecture.Core\Dedsi.CleanArchitecture.Core.csproj", "{D9846BA3-8AEA-4A74-AEA3-F00777EE67E4}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dedsi.CleanArchitecture.Infrastructure", "src\Dedsi.CleanArchitecture.Infrastructure\Dedsi.CleanArchitecture.Infrastructure.csproj", "{C923A027-7770-4E11-9DD5-A7CDE8A721F8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dedsi.CleanArchitecture.HttpApi", "src\Dedsi.CleanArchitecture.HttpApi\Dedsi.CleanArchitecture.HttpApi.csproj", "{0819EB91-2795-4E90-8CFA-30BDA80D6204}"
@@ -23,6 +21,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dedsi.Core", "src\Dedsi.Cor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dedsi.SqlSugar", "src\Dedsi.SqlSugar\Dedsi.SqlSugar.csproj", "{6D26E605-AC3A-4C57-B10E-D39E00199A23}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{587F298A-AFEF-4E79-B882-CBAB4FB3A69C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cleanArchitecture", "cleanArchitecture", "{57330FF5-31E2-4FD2-8FDC-DE7477E28F67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectName.HttpApi", "templates\cleanArchitecture\ProjectName.HttpApi\ProjectName.HttpApi.csproj", "{B50D0DAF-4DE3-48A8-A0FF-9AD5D94536E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectName.Domain", "templates\cleanArchitecture\ProjectName.Domain\ProjectName.Domain.csproj", "{3C2260C1-C464-407A-BCC8-72226B619937}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectName.Infrastructure", "templates\cleanArchitecture\ProjectName.Infrastructure\ProjectName.Infrastructure.csproj", "{01A7DFAD-26F5-4642-AC57-7E251620A86D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dedsi.CleanArchitecture.Domain", "src\Dedsi.CleanArchitecture.Domain\Dedsi.CleanArchitecture.Domain.csproj", "{A937D8F6-42F3-4142-BF5D-210D1F7790F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,7 +42,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{D9846BA3-8AEA-4A74-AEA3-F00777EE67E4} = {E32F98D6-D9D2-4D64-B9F7-EFEB260E9BF4}
 		{C923A027-7770-4E11-9DD5-A7CDE8A721F8} = {E32F98D6-D9D2-4D64-B9F7-EFEB260E9BF4}
 		{0819EB91-2795-4E90-8CFA-30BDA80D6204} = {E32F98D6-D9D2-4D64-B9F7-EFEB260E9BF4}
 		{E97DF795-1C78-4AC0-A010-F49E5D53A3CF} = {E32F98D6-D9D2-4D64-B9F7-EFEB260E9BF4}
@@ -41,12 +50,13 @@ Global
 		{089A67B0-2AE4-44FB-843F-906E267E5FF1} = {E32F98D6-D9D2-4D64-B9F7-EFEB260E9BF4}
 		{53E641E9-51F0-4662-95A2-9DB5A3369DFA} = {E32F98D6-D9D2-4D64-B9F7-EFEB260E9BF4}
 		{6D26E605-AC3A-4C57-B10E-D39E00199A23} = {E32F98D6-D9D2-4D64-B9F7-EFEB260E9BF4}
+		{57330FF5-31E2-4FD2-8FDC-DE7477E28F67} = {587F298A-AFEF-4E79-B882-CBAB4FB3A69C}
+		{B50D0DAF-4DE3-48A8-A0FF-9AD5D94536E2} = {57330FF5-31E2-4FD2-8FDC-DE7477E28F67}
+		{3C2260C1-C464-407A-BCC8-72226B619937} = {57330FF5-31E2-4FD2-8FDC-DE7477E28F67}
+		{01A7DFAD-26F5-4642-AC57-7E251620A86D} = {57330FF5-31E2-4FD2-8FDC-DE7477E28F67}
+		{A937D8F6-42F3-4142-BF5D-210D1F7790F1} = {E32F98D6-D9D2-4D64-B9F7-EFEB260E9BF4}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D9846BA3-8AEA-4A74-AEA3-F00777EE67E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D9846BA3-8AEA-4A74-AEA3-F00777EE67E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D9846BA3-8AEA-4A74-AEA3-F00777EE67E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D9846BA3-8AEA-4A74-AEA3-F00777EE67E4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C923A027-7770-4E11-9DD5-A7CDE8A721F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C923A027-7770-4E11-9DD5-A7CDE8A721F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C923A027-7770-4E11-9DD5-A7CDE8A721F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -79,5 +89,21 @@ Global
 		{6D26E605-AC3A-4C57-B10E-D39E00199A23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D26E605-AC3A-4C57-B10E-D39E00199A23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D26E605-AC3A-4C57-B10E-D39E00199A23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B50D0DAF-4DE3-48A8-A0FF-9AD5D94536E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B50D0DAF-4DE3-48A8-A0FF-9AD5D94536E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B50D0DAF-4DE3-48A8-A0FF-9AD5D94536E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B50D0DAF-4DE3-48A8-A0FF-9AD5D94536E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C2260C1-C464-407A-BCC8-72226B619937}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C2260C1-C464-407A-BCC8-72226B619937}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C2260C1-C464-407A-BCC8-72226B619937}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C2260C1-C464-407A-BCC8-72226B619937}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01A7DFAD-26F5-4642-AC57-7E251620A86D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01A7DFAD-26F5-4642-AC57-7E251620A86D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01A7DFAD-26F5-4642-AC57-7E251620A86D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01A7DFAD-26F5-4642-AC57-7E251620A86D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A937D8F6-42F3-4142-BF5D-210D1F7790F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A937D8F6-42F3-4142-BF5D-210D1F7790F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A937D8F6-42F3-4142-BF5D-210D1F7790F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A937D8F6-42F3-4142-BF5D-210D1F7790F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
