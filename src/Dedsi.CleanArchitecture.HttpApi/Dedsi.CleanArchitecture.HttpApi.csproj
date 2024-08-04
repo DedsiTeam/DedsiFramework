@@ -6,8 +6,4 @@
 
     </PropertyGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\Dedsi.AspNetCore\Dedsi.AspNetCore.csproj" />
-    </ItemGroup>
-
 </Project>

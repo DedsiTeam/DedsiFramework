@@ -5,26 +5,13 @@ namespace ProjectName.Domain.Users;
 
 public interface IUserAppService : IDedsiApplicationService
 {
-    Task<string> GetAsync();
+    Task<User> GetAsync();
 }
 
-public class UserAppService : DedsiApplicationService, IUserAppService
+public class UserAppService(IUserRepository userRepository) : DedsiApplicationService, IUserAppService
 {
-    public Task<string> GetAsync()
+    public Task<User> GetAsync()
     {
-        return Task.FromResult("123");
-    }
-}
-
-public interface IUserAAppService : IDedsiApplicationService
-{
-    Task<string> GetAsync();
-}
-
-public class UserAAppService : DedsiApplicationService, IUserAAppService
-{
-    public Task<string> GetAsync()
-    {
-        return Task.FromResult("123");
+        return userRepository.GetAsync(a => a.Id == Guid.Parse("E5F3305F-567D-45FB-15E4-3A13BF036337"));
     }
 }

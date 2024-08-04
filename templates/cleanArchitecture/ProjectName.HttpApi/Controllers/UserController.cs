@@ -8,5 +8,5 @@ namespace ProjectName.HttpApi.Controllers;
 public class UserController(IUserAppService userAppService) : ControllerBase
 {
     [HttpGet]
-    public Task<string> GetAsync() => userAppService.GetAsync();
+    public Task<User> GetAsync() => userAppService.GetAsync();
 }

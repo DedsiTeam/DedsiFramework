@@ -31,33 +31,33 @@ public static class DependencyInjectionExtensions
     /// <param name="lifetime"></param>
     private static void AddDependencyInjectionByType(this Type baseType,List<Assembly> assemblies,IServiceCollection services, ServiceLifetime lifetime)
     {
-        foreach (var assembly in assemblies)
-        {
-            var interfaceTypes = assembly.DefinedTypes
-                .Where(a => a.IsInterface && baseType.IsAssignableFrom(a) && a != baseType)
-                .ToArray();
-            
-            var implementTypes = assembly.DefinedTypes
-                .Where(a => a.IsClass && baseType.IsAssignableFrom(a) && a != baseType)
-                .ToArray();
+        var interfaceTypes = assemblies
+                        .SelectMany(a => a.DefinedTypes)
+                        .Where(a => a.IsInterface && baseType.IsAssignableFrom(a) && a != baseType)
+                        .OrderByDescending(a => a.Name)
+                        .ToArray();
+        
+        var implementTypes = assemblies
+                        .SelectMany(a => a.DefinedTypes)
+                        .Where(a => a.IsClass && baseType.IsAssignableFrom(a) && a != baseType)
+                        .ToArray();
 
-            foreach (var implementType in implementTypes)
+        foreach (var implementType in implementTypes)
+        {
+            var interfaceType = interfaceTypes.FirstOrDefault(a => a.IsAssignableFrom(implementType));
+            if (interfaceType != null)
             {
-                var interfaceType = interfaceTypes.FirstOrDefault(a => a.IsAssignableFrom(implementType));
-                if (interfaceType != null)
+                switch (lifetime)
                 {
-                    switch (lifetime)
-                    {
-                        case ServiceLifetime.Singleton:
-                            services.AddSingleton(interfaceType, implementType);
-                            break;
-                        case ServiceLifetime.Scoped:
-                            services.AddSingleton(interfaceType, implementType);
-                            break;
-                        case ServiceLifetime.Transient:
-                            services.AddTransient(interfaceType, implementType);
-                            break;
-                    }
+                    case ServiceLifetime.Singleton:
+                        services.AddSingleton(interfaceType, implementType);
+                        break;
+                    case ServiceLifetime.Scoped:
+                        services.AddSingleton(interfaceType, implementType);
+                        break;
+                    case ServiceLifetime.Transient:
+                        services.AddTransient(interfaceType, implementType);
+                        break;
                 }
             }
         }
@@ -69,38 +69,19 @@ public static class DependencyInjectionExtensions
     /// <returns></returns>
     private static List<Assembly> GetAllAssembly()
     {
+        var fileSystemInfos = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory)
+            .GetFileSystemInfos()
+            .Where(a => a.Extension == ".dll")
+            .Where(a => a.Name.StartsWith("Dedsi") || a.Name.EndsWith("Domain.dll") || a.Name.EndsWith("Infrastructure.dll"))
+            .OrderBy(a => a.Name);
 
-        var allAssemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
-
-        HashSet<string> loadedAssemblies = new();
-
-        foreach (var item in allAssemblies)
+        List<Assembly> assemblies = new List<Assembly>();
+        foreach (var fileSystemInfo in fileSystemInfos)
         {
-            loadedAssemblies.Add(item.FullName!);
+            assemblies.Add(Assembly.Load(fileSystemInfo.Name.Substring(0,fileSystemInfo.Name.Length - 4)));
         }
 
-        Queue<Assembly> assembliesToCheck = new();
-        assembliesToCheck.Enqueue(Assembly.GetEntryAssembly()!);
-
-        while (assembliesToCheck.Any())
-        {
-            var assemblyToCheck = assembliesToCheck.Dequeue();
-            foreach (var reference in assemblyToCheck!.GetReferencedAssemblies())
-            {
-                if (!loadedAssemblies.Contains(reference.FullName))
-                {
-                    var assembly = Assembly.Load(reference);
-
-                    assembliesToCheck.Enqueue(assembly);
-
-                    loadedAssemblies.Add(reference.FullName);
-
-                    allAssemblies.Add(assembly);
-                }
-            }
-        }
-
-        return allAssemblies;
+        return assemblies;
     }
     
 }
