@@ -9,11 +9,13 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.7"/>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
+        <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="8.2.1" />
+        <PackageReference Include="Volo.Abp.Autofac" Version="8.2.1" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\src\Dedsi.AspNetCore\Dedsi.AspNetCore.csproj" />
-      <ProjectReference Include="..\ProjectName.Infrastructure\ProjectName.Infrastructure.csproj" />
+      <ProjectReference Include="..\..\src\ProjectName.HttpApi\ProjectName.HttpApi.csproj" />
+      <ProjectReference Include="..\..\src\ProjectName.Infrastructure\ProjectName.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

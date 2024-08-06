@@ -1,17 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <Import Project="..\..\common.props" />
-    
+
     <PropertyGroup>
 
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Dedsi.SqlSugar\Dedsi.SqlSugar.csproj" />
+      <PackageReference Include="Volo.Abp.EntityFrameworkCore" Version="8.2.1" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Volo.Abp.AspNetCore" Version="8.2.1" />
+      <ProjectReference Include="..\Dedsi.Ddd.Domain\Dedsi.Ddd.Domain.csproj" />
     </ItemGroup>
 
 </Project>

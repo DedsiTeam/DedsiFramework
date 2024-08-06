@@ -1,5 +1,3 @@
-using SqlSugar;
-
 namespace Dedsi.Ddd.Domain.Entities;
 
 public abstract class Entity : IEntity
@@ -22,7 +20,6 @@ public abstract class Entity<TKey> : Entity, IEntity<TKey>
     /// <summary>
     /// 主键Id
     /// </summary>
-    [SugarColumn(IsPrimaryKey = true)]
     public TKey Id { get; protected set; }
     
     

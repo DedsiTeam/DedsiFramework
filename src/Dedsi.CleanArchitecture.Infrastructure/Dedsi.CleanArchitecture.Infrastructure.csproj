@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Dedsi.SqlSugar\Dedsi.SqlSugar.csproj" />
+      <ProjectReference Include="..\Dedsi.EntityFrameworkCore\Dedsi.EntityFrameworkCore.csproj" />
     </ItemGroup>
 
 </Project>

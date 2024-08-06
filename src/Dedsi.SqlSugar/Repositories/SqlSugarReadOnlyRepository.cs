@@ -4,12 +4,12 @@ using SqlSugar;
 
 namespace Dedsi.SqlSugar.Repositories;
 
-public class ReadOnlyRepository<TEntity>(ISqlSugarClient sqlSugarClient) : IReadOnlyRepository<TEntity> where TEntity : class
+public class SqlSugarReadOnlyRepository<TEntity>(ISqlSugarClient readOnlyClient) : IReadOnlyRepository<TEntity> where TEntity : class
 {
     /// <inheritdoc />
     public Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> whereExpression)
     {
-        return sqlSugarClient.Queryable<TEntity>().FirstAsync(whereExpression);
+        return readOnlyClient.Queryable<TEntity>().FirstAsync(whereExpression);
     }
 
     /// <inheritdoc />
@@ -21,19 +21,19 @@ public class ReadOnlyRepository<TEntity>(ISqlSugarClient sqlSugarClient) : IRead
     /// <inheritdoc />
     public Task<TResult> GetAsync<TResult>(string sql, object whereObj)
     {
-        return sqlSugarClient.Ado.SqlQuerySingleAsync<TResult>(sql,whereObj);
+        return readOnlyClient.Ado.SqlQuerySingleAsync<TResult>(sql,whereObj);
     }
 
     /// <inheritdoc />
     public Task<TEntity> GetAsync<TPrimaryKey>(TPrimaryKey id)
     {
-        return sqlSugarClient.Queryable<TEntity>().In(id).FirstAsync();
+        return readOnlyClient.Queryable<TEntity>().In(id).FirstAsync();
     }
 
     /// <inheritdoc />
     public Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> whereExpression)
     {
-        return sqlSugarClient.Queryable<TEntity>().Where(whereExpression).ToListAsync();
+        return readOnlyClient.Queryable<TEntity>().Where(whereExpression).ToListAsync();
     }
 
     /// <inheritdoc />
@@ -45,13 +45,13 @@ public class ReadOnlyRepository<TEntity>(ISqlSugarClient sqlSugarClient) : IRead
     /// <inheritdoc />
     public Task<List<TResult>> GetListAsync<TResult>(string sql, object whereObj)
     {
-        return sqlSugarClient.Ado.SqlQueryAsync<TResult>(sql,whereObj);
+        return readOnlyClient.Ado.SqlQueryAsync<TResult>(sql,whereObj);
     }
 
     /// <inheritdoc />
     public Task<List<TEntity>> GetListAsync()
     {
-        return sqlSugarClient.Queryable<TEntity>().ToListAsync();
+        return readOnlyClient.Queryable<TEntity>().ToListAsync();
     }
 
     /// <inheritdoc />
@@ -60,13 +60,19 @@ public class ReadOnlyRepository<TEntity>(ISqlSugarClient sqlSugarClient) : IRead
         int pageSize,
         Expression<Func<TEntity, bool>> whereExpression,
         Expression<Func<TEntity, object>> orderExpression, 
-        OrderByType orderByType = OrderByType.Desc)
+        OrderByTypeEnum orderByType = OrderByTypeEnum.Desc)
     {
+        OrderByType orderByTypeSqlSugar = OrderByType.Desc;
+        if (orderByType == OrderByTypeEnum.Asc)
+        {
+            orderByTypeSqlSugar = OrderByType.Asc;
+        }
+        
         RefAsync<int> totalNumber = 0;
-        var dbList = await sqlSugarClient
+        var dbList = await readOnlyClient
                             .Queryable<TEntity>()
                             .Where(whereExpression)
-                            .OrderBy(orderExpression, orderByType)
+                            .OrderBy(orderExpression, orderByTypeSqlSugar)
                             .ToPageListAsync(pageNumber,pageSize,totalNumber);
 
         return (totalNumber,dbList);
@@ -75,22 +81,22 @@ public class ReadOnlyRepository<TEntity>(ISqlSugarClient sqlSugarClient) : IRead
     /// <inheritdoc />
     public Task<int> GetCountAsync(Expression<Func<TEntity, bool>> whereExpression)
     {
-        return sqlSugarClient.Queryable<TEntity>().CountAsync(whereExpression);
+        return readOnlyClient.Queryable<TEntity>().CountAsync(whereExpression);
     }
     
     /// <inheritdoc />
     public Task<int> GetCountAsync()
     {
-        return sqlSugarClient.Queryable<TEntity>().CountAsync();
+        return readOnlyClient.Queryable<TEntity>().CountAsync();
     }
 
     public Task<int> CountAsync(string sql, object whereObj)
     {
-        return sqlSugarClient.Ado.SqlQuerySingleAsync<int>(sql,whereObj);
+        return readOnlyClient.Ado.SqlQuerySingleAsync<int>(sql,whereObj);
     }
 
     public Task<bool> AnyAsync(Expression<Func<TEntity, bool>> whereExpression)
     {
-        return sqlSugarClient.Queryable<TEntity>().AnyAsync(whereExpression);
+        return readOnlyClient.Queryable<TEntity>().AnyAsync(whereExpression);
     }
 }

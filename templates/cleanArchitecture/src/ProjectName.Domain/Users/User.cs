@@ -1,9 +1,7 @@
 using Dedsi.Ddd.Domain.Entities.Auditing;
-using SqlSugar;
 
 namespace ProjectName.Domain.Users;
 
-[SugarTable("dbo.Users")]
 public class User : CreationAuditedEntity<Guid>
 {
     public string UserName { get; set; }

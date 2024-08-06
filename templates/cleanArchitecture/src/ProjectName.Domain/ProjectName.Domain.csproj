@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\..\src\Dedsi.CleanArchitecture.Domain\Dedsi.CleanArchitecture.Domain.csproj" />
+      <ProjectReference Include="..\..\..\..\src\Dedsi.Ddd.Domain\Dedsi.Ddd.Domain.csproj" />
+    </ItemGroup>
+
+</Project>

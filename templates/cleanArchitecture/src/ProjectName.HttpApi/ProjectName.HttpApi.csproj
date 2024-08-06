@@ -7,8 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\src\Dedsi.CleanArchitecture.Domain\Dedsi.CleanArchitecture.Domain.csproj" />
-      <ProjectReference Include="..\..\..\src\Dedsi.Ddd.Domain\Dedsi.Ddd.Domain.csproj" />
+      <ProjectReference Include="..\..\..\..\src\Dedsi.CleanArchitecture.HttpApi\Dedsi.CleanArchitecture.HttpApi.csproj" />
     </ItemGroup>
 
 </Project>

@@ -7,10 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="SqlSugarCore" Version="5.1.4.166" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\Dedsi.Core\Dedsi.Core.csproj" />
     </ItemGroup>
 

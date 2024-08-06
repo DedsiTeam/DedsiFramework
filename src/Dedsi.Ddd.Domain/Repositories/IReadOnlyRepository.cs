@@ -1,6 +1,5 @@
 using System.Linq.Expressions;
-using Dedsi.Core.DependencyInjections;
-using SqlSugar;
+using Volo.Abp.DependencyInjection;
 
 namespace Dedsi.Ddd.Domain.Repositories;
 
@@ -76,7 +75,7 @@ public interface IReadOnlyRepository<TEntity> : ITransientDependency where TEnti
         int pageSize,
         Expression<Func<TEntity, bool>> whereExpression,
         Expression<Func<TEntity, object>> orderExpression,
-        OrderByType orderByType = OrderByType.Desc);
+        OrderByTypeEnum orderByType = OrderByTypeEnum.Desc);
 
     /// <summary>
     /// 查询
