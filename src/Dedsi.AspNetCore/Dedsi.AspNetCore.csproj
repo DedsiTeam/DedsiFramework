@@ -7,11 +7,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Dedsi.SqlSugar\Dedsi.SqlSugar.csproj" />
+      <PackageReference Include="Volo.Abp.AspNetCore" Version="8.2.1" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Volo.Abp.AspNetCore" Version="8.2.1" />
+      <ProjectReference Include="..\Dedsi.Core\Dedsi.Core.csproj" />
     </ItemGroup>
 
 </Project>

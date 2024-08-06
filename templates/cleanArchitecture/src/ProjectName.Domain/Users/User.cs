@@ -1,4 +1,4 @@
-using Dedsi.Ddd.Domain.Entities.Auditing;
+using Volo.Abp.Domain.Entities.Auditing;
 
 namespace ProjectName.Domain.Users;
 

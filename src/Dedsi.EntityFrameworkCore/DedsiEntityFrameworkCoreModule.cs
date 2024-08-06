@@ -8,5 +8,4 @@ namespace Dedsi.EntityFrameworkCore;
 )]
 public class DedsiEntityFrameworkCoreModule : AbpModule
 {
-    
 }

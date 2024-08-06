@@ -2,7 +2,7 @@ using Dedsi.Ddd.Domain.Repositories;
 
 namespace ProjectName.Domain.Users;
 
-public interface IUserRepository : IRepository<User>
+public interface IUserDedsiRepository : IDedsiRepository<User, Guid>
 {
     
 }

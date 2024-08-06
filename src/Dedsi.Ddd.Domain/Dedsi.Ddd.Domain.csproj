@@ -10,4 +10,8 @@
       <ProjectReference Include="..\Dedsi.Core\Dedsi.Core.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Volo.Abp.Ddd.Domain" Version="8.2.1" />
+    </ItemGroup>
+
 </Project>

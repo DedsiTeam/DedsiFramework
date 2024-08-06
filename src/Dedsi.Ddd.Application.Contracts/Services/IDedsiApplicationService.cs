@@ -1,8 +1,8 @@
-using Volo.Abp.DependencyInjection;
+using Volo.Abp.Application.Services;
 
 namespace Dedsi.Ddd.Application.Contracts.Services;
 
-public interface IDedsiApplicationService : ITransientDependency
+public interface IDedsiApplicationService : IApplicationService
 {
     
 }
