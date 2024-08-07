@@ -3,7 +3,7 @@
     <Import Project="..\..\common.props" />
 
     <PropertyGroup>
-
+      <PackageIcon>logo.png</PackageIcon>
     </PropertyGroup>
 
     <ItemGroup>
@@ -13,5 +13,5 @@
     <ItemGroup>
       <ProjectReference Include="..\Dedsi.Ddd.Domain\Dedsi.Ddd.Domain.csproj" />
     </ItemGroup>
-
+    
 </Project>
