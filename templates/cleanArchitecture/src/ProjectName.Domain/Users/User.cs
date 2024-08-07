@@ -1,8 +1,8 @@
-using Volo.Abp.Domain.Entities.Auditing;
+using Volo.Abp.Domain.Entities;
 
-namespace ProjectName.Domain.Users;
+namespace ProjectName.Users;
 
-public class User : CreationAuditedEntity<Guid>
+public class User : Entity<Guid>
 {
     public string UserName { get; set; }
     

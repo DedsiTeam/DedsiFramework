@@ -1,16 +1,19 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Volo.Abp;
+﻿using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Autofac;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.SqlServer;
 using Volo.Abp.Modularity;
 
-namespace ProjectName.HttpApi.Host;
+namespace ProjectName;
 
 [DependsOn(
-    typeof(AbpEntityFrameworkCoreSqlServerModule),
+    // ProjectName
+    typeof(ProjectNameDomainModule),
+    typeof(ProjectNameInfrastructureModule),
+    typeof(ProjectNameHttpApiModule),
     
+    typeof(AbpEntityFrameworkCoreSqlServerModule),
     typeof(AbpAspNetCoreMvcModule),
     typeof(AbpAutofacModule)
 )]
@@ -34,6 +37,8 @@ public class ProjectNameHttpApiHostModule : AbpModule
                 dbConfigContext.UseSqlServer();
             });
         });
+
+        context.Services.AddSwaggerGen();
     }
 
     public override void OnApplicationInitialization(ApplicationInitializationContext context)
@@ -43,13 +48,28 @@ public class ProjectNameHttpApiHostModule : AbpModule
 
         if (env.IsDevelopment())
         {
-            app.UseExceptionHandler("/Error");
+            app.UseDeveloperExceptionPage();
+        }
+        else
+        {
             app.UseHsts();
         }
 
         app.UseHttpsRedirection();
+        app.UseCorrelationId();
         app.UseStaticFiles();
         app.UseRouting();
-        app.UseConfiguredEndpoints();
+        app.UseCors();
+
+        app.UseSwagger();
+        app.UseSwaggerUI();
+
+        app.UseAuditing();
+        app.UseConfiguredEndpoints(endpoints =>
+        {
+            // AuthorizeAttribute
+            // endpoints.MapControllers().RequireAuthorization();
+        });
+
     }
 }

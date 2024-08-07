@@ -1,8 +1,21 @@
-﻿using Volo.Abp.Modularity;
+﻿using Dedsi.AspNetCore;
+using Microsoft.Extensions.DependencyInjection;
+using Volo.Abp.Modularity;
 
-namespace ProjectName.HttpApi;
+namespace ProjectName;
 
+[DependsOn(
+    typeof(ProjectNameDomainModule),
+    typeof(DedsiAspNetCoreModule)
+)]
 public class ProjectNameHttpApiModule : AbpModule
 {
-    
+    public override void PreConfigureServices(ServiceConfigurationContext context)
+    {
+        PreConfigure<IMvcBuilder>(mvcBuilder =>
+        {
+            mvcBuilder.AddApplicationPartIfNotExists(typeof(ProjectNameHttpApiModule).Assembly);
+        });
+    }
+
 }

@@ -1,14 +1,19 @@
 ﻿using Dedsi.EntityFrameworkCore.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using ProjectName.Users;
+using Volo.Abp.Data;
 
-namespace ProjectName.Infrastructure.EntityFrameworkCore;
+namespace ProjectName.EntityFrameworkCore;
 
-public class ProjectNameDbContext(DbContextOptions<ProjectNameDbContext> options)
-    : DedsiEfCoreDbContext<ProjectNameDbContext>(options)
+[ConnectionStringName(ProjectNameDomainOptions.ConnectionStringName)]
+public class ProjectNameDbContext(DbContextOptions<ProjectNameDbContext> options) : DedsiEfCoreDbContext<ProjectNameDbContext>(options)
 {
+    public DbSet<User> Users { get; set; }
+    
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+        builder.ConfigureProjectName();
     }
 
 }

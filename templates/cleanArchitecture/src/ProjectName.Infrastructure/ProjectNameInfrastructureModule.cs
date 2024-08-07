@@ -1,12 +1,12 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using ProjectName.Infrastructure.EntityFrameworkCore;
-using Volo.Abp.EntityFrameworkCore;
+﻿using Dedsi.CleanArchitecture.Infrastructure;
+using Microsoft.Extensions.DependencyInjection;
+using ProjectName.EntityFrameworkCore;
 using Volo.Abp.Modularity;
 
-namespace ProjectName.Infrastructure;
+namespace ProjectName;
 
 [DependsOn(
-    typeof(AbpEntityFrameworkCoreModule)
+    typeof(DedsiCleanArchitectureInfrastructureModule)
 )]
 public class ProjectNameInfrastructureModule : AbpModule
 {

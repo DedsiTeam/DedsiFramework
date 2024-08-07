@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Dedsi.Ddd.Application\Dedsi.Ddd.Application.csproj" />
+      <ProjectReference Include="..\Dedsi.Ddd.Domain\Dedsi.Ddd.Domain.csproj" />
     </ItemGroup>
 
 </Project>

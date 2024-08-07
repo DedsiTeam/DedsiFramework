@@ -1,5 +1,4 @@
-
-using ProjectName.HttpApi.Host;
+using ProjectName;
 
 var builder = WebApplication.CreateBuilder(args);
 

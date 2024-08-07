@@ -1,7 +1,11 @@
-﻿using Volo.Abp.Modularity;
+﻿using Dedsi.CleanArchitecture.Domain;
+using Volo.Abp.Modularity;
 
-namespace ProjectName.Domain;
+namespace ProjectName;
 
+[DependsOn(
+    typeof(DedsiCleanArchitectureDomainModule)    
+)]
 public class ProjectNameDomainModule : AbpModule
 {
     
