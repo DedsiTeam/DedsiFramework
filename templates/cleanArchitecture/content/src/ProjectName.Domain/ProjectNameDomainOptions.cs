@@ -10,5 +10,5 @@ public class ProjectNameDomainOptions
     
     public const string ConnectionStringName = "ProjectNameDB";
     
-    public const string DbTablePrefix = "dbo";
+    public const string DbTablePrefix = "ProjectName";
 }
