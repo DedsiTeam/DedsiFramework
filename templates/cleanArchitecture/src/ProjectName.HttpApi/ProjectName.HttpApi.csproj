@@ -8,8 +8,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\..\src\Dedsi.CleanArchitecture.HttpApi\Dedsi.CleanArchitecture.HttpApi.csproj" />
       <ProjectReference Include="..\ProjectName.Domain\ProjectName.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Dedsi.CleanArchitecture.HttpApi" Version="8.2.1.1" />
     </ItemGroup>
 
 </Project>
