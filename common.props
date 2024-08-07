@@ -4,6 +4,8 @@
         <Version>8.2.1.1</Version>
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
+        <PackageIcon>logo.png</PackageIcon>
+        <Authors>Wang Cohen</Authors>
     </PropertyGroup>
 
     <ItemGroup>

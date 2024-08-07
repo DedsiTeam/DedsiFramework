@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <Import Project="..\..\common.props" />
-
     <PropertyGroup>
-      <PackageIcon>logo.png</PackageIcon>
+
     </PropertyGroup>
+
+    <Import Project="..\..\common.props" />
 
     <ItemGroup>
       <PackageReference Include="Volo.Abp.EntityFrameworkCore" Version="8.2.1" />
