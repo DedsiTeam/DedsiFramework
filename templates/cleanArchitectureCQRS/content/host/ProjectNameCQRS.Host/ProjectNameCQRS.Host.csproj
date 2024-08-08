@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <RootNamespace>ProjectNameCQRS</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.7"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.0" />
+        
+        <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="8.2.1" />
+        <PackageReference Include="Volo.Abp.Autofac" Version="8.2.1" />
+        <PackageReference Include="Volo.Abp.EntityFrameworkCore.SqlServer" Version="8.2.1" />
+        <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="8.2.1" />
+
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+        <PackageReference Include="Serilog.AspNetCore" Version="8.0.2" />
+        <PackageReference Include="Serilog.Sinks.Async" Version="2.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Logs\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="Logs\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="Logs\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Logs\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\ProjectNameCQRS.Command\ProjectNameCQRS.Command.csproj" />
+    </ItemGroup>
+
+</Project>

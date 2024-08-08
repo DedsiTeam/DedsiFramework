@@ -9,19 +9,17 @@ using Volo.Abp.EntityFrameworkCore.SqlServer;
 using Volo.Abp.Json;
 using Volo.Abp.Modularity;
 
-namespace ProjectName;
+namespace ProjectNameCQRS;
 
 [DependsOn(
     // ProjectName
-    typeof(ProjectNameDomainModule),
-    typeof(ProjectNameInfrastructureModule),
-    typeof(ProjectNameHttpApiModule),
+    typeof(ProjectNameCQRSCommandModule),
     
     typeof(AbpEntityFrameworkCoreSqlServerModule),
     typeof(AbpAspNetCoreMvcModule),
     typeof(AbpAutofacModule)
 )]
-public class ProjectNameHttpApiHostModule : AbpModule
+public class ProjectNameCQRSHostModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
@@ -45,7 +43,7 @@ public class ProjectNameHttpApiHostModule : AbpModule
         // 日志
         Configure<AbpAuditingOptions>(options =>
         {
-            options.ApplicationName = ProjectNameDomainOptions.ApplicationName;
+            options.ApplicationName = ProjectNameCQRSDomainOptions.ApplicationName;
             options.IsEnabledForGetRequests = true;
         });
         
