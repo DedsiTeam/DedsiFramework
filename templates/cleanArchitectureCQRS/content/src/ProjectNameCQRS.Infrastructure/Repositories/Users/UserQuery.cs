@@ -1,9 +1,12 @@
-﻿using ProjectNameCQRS.Users;
-using Volo.Abp.DependencyInjection;
+﻿using Dedsi.Ddd.Domain.Queries;
+using Dedsi.EntityFrameworkCore.Queries;
+using ProjectNameCQRS.EntityFrameworkCore;
+using ProjectNameCQRS.Users;
+using Volo.Abp.EntityFrameworkCore;
 
 namespace ProjectNameCQRS.Repositories.Users;
 
-public interface IUserQuery: ITransientDependency
+public interface IUserQuery: IDedsiQuery<User,Guid>
 {
     /// <summary>
     /// 查询
@@ -13,7 +16,9 @@ public interface IUserQuery: ITransientDependency
     Task<User> GetByIdAsync(Guid id);
 }
 
-public class UserQuery : IUserQuery
+public class UserQuery(IDbContextProvider<ProjectNameCQRSDbContext> dbContextProvider) 
+    : DedsiEfCoreQuery<ProjectNameCQRSDbContext,User,Guid>(dbContextProvider), 
+        IUserQuery
 {
     public Task<User> GetByIdAsync(Guid id)
     {

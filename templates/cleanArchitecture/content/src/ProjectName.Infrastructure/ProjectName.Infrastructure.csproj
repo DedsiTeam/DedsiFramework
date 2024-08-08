@@ -12,7 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Dedsi.CleanArchitecture.Infrastructure" Version="8.2.1.1" />
+        <PackageReference Include="Dedsi.CleanArchitecture.Infrastructure" Version="$(DedsiFrameworkVersion)" />
     </ItemGroup>
 
 </Project>

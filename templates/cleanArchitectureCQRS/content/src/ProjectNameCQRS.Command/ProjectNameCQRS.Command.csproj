@@ -8,7 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Dedsi.CleanArchitecture.HttpApi" Version="8.2.1.1" />
+        <PackageReference Include="Dedsi.CleanArchitecture.HttpApi" Version="$(DedsiFrameworkVersion)" />
     </ItemGroup>
 
     <ItemGroup>

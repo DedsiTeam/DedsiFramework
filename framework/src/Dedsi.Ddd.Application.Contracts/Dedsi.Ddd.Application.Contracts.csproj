@@ -1,7 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <Import Project="..\..\common.props" />
-
     <PropertyGroup>
 
     </PropertyGroup>
@@ -11,7 +9,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="8.2.1" />
+      <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="$(AbpFrameworkVersion)" />
     </ItemGroup>
 
 </Project>
