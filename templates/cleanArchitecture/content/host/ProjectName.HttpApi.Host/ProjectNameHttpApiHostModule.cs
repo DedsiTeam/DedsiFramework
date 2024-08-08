@@ -1,8 +1,11 @@
-﻿using Volo.Abp;
+﻿using Microsoft.AspNetCore.Cors;
+using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
+using Volo.Abp.Auditing;
 using Volo.Abp.Autofac;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.SqlServer;
+using Volo.Abp.Json;
 using Volo.Abp.Modularity;
 
 namespace ProjectName;
@@ -37,6 +40,41 @@ public class ProjectNameHttpApiHostModule : AbpModule
                 dbConfigContext.UseSqlServer();
             });
         });
+        
+        // 日志
+        Configure<AbpAuditingOptions>(options =>
+        {
+            options.ApplicationName = ProjectNameDomainOptions.ApplicationName;
+            options.IsEnabledForGetRequests = true;
+        });
+        
+        // 时间格式 
+        Configure<AbpJsonOptions>(options =>
+        {
+            options.OutputDateTimeFormat = "yyyy-MM-dd HH:mm:ss";
+        });
+        
+        context.Services.AddCors(options =>
+        {
+            options.AddDefaultPolicy(builder =>
+            {
+                builder
+                    .WithOrigins(
+                        configuration["App:CorsOrigins"]?
+                            .Split(",", StringSplitOptions.RemoveEmptyEntries)
+                            .Select(o => o.RemovePostFix("/"))
+                            .ToArray() ?? []
+                    )
+                    .WithAbpExposedHeaders()
+                    .SetIsOriginAllowedToAllowWildcardSubdomains()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials();
+            });
+        });
+
+
+
 
         context.Services.AddSwaggerGen();
     }

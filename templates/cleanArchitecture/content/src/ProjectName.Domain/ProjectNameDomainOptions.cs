@@ -2,11 +2,9 @@
 
 public class ProjectNameDomainOptions
 {
-    public const string RemoteServiceName = "ProjectName";
+    public const string ApplicationName = "ProjectName";
     
-    public const string ModuleName = "ProjectName";
-    
-    public const string MobileModuleName = "ProjectName.Mobile";
+    public const string MobileApplicationName = "ProjectName.Mobile";
     
     public const string ConnectionStringName = "ProjectNameDB";
     

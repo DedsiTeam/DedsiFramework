@@ -4,5 +4,5 @@ namespace ProjectName.Users;
 
 public interface IUserRepository : IDedsiRepository<User, Guid>
 {
-    
+    Task<User> GetByIdAsync(Guid id);
 }
