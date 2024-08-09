@@ -4,6 +4,9 @@ namespace ProjectNameCQRS.Users;
 
 public class User : Entity<Guid>
 {
+    public User(){}
+    public User(Guid id): base(id){}
+    
     public string UserName { get; set; }
     
     public string Account { get; set; }

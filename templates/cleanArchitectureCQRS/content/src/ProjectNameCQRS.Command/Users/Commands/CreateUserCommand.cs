@@ -1,4 +1,5 @@
-﻿using ProjectNameCQRS.Users.Dtos;
+﻿using Dedsi.Ddd.CQRS;
+using ProjectNameCQRS.Users.Dtos;
 
 namespace ProjectNameCQRS.Users.Commands;
 
@@ -6,4 +7,4 @@ namespace ProjectNameCQRS.Users.Commands;
 /// 命令
 /// </summary>
 /// <param name="UserDto"></param>
-public record CreateUserCommand(CreateUserInputDto UserDto);
+public record CreateUserCommand(CreateUserInputDto UserDto) : IDedsiCommand<Guid>;
