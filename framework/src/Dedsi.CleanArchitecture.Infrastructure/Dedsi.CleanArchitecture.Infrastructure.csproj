@@ -5,6 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Dedsi.CleanArchitecture.Domain\Dedsi.CleanArchitecture.Domain.csproj" />
       <ProjectReference Include="..\Dedsi.EntityFrameworkCore\Dedsi.EntityFrameworkCore.csproj" />
     </ItemGroup>
 

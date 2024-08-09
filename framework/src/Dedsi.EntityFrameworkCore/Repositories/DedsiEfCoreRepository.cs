@@ -1,6 +1,5 @@
 ﻿using System.Linq.Expressions;
 using Dedsi.Ddd.Domain.Repositories;
-using Dedsi.EntityFrameworkCore.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Domain.Entities;
 using Volo.Abp.Domain.Repositories.EntityFrameworkCore;
