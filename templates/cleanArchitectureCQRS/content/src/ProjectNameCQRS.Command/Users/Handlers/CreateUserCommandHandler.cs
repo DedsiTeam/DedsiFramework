@@ -1,7 +1,8 @@
 ﻿using Dedsi.Ddd.CQRS;
 using ProjectNameCQRS.Repositories.Users;
+using ProjectNameCQRS.Users.Commands;
 
-namespace ProjectNameCQRS.Users.Commands;
+namespace ProjectNameCQRS.Users.Handlers;
 
 /// <summary>
 /// CreateUserCommand 处理
@@ -11,7 +12,7 @@ public class CreateUserCommandHandler(IUserRepository userRepository): IDedsiCom
 {
     public async Task<Guid> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
-        var user = new User()
+        var user = new User(Guid.NewGuid())
         {
             UserName = request.UserDto.UserName,
             Account = request.UserDto.Account,

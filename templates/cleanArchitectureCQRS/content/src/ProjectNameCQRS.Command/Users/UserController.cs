@@ -11,7 +11,7 @@ namespace ProjectNameCQRS.Users;
 /// </summary>
 /// <param name="dedsiMediator"></param>
 /// <param name="userQuery"></param>
-public class UserCQRSController(IDedsiMediator dedsiMediator,IUserQuery userQuery) : ProjectNameCQRSController
+public class UserController(IDedsiMediator dedsiMediator,IUserQuery userQuery) : ProjectNameCQRSController
 {
     [HttpPost]
     public async Task<Guid> CreateUserAsync(CreateUserInputDto input)
