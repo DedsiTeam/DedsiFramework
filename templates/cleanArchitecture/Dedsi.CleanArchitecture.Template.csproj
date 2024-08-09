@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <Version>8.2.1.4</Version>
+        <Version>8.2.1.5</Version>
         <PackageType>Template</PackageType>
         <PackageId>Dedsi.CleanArchitecture.Template</PackageId>
         <Title>Dedsi.CleanArchitecture.Templates</Title>

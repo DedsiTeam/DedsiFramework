@@ -1,6 +1,5 @@
-﻿using ProjectNameCQRS.Repositories.Users;
-using Volo.Abp.DependencyInjection;
-using Volo.Abp.EventBus;
+﻿using Dedsi.Ddd.CQRS;
+using ProjectNameCQRS.Repositories.Users;
 
 namespace ProjectNameCQRS.Users.Commands;
 
@@ -8,16 +7,18 @@ namespace ProjectNameCQRS.Users.Commands;
 /// CreateUserCommand 处理
 /// </summary>
 /// <param name="userRepository"></param>
-public class CreateUserCommandHandler(IUserRepository userRepository): ILocalEventHandler<CreateUserCommand>, ITransientDependency
+public class CreateUserCommandHandler(IUserRepository userRepository): IDedsiCommandHandler<CreateUserCommand,Guid>
 {
-    public Task HandleEventAsync(CreateUserCommand eventData)
+    public async Task<Guid> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
-        return userRepository.CreateAsync(new User()
+        var user = new User()
         {
-            UserName = eventData.UserDto.UserName,
-            Account = eventData.UserDto.Account,
-            PassWord = eventData.UserDto.PassWord,
-            Email = eventData.UserDto.Email,
-        });
+            UserName = request.UserDto.UserName,
+            Account = request.UserDto.Account,
+            PassWord = request.UserDto.PassWord,
+            Email = request.UserDto.Email,
+        };
+        await userRepository.CreateAsync(user);
+        return user.Id;
     }
 }

@@ -4,7 +4,6 @@ namespace Dedsi.Ddd.CQRS;
 
 public interface IDedsiMediator : IMediator;
 
-
 public class DedsiMediator : Mediator, IDedsiMediator
 {
     public DedsiMediator(IServiceProvider serviceProvider) : base(serviceProvider)

@@ -1,4 +1,6 @@
-﻿using Dedsi.AspNetCore;
+﻿using System.Reflection;
+using Dedsi.AspNetCore;
+using Dedsi.Ddd.CQRS;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Modularity;
 
@@ -9,6 +11,7 @@ namespace ProjectNameCQRS;
     typeof(ProjectNameCQRSDomainModule),
     typeof(ProjectNameCQRSInfrastructureModule),
     
+    typeof(DedsiDddCQRSModule),
     typeof(DedsiAspNetCoreModule)
 )]
 public class ProjectNameCQRSCommandModule : AbpModule
@@ -19,5 +22,11 @@ public class ProjectNameCQRSCommandModule : AbpModule
         {
             mvcBuilder.AddApplicationPartIfNotExists(typeof(ProjectNameCQRSCommandModule).Assembly);
         });
+    }
+
+    public override void ConfigureServices(ServiceConfigurationContext context)
+    {
+        // MediatR
+        context.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
     }
 }
