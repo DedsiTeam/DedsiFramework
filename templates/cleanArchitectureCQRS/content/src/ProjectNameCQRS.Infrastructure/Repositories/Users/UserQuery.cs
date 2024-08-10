@@ -22,12 +22,6 @@ public class UserQuery(IDbContextProvider<ProjectNameCQRSDbContext> dbContextPro
 {
     public Task<User> GetByIdAsync(Guid id)
     {
-        return Task.FromResult(new User()
-        {
-            UserName = "ProjectName",
-            Account = "ProjectName",
-            PassWord = "ProjectName@" + DateTime.Now,
-            Email = "123465789@qq.com"
-        });
+        return Task.FromResult(new User(id,"Cohen Wang", "cohen", "123123@qq.com","123123123@qq.com"));
     }
 }

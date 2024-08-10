@@ -17,4 +17,8 @@
       <ProjectReference Include="..\ProjectNameCQRS.Infrastructure\ProjectNameCQRS.Infrastructure.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Users\DomainEventHandlers\" />
+    </ItemGroup>
+
 </Project>

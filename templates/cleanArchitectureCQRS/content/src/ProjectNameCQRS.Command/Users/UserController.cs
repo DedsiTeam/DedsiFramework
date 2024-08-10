@@ -13,6 +13,11 @@ namespace ProjectNameCQRS.Users;
 /// <param name="userQuery"></param>
 public class UserController(IDedsiMediator dedsiMediator,IUserQuery userQuery) : ProjectNameCQRSController
 {
+    /// <summary>
+    /// 创建用户
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
     [HttpPost]
     public async Task<Guid> CreateUserAsync(CreateUserInputDto input)
     {
@@ -21,6 +26,11 @@ public class UserController(IDedsiMediator dedsiMediator,IUserQuery userQuery) :
         return id;
     }
     
+    /// <summary>
+    /// 查询
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     [HttpGet("{id}")]
     public Task<User> GetByIdAsync(Guid id)
     {
