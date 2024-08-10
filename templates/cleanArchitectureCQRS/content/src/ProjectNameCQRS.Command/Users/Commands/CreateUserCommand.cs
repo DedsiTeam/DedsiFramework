@@ -1,10 +1,5 @@
 ﻿using Dedsi.Ddd.CQRS;
-using ProjectNameCQRS.Users.Dtos;
 
 namespace ProjectNameCQRS.Users.Commands;
 
-/// <summary>
-/// 命令
-/// </summary>
-/// <param name="UserDto"></param>
-public record CreateUserCommand(CreateUserInputDto UserDto) : IDedsiCommand<Guid>;
+public record CreateUserCommand(string UserName,string Account,string Email) : IDedsiCommand<Guid>;

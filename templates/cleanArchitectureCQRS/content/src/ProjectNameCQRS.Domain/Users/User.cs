@@ -21,12 +21,4 @@ public class User : AggregateRoot<Guid>
     public string PassWord { get; private set; }
     
     public string Email { get; private set; }
-
-    /// <summary>
-    /// ÉèÖÃÄ¬ÈÏÃÜÂë
-    /// </summary>
-    public void SetDefaultPassword()
-    {
-        this.PassWord = "DefaultPassword@" + DateTime.Now.Year;
-    }
 }

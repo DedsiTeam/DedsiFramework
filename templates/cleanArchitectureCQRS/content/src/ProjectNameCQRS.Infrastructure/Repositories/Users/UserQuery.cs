@@ -16,7 +16,7 @@ public interface IUserQuery: IDedsiQuery
     Task<User> GetByIdAsync(Guid id);
 }
 
-public class UserQuery(IDbContextProvider<ProjectNameCQRSDbContext> dbContextProvider) 
+public class TestUserQuery(IDbContextProvider<ProjectNameCQRSDbContext> dbContextProvider) 
     : DedsiDapperQuery<ProjectNameCQRSDbContext>(dbContextProvider), 
         IUserQuery
 {

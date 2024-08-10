@@ -1,6 +1,8 @@
-﻿namespace ProjectNameCQRS.Users.Dtos;
+using Volo.Abp.Application.Dtos;
 
-public class CreateUserInputDto
+namespace ProjectNameCQRS.Users.Dtos;
+
+public class UserDto : EntityDto<Guid>
 {
     public string UserName { get; set; }
     

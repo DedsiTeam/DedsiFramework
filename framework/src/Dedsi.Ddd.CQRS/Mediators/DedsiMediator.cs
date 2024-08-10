@@ -1,8 +1,6 @@
 ﻿using MediatR;
 
-namespace Dedsi.Ddd.CQRS;
-
-public interface IDedsiMediator : IMediator;
+namespace Dedsi.Ddd.CQRS.Mediators;
 
 public class DedsiMediator : Mediator, IDedsiMediator
 {
