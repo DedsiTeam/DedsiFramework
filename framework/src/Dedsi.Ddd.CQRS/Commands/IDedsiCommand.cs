@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace Dedsi.Ddd.CQRS;
+namespace Dedsi.Ddd.CQRS.Commands;
 
 public interface IDedsiCommand : IRequest;
 

@@ -1,5 +1,5 @@
-﻿using Dedsi.Ddd.CQRS;
+﻿using Dedsi.Ddd.CQRS.Commands;
 
 namespace ProjectNameCQRS.Users.Commands;
 
-public record CreateUserCommand(string UserName,string Account,string Email) : IDedsiCommand<Guid>;
+public record CreateUserCommand(string UserName,string Account,string Email) : DedsiCommand<Guid>;

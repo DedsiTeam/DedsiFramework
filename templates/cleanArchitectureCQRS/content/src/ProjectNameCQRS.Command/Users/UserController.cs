@@ -1,4 +1,4 @@
-﻿using Dedsi.Ddd.CQRS;
+﻿using Dedsi.Ddd.CQRS.Mediators;
 using Microsoft.AspNetCore.Mvc;
 using ProjectNameCQRS.Users.Commands;
 
@@ -8,7 +8,6 @@ namespace ProjectNameCQRS.Users;
 /// 用户
 /// </summary>
 /// <param name="dedsiMediator"></param>
-/// <param name="userQuery"></param>
 public class UserController(IDedsiMediator dedsiMediator) : ProjectNameCQRSController
 {
     /// <summary>

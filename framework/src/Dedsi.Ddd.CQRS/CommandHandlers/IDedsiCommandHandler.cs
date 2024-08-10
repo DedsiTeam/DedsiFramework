@@ -1,6 +1,7 @@
+using Dedsi.Ddd.CQRS.Commands;
 using MediatR;
 
-namespace Dedsi.Ddd.CQRS;
+namespace Dedsi.Ddd.CQRS.CommandHandlers;
 
 public interface IDedsiCommandHandler<in TCommand> : IRequestHandler<TCommand> where TCommand : IDedsiCommand;
 
