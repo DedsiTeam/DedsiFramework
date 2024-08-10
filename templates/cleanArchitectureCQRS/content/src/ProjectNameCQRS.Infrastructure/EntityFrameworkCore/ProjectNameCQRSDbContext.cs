@@ -1,4 +1,4 @@
-﻿using Dedsi.EntityFrameworkCore.EntityFrameworkCore;
+﻿using Dedsi.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ProjectNameCQRS.Users;
 using Volo.Abp.Data;

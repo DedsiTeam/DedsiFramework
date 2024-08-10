@@ -6,7 +6,7 @@ using Volo.Abp.EntityFrameworkCore;
 
 namespace ProjectNameCQRS.Repositories.Users;
 
-public interface IUserQuery: IDedsiQuery<User,Guid>
+public interface IUserQuery: IDedsiQuery
 {
     /// <summary>
     /// 查询
@@ -17,7 +17,7 @@ public interface IUserQuery: IDedsiQuery<User,Guid>
 }
 
 public class UserQuery(IDbContextProvider<ProjectNameCQRSDbContext> dbContextProvider) 
-    : DedsiEfCoreQuery<ProjectNameCQRSDbContext,User,Guid>(dbContextProvider), 
+    : DedsiDapperQuery<ProjectNameCQRSDbContext>(dbContextProvider), 
         IUserQuery
 {
     public Task<User> GetByIdAsync(Guid id)

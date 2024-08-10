@@ -7,30 +7,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "host", "host", "{BC04B74F-7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AF96C03E-E3CE-4E4B-8A3F-7C117BA602AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectNameCQRS.Domain", "src\ProjectNameCQRS.Domain\ProjectNameCQRS.Domain.csproj", "{1344AE09-FD68-40B3-826C-B97BC0A18C3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectNameCQRS.Domain", "src\ProjectNameCQRS.Domain\ProjectNameCQRS.Domain.csproj", "{1344AE09-FD68-40B3-826C-B97BC0A18C3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectNameCQRS.Infrastructure", "src\ProjectNameCQRS.Infrastructure\ProjectNameCQRS.Infrastructure.csproj", "{0133C343-273C-4073-8140-47F8B6FBC990}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectNameCQRS.Infrastructure", "src\ProjectNameCQRS.Infrastructure\ProjectNameCQRS.Infrastructure.csproj", "{0133C343-273C-4073-8140-47F8B6FBC990}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectNameCQRS.Command", "src\ProjectNameCQRS.Command\ProjectNameCQRS.Command.csproj", "{02FA1CC9-AB3A-46C9-A708-F670D3F9C975}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectNameCQRS.Command", "src\ProjectNameCQRS.Command\ProjectNameCQRS.Command.csproj", "{02FA1CC9-AB3A-46C9-A708-F670D3F9C975}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectNameCQRS.Host", "host\ProjectNameCQRS.Host\ProjectNameCQRS.Host.csproj", "{69FBA34B-8170-4669-B52B-7E23008FCBE5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dedsi.Ddd.CQRS", "src\Dedsi.Ddd.CQRS\Dedsi.Ddd.CQRS.csproj", "{C11CACB3-5493-4D5F-9300-DD18CC780584}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectNameCQRS.Host", "host\ProjectNameCQRS.Host\ProjectNameCQRS.Host.csproj", "{69FBA34B-8170-4669-B52B-7E23008FCBE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{1344AE09-FD68-40B3-826C-B97BC0A18C3D} = {AF96C03E-E3CE-4E4B-8A3F-7C117BA602AA}
-		{0133C343-273C-4073-8140-47F8B6FBC990} = {AF96C03E-E3CE-4E4B-8A3F-7C117BA602AA}
-		{02FA1CC9-AB3A-46C9-A708-F670D3F9C975} = {AF96C03E-E3CE-4E4B-8A3F-7C117BA602AA}
-		{69FBA34B-8170-4669-B52B-7E23008FCBE5} = {BC04B74F-7CAC-4ACC-BFD9-6DED68564777}
-		{C11CACB3-5493-4D5F-9300-DD18CC780584} = {AF96C03E-E3CE-4E4B-8A3F-7C117BA602AA}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{1344AE09-FD68-40B3-826C-B97BC0A18C3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -49,9 +37,14 @@ Global
 		{69FBA34B-8170-4669-B52B-7E23008FCBE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69FBA34B-8170-4669-B52B-7E23008FCBE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69FBA34B-8170-4669-B52B-7E23008FCBE5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C11CACB3-5493-4D5F-9300-DD18CC780584}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C11CACB3-5493-4D5F-9300-DD18CC780584}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C11CACB3-5493-4D5F-9300-DD18CC780584}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C11CACB3-5493-4D5F-9300-DD18CC780584}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1344AE09-FD68-40B3-826C-B97BC0A18C3D} = {AF96C03E-E3CE-4E4B-8A3F-7C117BA602AA}
+		{0133C343-273C-4073-8140-47F8B6FBC990} = {AF96C03E-E3CE-4E4B-8A3F-7C117BA602AA}
+		{02FA1CC9-AB3A-46C9-A708-F670D3F9C975} = {AF96C03E-E3CE-4E4B-8A3F-7C117BA602AA}
+		{69FBA34B-8170-4669-B52B-7E23008FCBE5} = {BC04B74F-7CAC-4ACC-BFD9-6DED68564777}
 	EndGlobalSection
 EndGlobal
