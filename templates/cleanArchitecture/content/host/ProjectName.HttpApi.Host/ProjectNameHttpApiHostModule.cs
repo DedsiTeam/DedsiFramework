@@ -34,7 +34,7 @@ public class ProjectNameHttpApiHostModule : AbpModule
             options.Configure(dbConfigContext =>
             {
                 // 本地研发环境 - 输出到控制台
-                if (hostEnvironment.EnvironmentName == "Localhost")
+                if (hostEnvironment.EnvironmentName == "Development")
                 {
                     dbConfigContext.DbContextOptions.LogTo(Serilog.Log.Information, new[] { DbLoggerCategory.Database.Command.Name }).EnableSensitiveDataLogging();
                 }
@@ -55,6 +55,7 @@ public class ProjectNameHttpApiHostModule : AbpModule
             options.OutputDateTimeFormat = "yyyy-MM-dd HH:mm:ss";
         });
         
+        // 跨域
         context.Services.AddCors(options =>
         {
             options.AddDefaultPolicy(builder =>
@@ -74,9 +75,7 @@ public class ProjectNameHttpApiHostModule : AbpModule
             });
         });
 
-
-
-
+        // Swagger
         context.Services.AddSwaggerGen();
     }
 

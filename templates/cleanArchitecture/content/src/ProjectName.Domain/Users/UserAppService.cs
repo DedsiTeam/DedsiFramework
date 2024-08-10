@@ -12,6 +12,6 @@ public class UserAppService(IUserRepository userRepository) : DedsiApplicationSe
 {
     public Task<User> GetAsync()
     {
-        return userRepository.GetByIdAsync(GuidGenerator.Create());
+        return userRepository.GetAsync(GuidGenerator.Create());
     }
 }

@@ -2,7 +2,4 @@ using Dedsi.Ddd.Domain.Repositories;
 
 namespace ProjectName.Users;
 
-public interface IUserRepository : IDedsiRepository<User, Guid>
-{
-    Task<User> GetByIdAsync(Guid id);
-}
+public interface IUserRepository : IDedsiRepository<User, Guid>;
