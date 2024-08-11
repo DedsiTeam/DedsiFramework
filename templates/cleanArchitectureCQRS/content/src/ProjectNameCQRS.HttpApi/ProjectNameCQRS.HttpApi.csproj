@@ -12,7 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\ProjectNameCQRS.UseCase.Command\ProjectNameCQRS.UseCase.csproj" />
+      <ProjectReference Include="..\ProjectNameCQRS.UseCase\ProjectNameCQRS.UseCase.csproj" />
     </ItemGroup>
 
 </Project>

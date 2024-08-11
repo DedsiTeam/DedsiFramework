@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectNameCQRS.Infrastruct
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectNameCQRS.Host", "host\ProjectNameCQRS.Host\ProjectNameCQRS.Host.csproj", "{69FBA34B-8170-4669-B52B-7E23008FCBE5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectNameCQRS.UseCase", "src\ProjectNameCQRS.UseCase.Command\ProjectNameCQRS.UseCase.csproj", "{26C9A27E-8C32-4403-9E72-F3F336CA68E5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectNameCQRS.UseCase", "src\ProjectNameCQRS.UseCase\ProjectNameCQRS.UseCase.csproj", "{26C9A27E-8C32-4403-9E72-F3F336CA68E5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectNameCQRS.HttpApi", "src\ProjectNameCQRS.HttpApi\ProjectNameCQRS.HttpApi.csproj", "{893156FD-3D1A-4024-B381-EFAC598991E0}"
 EndProject
