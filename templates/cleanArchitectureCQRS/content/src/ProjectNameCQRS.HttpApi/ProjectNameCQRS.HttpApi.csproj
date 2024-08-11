@@ -9,12 +9,10 @@
 
     <ItemGroup>
         <PackageReference Include="Dedsi.CleanArchitecture.HttpApi" Version="$(DedsiFrameworkVersion)" />
-        <PackageReference Include="Dedsi.Ddd.CQRS" Version="$(DedsiFrameworkVersion)" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\ProjectNameCQRS.Domain\ProjectNameCQRS.Domain.csproj" />
-      <ProjectReference Include="..\ProjectNameCQRS.Infrastructure\ProjectNameCQRS.Infrastructure.csproj" />
+      <ProjectReference Include="..\ProjectNameCQRS.UseCase.Command\ProjectNameCQRS.UseCase.csproj" />
     </ItemGroup>
 
 </Project>

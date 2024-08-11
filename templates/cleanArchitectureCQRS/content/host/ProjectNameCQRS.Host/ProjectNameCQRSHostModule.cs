@@ -13,8 +13,8 @@ namespace ProjectNameCQRS;
 
 [DependsOn(
     // ProjectName
-    typeof(ProjectNameCQRSCommandModule),
-    
+    typeof(ProjectNameCQRSHttpApiModule),
+
     typeof(AbpEntityFrameworkCoreSqlServerModule),
     typeof(AbpAspNetCoreMvcModule),
     typeof(AbpAutofacModule)

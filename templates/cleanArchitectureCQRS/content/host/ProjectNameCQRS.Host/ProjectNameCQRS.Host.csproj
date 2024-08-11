@@ -37,7 +37,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\ProjectNameCQRS.Command\ProjectNameCQRS.Command.csproj" />
+      <ProjectReference Include="..\..\src\ProjectNameCQRS.HttpApi\ProjectNameCQRS.HttpApi.csproj" />
     </ItemGroup>
 
 </Project>

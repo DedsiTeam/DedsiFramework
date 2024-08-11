@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using Dedsi.AspNetCore;
 using Dedsi.Ddd.CQRS;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Modularity;
@@ -11,19 +10,10 @@ namespace ProjectNameCQRS;
     typeof(ProjectNameCQRSDomainModule),
     typeof(ProjectNameCQRSInfrastructureModule),
     
-    typeof(DedsiDddCQRSModule),
-    typeof(DedsiAspNetCoreModule)
+    typeof(DedsiDddCQRSModule)
 )]
-public class ProjectNameCQRSCommandModule : AbpModule
+public class ProjectNameCQRSUseCaseModule : AbpModule
 {
-    public override void PreConfigureServices(ServiceConfigurationContext context)
-    {
-        PreConfigure<IMvcBuilder>(mvcBuilder =>
-        {
-            mvcBuilder.AddApplicationPartIfNotExists(typeof(ProjectNameCQRSCommandModule).Assembly);
-        });
-    }
-
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         // MediatR

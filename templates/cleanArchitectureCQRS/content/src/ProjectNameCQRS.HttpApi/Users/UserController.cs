@@ -1,6 +1,7 @@
 ﻿using Dedsi.Ddd.CQRS.Mediators;
 using Microsoft.AspNetCore.Mvc;
 using ProjectNameCQRS.Users.Commands;
+using ProjectNameCQRS.Users.Dtos;
 
 namespace ProjectNameCQRS.Users;
 
