@@ -1,5 +1,6 @@
 using Dedsi.Ddd.Domain.Queries;
 using Dedsi.EntityFrameworkCore.Queries;
+using Mapster;
 using ProjectNameCQRS.EntityFrameworkCore;
 using ProjectNameCQRS.Users.Commands;
 using ProjectNameCQRS.Users.Dtos;
@@ -16,18 +17,21 @@ public class UserQuery(IDbContextProvider<ProjectNameCQRSDbContext> dbContextPro
     : DedsiEfCoreQuery<ProjectNameCQRSDbContext>(dbContextProvider), 
         IUserQuery
 {
-    public Task<SearchUserPagedResultDto> SearchUserAsync(SearchUserCommand request)
+    public async Task<SearchUserPagedResultDto> SearchUserAsync(SearchUserCommand request)
     {
-        var result = new SearchUserPagedResultDto()
+        var dbContext = await GetDbContextAsync();
+        
+        // 查询数据库
+        var totalCount = dbContext.Users.Count();
+        var dbList = dbContext.Users.ToList();
+
+        // 转为 dto
+        var items = dbList.Adapt<List<UserDto>>();
+        
+        return new SearchUserPagedResultDto()
         {
-            TotalCount = 10,
-            Items = new List<UserDto>()
-            {
-                new (),
-                new (),
-                new (),
-            }
+            TotalCount = totalCount,
+            Items = items
         };
-        return Task.FromResult(result);
     }
 }
