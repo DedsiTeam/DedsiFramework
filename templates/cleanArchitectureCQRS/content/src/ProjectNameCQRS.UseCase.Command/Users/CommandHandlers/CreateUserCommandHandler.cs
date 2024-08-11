@@ -10,7 +10,7 @@ namespace ProjectNameCQRS.Users.CommandHandlers;
 /// </summary>
 /// <param name="UserRepository"></param>
 /// <param name="GuidGenerator"></param>
-public record CreateUserCommandHandler(IUserRepository UserRepository,IGuidGenerator GuidGenerator) 
+public class CreateUserCommandHandler(IUserRepository UserRepository,IGuidGenerator GuidGenerator) 
     : DedsiCommandHandler<CreateUserCommand,Guid>
 {
     public override async Task<Guid> Handle(CreateUserCommand request, CancellationToken cancellationToken)

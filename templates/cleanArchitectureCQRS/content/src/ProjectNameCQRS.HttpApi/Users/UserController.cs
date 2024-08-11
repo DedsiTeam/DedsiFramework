@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ProjectNameCQRS.Users.Commands;
 using ProjectNameCQRS.Users.Dtos;
+using ProjectNameCQRS.Users.Queries;
 
 namespace ProjectNameCQRS.Users;
 
@@ -9,7 +10,7 @@ namespace ProjectNameCQRS.Users;
 /// 用户
 /// </summary>
 /// <param name="dedsiMediator"></param>
-public class UserController(IDedsiMediator dedsiMediator) : ProjectNameCQRSController
+public class UserController(IDedsiMediator dedsiMediator,IUserQuery userQuery) : ProjectNameCQRSController
 {
     /// <summary>
     /// 创建用户
@@ -17,10 +18,9 @@ public class UserController(IDedsiMediator dedsiMediator) : ProjectNameCQRSContr
     /// <param name="command"></param>
     /// <returns></returns>
     [HttpPost]
-    public async Task<Guid> CreateUserAsync(CreateUserCommand command)
+    public Task<Guid> CreateUserAsync(CreateUserCommand command)
     {
-        var id = await dedsiMediator.Send(command);
-        return id;
+        return dedsiMediator.Send(command);
     }
 
     /// <summary>
@@ -29,10 +29,9 @@ public class UserController(IDedsiMediator dedsiMediator) : ProjectNameCQRSContr
     /// <param name="command"></param>
     /// <returns></returns>
     [HttpPost]
-    public async Task<SearchUserPagedResultDto> SearchUserAsync(SearchUserCommand command)
+    public Task<SearchUserPagedResultDto> SearchUserAsync(SearchUserCommand command)
     {
-        var result = await dedsiMediator.Send(command);
-        return result;
+        return userQuery.SearchUserAsync(command);
     }
     
 }

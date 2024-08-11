@@ -12,7 +12,7 @@ public interface IUserQuery: IDedsiQuery
     Task<SearchUserPagedResultDto> SearchUserAsync(SearchUserCommand command);
 }
 
-public class TestUserQuery(IDbContextProvider<ProjectNameCQRSDbContext> dbContextProvider) 
+public class UserQuery(IDbContextProvider<ProjectNameCQRSDbContext> dbContextProvider) 
     : DedsiEfCoreQuery<ProjectNameCQRSDbContext>(dbContextProvider), 
         IUserQuery
 {
