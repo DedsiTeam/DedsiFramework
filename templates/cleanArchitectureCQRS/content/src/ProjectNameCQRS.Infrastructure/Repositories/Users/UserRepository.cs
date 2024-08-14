@@ -9,5 +9,5 @@ namespace ProjectNameCQRS.Repositories.Users;
 public interface IUserRepository : IDedsiRepository<User, Guid>;
 
 public class UserRepository(IDbContextProvider<ProjectNameCQRSDbContext> dbContextProvider)
-    : DedsiEfCoreRepository<ProjectNameCQRSDbContext, User, Guid>(dbContextProvider), 
+    : DedsiEfCoreRepository<ProjectNameCQRSDbContext, User, Guid>(dbContextProvider),
         IUserRepository;
