@@ -2,7 +2,7 @@ using Volo.Abp.Domain.Entities;
 
 namespace ProjectName.Users;
 
-public class User : Entity<Guid>
+public class User : AggregateRoot<Guid>
 {
     public string UserName { get; set; }
     
