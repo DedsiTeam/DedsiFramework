@@ -1,3 +1,5 @@
-﻿namespace ProjectNameCQRS.Roles.Commands;
+﻿using Dedsi.Ddd.CQRS.Commands;
 
-public record CreateRoleCommand(string RoleName, string RoleCode);
+namespace ProjectNameCQRS.Roles.Commands;
+
+public record CreateRoleCommand(string RoleName, string RoleCode) : DedsiCommand<Guid>;

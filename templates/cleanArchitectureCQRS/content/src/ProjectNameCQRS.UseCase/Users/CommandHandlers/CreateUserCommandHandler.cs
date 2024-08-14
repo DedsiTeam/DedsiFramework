@@ -1,8 +1,7 @@
-﻿using ProjectNameCQRS.Repositories.Roles;
+﻿using Dedsi.Ddd.CQRS.CommandHandlers;
+using ProjectNameCQRS.Repositories.Roles;
 using ProjectNameCQRS.Repositories.Users;
 using ProjectNameCQRS.Users.Commands;
-using Volo.Abp.DependencyInjection;
-using Volo.Abp.EventBus;
 using Volo.Abp.Guids;
 
 namespace ProjectNameCQRS.Users.CommandHandlers;
@@ -17,17 +16,19 @@ public class CreateUserCommandHandler(
     IUserRepository userRepository,
     IRoleRepository roleRepository,
     IGuidGenerator guidGenerator)
-    : ILocalEventHandler<CreateUserCommand>, ITransientDependency
+    : DedsiCommandHandler<CreateUserCommand, Guid>
 {
-    public async Task HandleEventAsync(CreateUserCommand eventData)
+    public async override Task<Guid> HandleEventAsync(CreateUserCommand command, CancellationToken cancellationToken)
     {
         // 普通用户角色
         var role = await roleRepository.GetAsync(a => a.RoleCode == "OrdinaryUser");
 
         // 创建用户
-        var user = new User(guidGenerator.Create(), eventData.UserName, eventData.Account, "PassWork@" + DateTime.Now.Year, eventData.Email, role);
+        var user = new User(guidGenerator.Create(), command.UserName, command.Account, "PassWork@" + DateTime.Now.Year, command.Email, role);
 
         // 保存到数据库
         await userRepository.InsertAsync(user);
+
+        return user.Id;
     }
 }

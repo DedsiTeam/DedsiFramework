@@ -1,18 +1,18 @@
-﻿using ProjectNameCQRS.Repositories.Roles;
+﻿using Dedsi.Ddd.CQRS.CommandHandlers;
+using ProjectNameCQRS.Repositories.Roles;
 using ProjectNameCQRS.Roles.Commands;
-using Volo.Abp.DependencyInjection;
-using Volo.Abp.EventBus;
 using Volo.Abp.Guids;
 
 namespace ProjectNameCQRS.Roles.CommandHandlers;
 
-public class CreateRoleCommandHandler(IRoleRepository roleRepository, IGuidGenerator guidGenerator) : ILocalEventHandler<CreateRoleCommand>, ITransientDependency
+public class CreateRoleCommandHandler(IRoleRepository roleRepository, IGuidGenerator guidGenerator) : DedsiCommandHandler<CreateRoleCommand, Guid>
 {
-    public async Task HandleEventAsync(CreateRoleCommand eventData)
+    public async override Task<Guid> HandleEventAsync(CreateRoleCommand command, CancellationToken cancellationToken)
     {
-        var role = new Role(guidGenerator.Create(), eventData.RoleCode, eventData.RoleName);
+        var role = new Role(guidGenerator.Create(), command.RoleCode, command.RoleName);
 
         await roleRepository.InsertAsync(role);
-    }
 
+        return role.Id;
+    }
 }

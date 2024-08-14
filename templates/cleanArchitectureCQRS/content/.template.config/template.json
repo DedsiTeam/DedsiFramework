@@ -8,7 +8,7 @@
     },
     "name": "Dedsi.CleanArchitectureCQRS",
     "identity": "Dedsi.CleanArchitectureCQRS",
-    "shortName": "Dedsi.CleanArchitectureCQRS",
+    "shortName": "Dedsi.CACQRS",
     "sourceName": "ProjectNameCQRS",
     "preferNameDirectory": true
 }

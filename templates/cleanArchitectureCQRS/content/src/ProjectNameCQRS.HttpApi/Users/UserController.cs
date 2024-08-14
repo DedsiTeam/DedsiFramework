@@ -1,16 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Dedsi.Ddd.CQRS.Mediators;
+using Microsoft.AspNetCore.Mvc;
 using ProjectNameCQRS.Users.Commands;
 using ProjectNameCQRS.Users.Queries;
-using Volo.Abp.EventBus.Local;
 
 namespace ProjectNameCQRS.Users;
 
 /// <summary>
 /// 用户
 /// </summary>
-/// <param name="localEventBus"></param>
+/// <param name="dedsiMediator"></param>
 /// <param name="userQuery"></param>
-public class UserController(ILocalEventBus localEventBus, IUserQuery userQuery) : DedsiIdentityController
+public class UserController(IDedsiMediator dedsiMediator, IUserQuery userQuery) : ProjectNameCQRSController
 {
     /// <summary>
     /// 创建用户
@@ -18,10 +18,9 @@ public class UserController(ILocalEventBus localEventBus, IUserQuery userQuery) 
     /// <param name="command"></param>
     /// <returns></returns>
     [HttpPost]
-    public async Task<bool> CreateUserAsync(CreateUserCommand command)
+    public Task<Guid> CreateUserAsync(CreateUserCommand command)
     {
-        await localEventBus.PublishAsync(command);
-        return true;
+        return dedsiMediator.PublishAsync(command);
     }
 
     /// <summary>
@@ -32,7 +31,7 @@ public class UserController(ILocalEventBus localEventBus, IUserQuery userQuery) 
     [HttpPost]
     public async Task<bool> SetUserRoleAsync(SetUserRoleCommand command)
     {
-        await localEventBus.PublishAsync(command);
+        await dedsiMediator.PublishAsync(command);
         return true;
     }
 

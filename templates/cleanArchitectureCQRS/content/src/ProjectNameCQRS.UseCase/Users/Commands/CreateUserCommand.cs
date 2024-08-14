@@ -1,4 +1,6 @@
-﻿namespace ProjectNameCQRS.Users.Commands;
+﻿using Dedsi.Ddd.CQRS.Commands;
+
+namespace ProjectNameCQRS.Users.Commands;
 
 /// <summary>
 /// 命令：创建用户
@@ -6,4 +8,4 @@
 /// <param name="UserName"></param>
 /// <param name="Account"></param>
 /// <param name="Email"></param>
-public record CreateUserCommand(string UserName, string Account, string Email);
+public record CreateUserCommand(string UserName, string Account, string Email) : DedsiCommand<Guid>;

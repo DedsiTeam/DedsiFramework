@@ -1,4 +1,5 @@
-﻿using ProjectNameCQRS.Roles.Dtos;
+﻿using Dedsi.Ddd.CQRS.Commands;
+using ProjectNameCQRS.Roles.Dtos;
 
 namespace ProjectNameCQRS.Users.Commands;
 
@@ -7,4 +8,4 @@ namespace ProjectNameCQRS.Users.Commands;
 /// </summary>
 /// <param name="userId"></param>
 /// <param name="Roles"></param>
-public record SetUserRoleCommand(Guid userId, List<RoleDto> Roles);
+public record SetUserRoleCommand(Guid userId, List<RoleDto> Roles) : DedsiCommand;

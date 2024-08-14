@@ -1,10 +1,9 @@
-﻿using ProjectNameCQRS.Repositories.Roles;
+﻿using Dedsi.Ddd.CQRS.CommandHandlers;
+using ProjectNameCQRS.Repositories.Roles;
 using ProjectNameCQRS.Repositories.Users;
 using ProjectNameCQRS.Users.Commands;
 using Volo.Abp;
-using Volo.Abp.DependencyInjection;
 using Volo.Abp.Domain.Repositories;
-using Volo.Abp.EventBus;
 using Volo.Abp.Guids;
 
 namespace ProjectNameCQRS.Users.CommandHandlers;
@@ -19,9 +18,9 @@ public class SetUserRoleCommandHandler(
     IUserRepository userRepository,
     IRoleRepository roleRepository,
     IGuidGenerator guidGenerator)
-    : ILocalEventHandler<SetUserRoleCommand>, ITransientDependency
+    : DedsiCommandHandler<SetUserRoleCommand>
 {
-    public async Task HandleEventAsync(SetUserRoleCommand eventData)
+    public async override Task HandleEventAsync(SetUserRoleCommand eventData)
     {
         var user = await userRepository.GetAsync(a => a.Id == eventData.userId);
 

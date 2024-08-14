@@ -5,7 +5,7 @@ using Volo.Abp.DependencyInjection;
 
 namespace Dedsi.Ddd.CQRS.CommandHandlers;
 
-public class DedsiCommandHandler: IDedsiCommandHandler
+public class DedsiCommandHandler : IDedsiCommandHandler
 {
     public IAbpLazyServiceProvider LazyServiceProvider { get; set; }
    
@@ -17,14 +17,26 @@ public class DedsiCommandHandler: IDedsiCommandHandler
     protected ILogger Logger => LazyServiceProvider.LazyGetService<ILogger>(provider => LoggerFactory?.CreateLogger(GetType().FullName!) ?? NullLogger.Instance);
 }
 
-public abstract class DedsiCommandHandler<TCommand> : DedsiCommandHandler, IDedsiCommandHandler<TCommand>
+public abstract class DedsiCommandHandler<TCommand> 
+    : DedsiCommandHandler, 
+    IDedsiCommandHandler<TCommand>
     where TCommand : DedsiCommand
 {
-    public abstract Task Handle(TCommand request, CancellationToken cancellationToken);
+    public abstract Task HandleEventAsync(TCommand eventData);
 }
 
-public abstract class DedsiCommandHandler<TCommand, TResponse> : DedsiCommandHandler, IDedsiCommandHandler<TCommand, TResponse>
+public abstract class DedsiCommandHandler<TCommand, TResponse> 
+    : DedsiCommandHandler, 
+    IDedsiCommandHandler<TCommand, TResponse>
     where TCommand : DedsiCommand<TResponse>
 {
-    public abstract Task<TResponse> Handle(TCommand request, CancellationToken cancellationToken);
+
+    public abstract Task<TResponse> HandleEventAsync(TCommand command, CancellationToken cancellationToken);
+
+
+    public Task<TResponse> Handle(TCommand command, CancellationToken cancellationToken)
+    {
+        return HandleEventAsync(command, cancellationToken);
+    }
+
 }
