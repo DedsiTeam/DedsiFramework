@@ -1,5 +1,5 @@
 <Project>
     <PropertyGroup>
-        <AbpFrameworkVersion>8.2.1</AbpFrameworkVersion>
+        <AbpFrameworkVersion>8.2.2</AbpFrameworkVersion>
     </PropertyGroup>
 </Project>

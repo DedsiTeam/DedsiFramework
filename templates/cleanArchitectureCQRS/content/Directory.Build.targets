@@ -1,6 +1,6 @@
 <Project>
     <PropertyGroup>
-        <DedsiFrameworkVersion>8.2.1.91</DedsiFrameworkVersion>
-        <AbpFrameworkVersion>8.2.1</AbpFrameworkVersion>
+        <DedsiFrameworkVersion>8.2.2</DedsiFrameworkVersion>
+        <AbpFrameworkVersion>8.2.2</AbpFrameworkVersion>
     </PropertyGroup>
 </Project>
