@@ -4,7 +4,7 @@ using Volo.Abp.Domain.Repositories;
 
 namespace Dedsi.Ddd.Domain.Repositories;
 
-public interface IDedsiRepository<TEntity,TKey> : IRepository<TEntity,TKey> where TEntity : class, IEntity<TKey>
+public interface IDedsiRepository : IRepository
 {
     /// <summary>
     /// 启用：IsChangeTrackingEnabled
@@ -15,7 +15,10 @@ public interface IDedsiRepository<TEntity,TKey> : IRepository<TEntity,TKey> wher
     /// 关闭：IsChangeTrackingEnabled
     /// </summary>
     void CloseChangeTracking();
+}
 
+public interface IDedsiRepository<TEntity> : IDedsiRepository, IRepository<TEntity> where TEntity : class, IEntity
+{
     /// <summary>
     /// 分页查询
     /// </summary>
@@ -38,7 +41,7 @@ public interface IDedsiRepository<TEntity,TKey> : IRepository<TEntity,TKey> wher
     /// </summary>
     /// <param name="wherePredicate"></param>
     /// <returns></returns>
-    Task<int> DeleteAsync(Expression<Func<TEntity, bool>> wherePredicate);
+    Task<int> DeleteManyAsync(Expression<Func<TEntity, bool>> wherePredicate);
 
     /// <summary>
     /// 执行sql，返回受影响行数
@@ -48,3 +51,5 @@ public interface IDedsiRepository<TEntity,TKey> : IRepository<TEntity,TKey> wher
     /// <returns></returns>
     Task<int> ExecuteSqlAsync(FormattableString sql, CancellationToken cancellationToken = default);
 }
+
+public interface IDedsiRepository<TEntity, TKey> : IDedsiRepository<TEntity>, IRepository<TEntity, TKey> where TEntity : class, IEntity<TKey>;

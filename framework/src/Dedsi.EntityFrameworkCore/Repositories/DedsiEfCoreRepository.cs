@@ -7,25 +7,23 @@ using Volo.Abp.EntityFrameworkCore;
 
 namespace Dedsi.EntityFrameworkCore.Repositories;
 
-
-public abstract class DedsiEfCoreRepository<TDbContext,TEntity, TKey>(IDbContextProvider<TDbContext> dbContextProvider) 
-    : EfCoreRepository<TDbContext,TEntity, TKey>(dbContextProvider),
-        IDedsiRepository<TEntity, TKey>
+public abstract class DedsiEfCoreRepository<TDbContext, TEntity>(IDbContextProvider<TDbContext> dbContextProvider)
+    : EfCoreRepository<TDbContext,TEntity>(dbContextProvider), IDedsiRepository<TEntity>
     where TDbContext : IDedsiEfCoreDbContext
-    where TEntity : class, IEntity<TKey>
+    where TEntity : class, IEntity
 {
     /// <inheritdoc />
-    public void EnableChangeTracking()
+    public virtual void EnableChangeTracking()
     {
         this.IsChangeTrackingEnabled = true;
     }
 
     /// <inheritdoc />
-    public void CloseChangeTracking()
+    public virtual void CloseChangeTracking()
     {
         this.IsChangeTrackingEnabled = false;
     }
-
+    
     /// <inheritdoc />
     public virtual async Task<(int,List<TEntity>)> GetPagedListAsync<TOrderKey>(
         Expression<Func<TEntity, bool>> wherePredicate,
@@ -49,7 +47,7 @@ public abstract class DedsiEfCoreRepository<TDbContext,TEntity, TKey>(IDbContext
     }
 
     /// <inheritdoc />
-    public async Task<int> DeleteAsync(Expression<Func<TEntity, bool>> wherePredicate)
+    public virtual async Task<int> DeleteManyAsync(Expression<Func<TEntity, bool>> wherePredicate)
     {
         return await (await GetQueryableAsync()).Where(wherePredicate).ExecuteDeleteAsync();
     }
@@ -59,5 +57,39 @@ public abstract class DedsiEfCoreRepository<TDbContext,TEntity, TKey>(IDbContext
     {
         return await (await GetDbContextAsync()).Database.ExecuteSqlAsync(sql,cancellationToken);
     }
+}
 
+public abstract class DedsiEfCoreRepository<TDbContext,TEntity, TKey>(IDbContextProvider<TDbContext> dbContextProvider) 
+    : DedsiEfCoreRepository<TDbContext,TEntity>(dbContextProvider), IDedsiRepository<TEntity, TKey>
+    where TDbContext : IDedsiEfCoreDbContext
+    where TEntity : class, IEntity<TKey>
+{
+    /// <summary>
+    /// abp EfCoreRepository
+    /// </summary>
+    private readonly EfCoreRepository<TDbContext, TEntity, TKey> _efCoreRepository = new (dbContextProvider);
+    
+    /// <inheritdoc />
+    public virtual Task<TEntity> GetAsync(TKey id, bool includeDetails = true, CancellationToken cancellationToken = default)
+    {
+        return _efCoreRepository.GetAsync(id, includeDetails, cancellationToken);
+    }
+
+    /// <inheritdoc />
+    public virtual Task<TEntity?> FindAsync(TKey id, bool includeDetails = true, CancellationToken cancellationToken = default)
+    {
+        return _efCoreRepository.GetAsync(id, includeDetails, cancellationToken);
+    }
+
+    /// <inheritdoc />
+    public virtual Task DeleteAsync(TKey id, bool autoSave = false, CancellationToken cancellationToken = default)
+    {
+        return _efCoreRepository.DeleteAsync(id, autoSave, cancellationToken);
+    }
+
+    /// <inheritdoc />
+    public virtual Task DeleteManyAsync(IEnumerable<TKey> ids, bool autoSave = false, CancellationToken cancellationToken = default)
+    {
+        return _efCoreRepository.DeleteManyAsync(ids, autoSave, cancellationToken);
+    }
 }
