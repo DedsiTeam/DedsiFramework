@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Volo.Abp.DependencyInjection;
+using Volo.Abp.Guids;
 
 namespace Dedsi.Ddd.CQRS.CommandHandlers;
 
@@ -9,6 +10,11 @@ public class DedsiCommandHandler : IDedsiCommandHandler
 {
     public IAbpLazyServiceProvider LazyServiceProvider { get; set; }
    
+    protected IGuidGenerator GuidGenerator 
+    {
+        get => this.LazyServiceProvider.LazyGetRequiredService<IGuidGenerator>();
+    }
+    
     protected ILoggerFactory LoggerFactory
     {
         get => this.LazyServiceProvider.LazyGetRequiredService<ILoggerFactory>();
