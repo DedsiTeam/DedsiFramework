@@ -18,6 +18,6 @@ public class UserQuery(IDbContextProvider<ProjectNameCQRSDbContext> dbContextPro
     public async Task<User?> GetByIdAsync(Guid id)
     {
         var dbContext = await GetDbContextAsync();
-        return await dbContext.Users.Include(b => b.UserRoles).SingleOrDefaultAsync(a => a.Id == id);
+        return await dbContext.Users.Include(b => b.UserRoles).FirstOrDefaultAsync(a => a.Id == id);
     }
 }

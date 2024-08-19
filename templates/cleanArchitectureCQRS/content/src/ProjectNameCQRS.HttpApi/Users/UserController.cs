@@ -1,6 +1,7 @@
 ﻿using Dedsi.Ddd.CQRS.Mediators;
 using Microsoft.AspNetCore.Mvc;
 using ProjectNameCQRS.Users.Commands;
+using ProjectNameCQRS.Users.Dtos;
 using ProjectNameCQRS.Users.Queries;
 
 namespace ProjectNameCQRS.Users;
@@ -18,9 +19,42 @@ public class UserController(IDedsiMediator dedsiMediator, IUserQuery userQuery) 
     /// <param name="command"></param>
     /// <returns></returns>
     [HttpPost]
-    public Task<Guid> CreateUserAsync(CreateUserCommand command)
+    public Task<Guid> CreateAsync(CreateUserInputDto input)
     {
-        return dedsiMediator.PublishAsync(command);
+        return dedsiMediator.PublishAsync(new CreateUserCommand(input.UserName, input.Account, input.Email));
+    }
+
+    /// <summary>
+    /// 修改
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpPost]
+    public Task<bool> UpdateAsync(UpdateUserInputDto input)
+    {
+        return dedsiMediator.PublishAsync(new UpdateUserCommand(input.Id, input.UserName, input.Account, input.Email));
+    }
+
+    /// <summary>
+    /// 删除
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    [HttpPost("{id}")]
+    public Task<bool> DeleteAsync(Guid id)
+    {
+        return dedsiMediator.PublishAsync(new DeleteUserCommand(id));
+    }
+
+    /// <summary>
+    /// 查询
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    [HttpGet("{id}")]
+    public Task<User?> GetAsync(Guid id)
+    {
+        return userQuery.GetByIdAsync(id);
     }
 
     /// <summary>
@@ -33,16 +67,5 @@ public class UserController(IDedsiMediator dedsiMediator, IUserQuery userQuery) 
     {
         await dedsiMediator.PublishAsync(command);
         return true;
-    }
-
-    /// <summary>
-    /// 查询
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
-    [HttpGet("{id}")]
-    public Task<User?> GetAsync(Guid id)
-    {
-        return userQuery.GetByIdAsync(id);
     }
 }

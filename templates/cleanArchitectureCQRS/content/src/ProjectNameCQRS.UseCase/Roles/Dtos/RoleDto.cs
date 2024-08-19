@@ -14,3 +14,21 @@ public class RoleDto : EntityDto<Guid>
     /// </summary>
     public string RoleName { get; set; }
 }
+
+public class CreateRoleInputDto
+{
+    /// <summary>
+    /// 
+    /// </summary>
+    public string RoleCode { get; set; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public string RoleName { get; set; }
+}
+
+public class UpdateRoleInputDto : RoleDto
+{
+
+}

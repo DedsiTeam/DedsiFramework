@@ -23,6 +23,7 @@ public class Role : AggregateRoot<Guid>
     /// </summary>
     public string RoleName { get; set; }
     
+
     public void Update(string roleCode, string roleName)
     {
         RoleCode = Check.NotNullOrWhiteSpace(roleCode, nameof(roleCode));
