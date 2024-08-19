@@ -1,4 +1,5 @@
-﻿using Volo.Abp.Domain.Entities;
+﻿using Volo.Abp;
+using Volo.Abp.Domain.Entities;
 
 namespace ProjectNameCQRS.Roles;
 
@@ -21,4 +22,10 @@ public class Role : AggregateRoot<Guid>
     /// 
     /// </summary>
     public string RoleName { get; set; }
+    
+    public void Update(string roleCode, string roleName)
+    {
+        RoleCode = Check.NotNullOrWhiteSpace(roleCode, nameof(roleCode));
+        RoleName = Check.NotNullOrWhiteSpace(roleName, nameof(roleName));
+    }
 }
