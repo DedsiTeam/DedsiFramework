@@ -1,7 +1,7 @@
 {
     "$schema": "http://json.schemastore.org/template",
     "author": "Cohen Wang",
-    "classifications": [ "WebAPI" ],
+    "classifications": [ "Web API" ],
     "tags": {
         "language": "C#",
         "type":"project"
