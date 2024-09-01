@@ -74,7 +74,11 @@ public class ProjectNameCQRSHostModule : AbpModule
         });
 
         // Swagger
-        context.Services.AddSwaggerGen();
+        context.Services.AddSwaggerGen(options =>
+        {
+            options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "ProjectNameCQRS.HttpApi.xml"), true);
+            options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "ProjectNameCQRS.UseCase.xml"), true);
+        });
     }
 
     public override void OnApplicationInitialization(ApplicationInitializationContext context)

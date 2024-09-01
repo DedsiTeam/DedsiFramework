@@ -76,7 +76,11 @@ public class ProjectNameHttpApiHostModule : AbpModule
         });
 
         // Swagger
-        context.Services.AddSwaggerGen();
+        context.Services.AddSwaggerGen(options =>
+        {
+            options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "ProjectName.HttpApi.xml"), true);
+            options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "ProjectName.Domain.xml"), true);
+        });
     }
 
     public override void OnApplicationInitialization(ApplicationInitializationContext context)
