@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Dedsi.Ddd.Domain\Dedsi.Ddd.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="SqlSugarCore" Version="5.1.4.167" />
+      <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="8.2.1" />
+    </ItemGroup>
+
+</Project>
