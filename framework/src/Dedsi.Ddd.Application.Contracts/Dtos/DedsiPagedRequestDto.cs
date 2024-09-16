@@ -25,6 +25,6 @@ public class DedsiPagedRequestDto : PagedResultRequestDto
 
     public override int MaxResultCount => PageSize;
 
-    public override int SkipCount => (PageSize - 1) * PageSize;
+    public override int SkipCount => (PageIndex - 1) * PageSize;
 }
 
