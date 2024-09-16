@@ -2,5 +2,5 @@ namespace Dedsi.Ddd.Domain;
 
 public class DedsiDddDomainOptions
 {
-    public const string DbTablePrefixByDbo = "dbo";
+    public static string DefaultDbSchema = "dbo";
 }
