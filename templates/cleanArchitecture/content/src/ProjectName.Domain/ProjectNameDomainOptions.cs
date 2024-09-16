@@ -10,5 +10,7 @@ public class ProjectNameDomainOptions : DedsiCleanArchitectureDomainOptions
     
     public const string ConnectionStringName = "ProjectNameDB";
     
+    public const string DbSchemaName  = "ProjectName";
+
     public const string DbTablePrefix = "ProjectName";
 }
