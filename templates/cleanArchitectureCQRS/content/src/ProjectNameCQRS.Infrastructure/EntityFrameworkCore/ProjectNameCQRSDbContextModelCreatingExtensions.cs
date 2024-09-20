@@ -13,19 +13,19 @@ public static class ProjectNameCQRSDbContextModelCreatingExtensions
 
         builder.Entity<User>(b =>
         {
-            b.ToTable("Users", ProjectNameCQRSDomainOptions.DbTablePrefixByDbo);
+            b.ToTable("Users", ProjectNameCQRSDomainOptions.DefaultDbSchema);
             b.HasKey(a => a.Id);
         });
 
         builder.Entity<Role>(b =>
         {
-            b.ToTable("Roles", ProjectNameCQRSDomainOptions.DbTablePrefixByDbo);
+            b.ToTable("Roles", ProjectNameCQRSDomainOptions.DefaultDbSchema);
             b.HasKey(a => a.Id);
         });
 
         builder.Entity<UserRole>(b =>
         {
-            b.ToTable("UserRoles", ProjectNameCQRSDomainOptions.DbTablePrefixByDbo);
+            b.ToTable("UserRoles", ProjectNameCQRSDomainOptions.DefaultDbSchema);
             b.HasKey(a => a.Id);
         });
 
