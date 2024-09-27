@@ -1,6 +1,6 @@
-﻿using System.Linq.Expressions;
-using Dedsi.Ddd.Domain.Repositories;
+﻿using Dedsi.Ddd.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 using Volo.Abp.Domain.Entities;
 using Volo.Abp.Domain.Repositories.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
@@ -64,32 +64,48 @@ public abstract class DedsiEfCoreRepository<TDbContext,TEntity, TKey>(IDbContext
     where TDbContext : IDedsiEfCoreDbContext
     where TEntity : class, IEntity<TKey>
 {
-    /// <summary>
-    /// abp EfCoreRepository
-    /// </summary>
-    private readonly EfCoreRepository<TDbContext, TEntity, TKey> _efCoreRepository = new (dbContextProvider);
-    
     /// <inheritdoc />
-    public virtual Task<TEntity> GetAsync(TKey id, bool includeDetails = true, CancellationToken cancellationToken = default)
+    public virtual async Task<TEntity> GetAsync(TKey id, bool includeDetails = true, CancellationToken cancellationToken = default)
     {
-        return _efCoreRepository.GetAsync(id, includeDetails, cancellationToken);
+        var entity = await FindAsync(id, includeDetails, GetCancellationToken(cancellationToken));
+
+        if (entity == null)
+        {
+            throw new EntityNotFoundException(typeof(TEntity), id);
+        }
+
+        return entity;
     }
 
     /// <inheritdoc />
-    public virtual Task<TEntity?> FindAsync(TKey id, bool includeDetails = true, CancellationToken cancellationToken = default)
+    public virtual async Task<TEntity?> FindAsync(TKey id, bool includeDetails = true, CancellationToken cancellationToken = default)
     {
-        return _efCoreRepository.GetAsync(id, includeDetails, cancellationToken);
+        return includeDetails
+            ? await (await WithDetailsAsync()).OrderBy(e => e.Id).FirstOrDefaultAsync(e => e.Id!.Equals(id), GetCancellationToken(cancellationToken))
+            : !ShouldTrackingEntityChange()
+                ? await (await GetQueryableAsync()).OrderBy(e => e.Id).FirstOrDefaultAsync(e => e.Id!.Equals(id), GetCancellationToken(cancellationToken))
+                : await (await GetDbSetAsync()).FindAsync(new object[] { id! }, GetCancellationToken(cancellationToken));
     }
 
     /// <inheritdoc />
-    public virtual Task DeleteAsync(TKey id, bool autoSave = false, CancellationToken cancellationToken = default)
+    public virtual async Task DeleteAsync(TKey id, bool autoSave = false, CancellationToken cancellationToken = default)
     {
-        return _efCoreRepository.DeleteAsync(id, autoSave, cancellationToken);
+        var entity = await FindAsync(id, cancellationToken: cancellationToken);
+        if (entity == null)
+        {
+            return;
+        }
+
+        await DeleteAsync(entity, autoSave, cancellationToken);
     }
 
     /// <inheritdoc />
-    public virtual Task DeleteManyAsync(IEnumerable<TKey> ids, bool autoSave = false, CancellationToken cancellationToken = default)
+    public virtual async Task DeleteManyAsync(IEnumerable<TKey> ids, bool autoSave = false, CancellationToken cancellationToken = default)
     {
-        return _efCoreRepository.DeleteManyAsync(ids, autoSave, cancellationToken);
+        cancellationToken = GetCancellationToken(cancellationToken);
+
+        var entities = await (await GetDbSetAsync()).Where(x => ids.Contains(x.Id)).ToListAsync(cancellationToken);
+
+        await DeleteManyAsync(entities, autoSave, cancellationToken);
     }
 }
