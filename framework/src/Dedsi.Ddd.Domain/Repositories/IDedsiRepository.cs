@@ -20,6 +20,12 @@ public interface IDedsiRepository : IRepository
 public interface IDedsiRepository<TEntity> : IDedsiRepository, IRepository<TEntity> where TEntity : class, IEntity
 {
     /// <summary>
+    /// 状态不跟踪
+    /// </summary>
+    /// <returns></returns>
+    Task<IQueryable<TEntity>> GetQueryableNoTrackingAsync();
+    
+    /// <summary>
     /// 分页查询
     /// </summary>
     /// <param name="wherePredicate"></param>

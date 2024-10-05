@@ -23,7 +23,14 @@ public abstract class DedsiEfCoreRepository<TDbContext, TEntity>(IDbContextProvi
     {
         this.IsChangeTrackingEnabled = false;
     }
-    
+
+    /// <inheritdoc />
+    public async Task<IQueryable<TEntity>> GetQueryableNoTrackingAsync()
+    {
+        var dbSet = await GetDbSetAsync();
+        return dbSet.AsNoTracking();
+    }
+
     /// <inheritdoc />
     public virtual async Task<(int,List<TEntity>)> GetPagedListAsync<TOrderKey>(
         Expression<Func<TEntity, bool>> wherePredicate,

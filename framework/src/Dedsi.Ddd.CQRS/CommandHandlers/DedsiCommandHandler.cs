@@ -28,7 +28,7 @@ public abstract class DedsiCommandHandler<TCommand>
     IDedsiCommandHandler<TCommand>
     where TCommand : DedsiCommand
 {
-    public abstract Task HandleEventAsync(TCommand eventData);
+    public abstract Task Handle(TCommand command, CancellationToken cancellationToken);
 }
 
 public abstract class DedsiCommandHandler<TCommand, TResponse> 
@@ -36,13 +36,5 @@ public abstract class DedsiCommandHandler<TCommand, TResponse>
     IDedsiCommandHandler<TCommand, TResponse>
     where TCommand : DedsiCommand<TResponse>
 {
-
-    public abstract Task<TResponse> HandleEventAsync(TCommand command, CancellationToken cancellationToken);
-
-
-    public Task<TResponse> Handle(TCommand command, CancellationToken cancellationToken)
-    {
-        return HandleEventAsync(command, cancellationToken);
-    }
-
+    public abstract Task<TResponse> Handle(TCommand command, CancellationToken cancellationToken);
 }

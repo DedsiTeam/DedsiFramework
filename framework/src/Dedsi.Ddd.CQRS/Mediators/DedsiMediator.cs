@@ -1,16 +1,13 @@
 ﻿using Dedsi.Ddd.CQRS.Commands;
 using MediatR;
-using Volo.Abp.EventBus.Local;
 
 namespace Dedsi.Ddd.CQRS.Mediators;
 
-public class DedsiMediator(ILocalEventBus localEventBus, IMediator mediator) : IDedsiMediator
+public class DedsiMediator(IMediator mediator) : IDedsiMediator
 {
-
-    /// <inheritdoc />
-    public Task PublishAsync(IDedsiCommand command, bool onUnitOfWorkComplete = true)
+    public virtual Task PublishAsync(IDedsiCommand command,CancellationToken cancellationToken = default)
     {
-        return localEventBus.PublishAsync(command, onUnitOfWorkComplete);
+        return mediator.Send(command, cancellationToken);
     }
 
     /// <inheritdoc />

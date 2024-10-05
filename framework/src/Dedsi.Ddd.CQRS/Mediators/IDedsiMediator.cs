@@ -5,19 +5,19 @@ namespace Dedsi.Ddd.CQRS.Mediators;
 public interface IDedsiMediator
 {
     /// <summary>
-    /// �޷���ֵ
+    /// 发布事件：无返回值
     /// </summary>
     /// <param name="command"></param>
-    /// <param name="onUnitOfWorkComplete"></param>
+    /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task PublishAsync(IDedsiCommand command, bool onUnitOfWorkComplete = true);
+    Task PublishAsync(IDedsiCommand command, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// �з���ֵ
+    /// 发布事件：有返回值
     /// </summary>
-    /// <typeparam name="TResponse"></typeparam>
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
+    /// <typeparam name="TResponse"></typeparam>
     /// <returns></returns>
     Task<TResponse> PublishAsync<TResponse>(IDedsiCommand<TResponse> request, CancellationToken cancellationToken = default);
 }
