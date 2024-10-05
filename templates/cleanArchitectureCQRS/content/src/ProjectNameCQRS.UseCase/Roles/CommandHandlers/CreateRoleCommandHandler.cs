@@ -7,7 +7,7 @@ namespace ProjectNameCQRS.Roles.CommandHandlers;
 
 public class CreateRoleCommandHandler(IRoleRepository roleRepository, IGuidGenerator guidGenerator) : DedsiCommandHandler<CreateRoleCommand, Guid>
 {
-    public async override Task<Guid> HandleEventAsync(CreateRoleCommand command, CancellationToken cancellationToken)
+    public async override Task<Guid> Handle(CreateRoleCommand command, CancellationToken cancellationToken)
     {
         var role = new Role(guidGenerator.Create(), command.RoleCode, command.RoleName);
 

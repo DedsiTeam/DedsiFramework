@@ -7,7 +7,7 @@ namespace ProjectNameCQRS.Roles.CommandHandlers;
 
 public class UpdateRoleCommandHandler(IRoleRepository roleRepository) : DedsiCommandHandler<UpdateRoleCommand, bool>
 {
-    public override async Task<bool> HandleEventAsync(UpdateRoleCommand command, CancellationToken cancellationToken)
+    public override async Task<bool> Handle(UpdateRoleCommand command, CancellationToken cancellationToken)
     {
         var role = await roleRepository.GetAsync(a => a.Id == command.id);
         if (role == null)

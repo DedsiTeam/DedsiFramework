@@ -18,7 +18,7 @@ public class CreateUserCommandHandler(
     IGuidGenerator guidGenerator)
     : DedsiCommandHandler<CreateUserCommand, Guid>
 {
-    public async override Task<Guid> HandleEventAsync(CreateUserCommand command, CancellationToken cancellationToken)
+    public override async Task<Guid> Handle(CreateUserCommand command, CancellationToken cancellationToken)
     {
         // 普通用户角色
         var role = await roleRepository.GetAsync(a => a.RoleCode == "OrdinaryUser");

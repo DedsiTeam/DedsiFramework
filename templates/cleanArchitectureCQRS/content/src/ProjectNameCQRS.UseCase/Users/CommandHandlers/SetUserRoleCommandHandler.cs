@@ -20,7 +20,7 @@ public class SetUserRoleCommandHandler(
     IGuidGenerator guidGenerator)
     : DedsiCommandHandler<SetUserRoleCommand>
 {
-    public async override Task HandleEventAsync(SetUserRoleCommand eventData)
+    public async override Task Handle(SetUserRoleCommand eventData, CancellationToken cancellationToken)
     {
         var user = await userRepository.GetAsync(a => a.Id == eventData.userId);
 

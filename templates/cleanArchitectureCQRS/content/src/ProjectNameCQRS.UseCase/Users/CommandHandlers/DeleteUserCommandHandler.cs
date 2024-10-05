@@ -7,7 +7,7 @@ namespace ProjectNameCQRS.Users.CommandHandlers;
 
 public class DeleteUserCommandHandler(IUserRepository userRepository, IUserQuery userQuery) : DedsiCommandHandler<DeleteUserCommand, bool>
 {
-    public override async Task<bool> HandleEventAsync(DeleteUserCommand command, CancellationToken cancellationToken)
+    public override async Task<bool> Handle(DeleteUserCommand command, CancellationToken cancellationToken)
     {
         var user = await userQuery.GetByIdAsync(command.id);
         await userRepository.DeleteAsync(user);

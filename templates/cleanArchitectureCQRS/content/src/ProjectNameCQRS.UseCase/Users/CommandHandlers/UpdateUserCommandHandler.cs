@@ -7,7 +7,7 @@ namespace ProjectNameCQRS.Users.CommandHandlers;
 
 public class UpdateUserCommandHandler(IUserRepository userRepository) : DedsiCommandHandler<UpdateUserCommand, bool>
 {
-    public override async Task<bool> HandleEventAsync(UpdateUserCommand command, CancellationToken cancellationToken)
+    public override async Task<bool> Handle(UpdateUserCommand command, CancellationToken cancellationToken)
     {
         var user = await userRepository.GetAsync(a => a.Id == command.id);
         if (user == null)

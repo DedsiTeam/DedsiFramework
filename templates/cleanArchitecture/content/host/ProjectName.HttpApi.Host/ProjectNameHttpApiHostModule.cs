@@ -1,5 +1,9 @@
-﻿using Microsoft.AspNetCore.Cors;
+﻿using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Swashbuckle.AspNetCore.SwaggerUI;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Auditing;
@@ -81,6 +85,27 @@ public class ProjectNameHttpApiHostModule : AbpModule
             options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "ProjectName.HttpApi.xml"), true);
             options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "ProjectName.Domain.xml"), true);
         });
+        
+        // 添加JWT身份验证服务
+        context.Services
+            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                var secretByte = Encoding.UTF8.GetBytes(configuration["JwtOptions:SecretKey"]!);
+                options.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuer = true,
+                    ValidIssuer = configuration["JwtOptions:Issuer"],
+
+                    ValidateAudience = true,
+                    ValidAudience = configuration["JwtOptions:Audience"],
+
+                    ValidateLifetime = true,
+
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(secretByte)
+                };
+            });
     }
 
     public override void OnApplicationInitialization(ApplicationInitializationContext context)
@@ -104,13 +129,20 @@ public class ProjectNameHttpApiHostModule : AbpModule
         app.UseCors();
 
         app.UseSwagger();
-        app.UseSwaggerUI();
+        app.UseSwaggerUI(options =>
+        {
+            options.DocExpansion(DocExpansion.None);
+            options.DefaultModelExpandDepth(-1);
+        });
+        
+        app.UseAuthentication();
+        app.UseAuthorization();
 
         app.UseAuditing();
         app.UseConfiguredEndpoints(endpoints =>
         {
             // AuthorizeAttribute
-            // endpoints.MapControllers().RequireAuthorization();
+            endpoints.MapControllers().RequireAuthorization();
         });
 
     }

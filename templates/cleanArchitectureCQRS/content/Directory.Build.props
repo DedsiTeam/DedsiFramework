@@ -4,5 +4,6 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Authors>Cohen Wang</Authors>
+        <NoWarn>$(NoWarn);CS1591;</NoWarn>
     </PropertyGroup>
 </Project>
