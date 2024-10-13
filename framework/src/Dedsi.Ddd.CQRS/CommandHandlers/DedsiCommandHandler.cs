@@ -3,6 +3,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Guids;
+using Volo.Abp.Timing;
+using Volo.Abp.Users;
 
 namespace Dedsi.Ddd.CQRS.CommandHandlers;
 
@@ -21,6 +23,10 @@ public class DedsiCommandHandler : IDedsiCommandHandler
     }
 
     protected ILogger Logger => LazyServiceProvider.LazyGetService<ILogger>(provider => LoggerFactory?.CreateLogger(GetType().FullName!) ?? NullLogger.Instance);
+    
+    protected ICurrentUser CurrentUser => LazyServiceProvider.LazyGetRequiredService<ICurrentUser>();
+    
+    protected IClock Clock => LazyServiceProvider.LazyGetRequiredService<IClock>();
 }
 
 public abstract class DedsiCommandHandler<TCommand> 
