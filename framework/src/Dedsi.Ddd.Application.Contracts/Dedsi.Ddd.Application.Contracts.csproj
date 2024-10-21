@@ -10,6 +10,7 @@
 
     <ItemGroup>
       <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="$(AbpFrameworkVersion)" />
+      <PackageReference Include="Volo.Abp.FluentValidation" Version="$(AbpFrameworkVersion)" />
     </ItemGroup>
 
 </Project>
