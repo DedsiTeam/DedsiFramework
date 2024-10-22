@@ -8,10 +8,7 @@ namespace Dedsi.SqlSugar.Repositories;
 /// </summary>
 /// <param name="sqlSugarClient"></param>
 /// <typeparam name="TEntity"></typeparam>
-public class DedsiSqlSugarRepository<TEntity>(ISqlSugarClient sqlSugarClient) 
-    : SimpleClient<TEntity>(sqlSugarClient), 
-        IDedsiSqlSugarRepository<TEntity>
-    where TEntity : class, IEntity, new()
+public class DedsiSqlSugarRepository<TEntity>(ISqlSugarClient sqlSugarClient) : SimpleClient<TEntity>(sqlSugarClient), IDedsiSqlSugarRepository<TEntity> where TEntity : class, IEntity, new()
 {
 
 }

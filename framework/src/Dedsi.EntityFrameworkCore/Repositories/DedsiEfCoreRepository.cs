@@ -13,18 +13,6 @@ public abstract class DedsiEfCoreRepository<TDbContext, TEntity>(IDbContextProvi
     where TEntity : class, IEntity
 {
     /// <inheritdoc />
-    public virtual void EnableChangeTracking()
-    {
-        this.IsChangeTrackingEnabled = true;
-    }
-
-    /// <inheritdoc />
-    public virtual void CloseChangeTracking()
-    {
-        this.IsChangeTrackingEnabled = false;
-    }
-
-    /// <inheritdoc />
     public async Task<IQueryable<TEntity>> GetQueryableNoTrackingAsync()
     {
         var dbSet = await GetDbSetAsync();
@@ -85,7 +73,7 @@ public abstract class DedsiEfCoreRepository<TDbContext,TEntity, TKey>(IDbContext
     }
 
     /// <inheritdoc />
-    public virtual async Task<TEntity?> FindAsync(TKey id, bool includeDetails = true, CancellationToken cancellationToken = default)
+    public virtual async Task<TEntity> FindAsync(TKey id, bool includeDetails = true, CancellationToken cancellationToken = default)
     {
         return includeDetails
             ? await (await WithDetailsAsync()).OrderBy(e => e.Id).FirstOrDefaultAsync(e => e.Id!.Equals(id), GetCancellationToken(cancellationToken))

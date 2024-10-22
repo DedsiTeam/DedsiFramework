@@ -4,25 +4,10 @@ using Volo.Abp.Domain.Repositories;
 
 namespace Dedsi.Ddd.Domain.Repositories;
 
-public interface IDedsiRepository : IRepository
-{
-    /// <summary>
-    /// 启用：IsChangeTrackingEnabled
-    /// </summary>
-    void EnableChangeTracking();
-    
-    /// <summary>
-    /// 关闭：IsChangeTrackingEnabled
-    /// </summary>
-    void CloseChangeTracking();
-}
+public interface IDedsiRepository : IRepository;
 
 public interface IDedsiRepository<TEntity> : IDedsiRepository, IRepository<TEntity> where TEntity : class, IEntity
 {
-    /// <summary>
-    /// 状态不跟踪
-    /// </summary>
-    /// <returns></returns>
     Task<IQueryable<TEntity>> GetQueryableNoTrackingAsync();
     
     /// <summary>
@@ -33,7 +18,6 @@ public interface IDedsiRepository<TEntity> : IDedsiRepository, IRepository<TEnti
     /// <param name="isReverse"></param>
     /// <param name="pageIndex"></param>
     /// <param name="pageSize"></param>
-    /// <typeparam name="TOrderKey"></typeparam>
     /// <returns></returns>
     Task<(int, List<TEntity>)> GetPagedListAsync<TOrderKey>(
         Expression<Func<TEntity, bool>> wherePredicate,
