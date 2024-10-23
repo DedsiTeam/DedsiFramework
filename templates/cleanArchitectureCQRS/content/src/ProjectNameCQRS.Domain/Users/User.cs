@@ -50,10 +50,6 @@ public class User : AggregateRoot<Guid>
 
     public void SetUserRole(UserRole userRole)
     {
-        if (UserRoles == null)
-        {
-            UserRoles = new List<UserRole>();
-        }
         UserRoles.Add(userRole);
     }
 

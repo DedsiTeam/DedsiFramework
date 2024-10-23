@@ -21,13 +21,13 @@ public class CreateUserCommandHandler(
     public override async Task<Guid> Handle(CreateUserCommand command, CancellationToken cancellationToken)
     {
         // 普通用户角色
-        var role = await roleRepository.GetAsync(a => a.RoleCode == "OrdinaryUser");
+        var role = await roleRepository.GetAsync(a => a.RoleCode == "OrdinaryUser", cancellationToken: cancellationToken);
 
         // 创建用户
         var user = new User(guidGenerator.Create(), command.UserName, command.Account, "PassWork@" + DateTime.Now.Year, command.Email, role);
 
         // 保存到数据库
-        await userRepository.InsertAsync(user);
+        await userRepository.InsertAsync(user, cancellationToken: cancellationToken);
 
         return user.Id;
     }

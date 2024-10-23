@@ -3,6 +3,11 @@ using Volo.Abp.Domain.Entities;
 
 namespace Dedsi.Ddd.Domain.Repositories;
 
+/// <summary>
+/// CRQS 仓储
+/// </summary>
+/// <typeparam name="TEntity"></typeparam>
+/// <typeparam name="TKey"></typeparam>
 public interface IDedsiCqrsRepository<TEntity, in TKey> where TEntity : class, IEntity<TKey>
 {
     /// <summary>
@@ -58,6 +63,15 @@ public interface IDedsiCqrsRepository<TEntity, in TKey> where TEntity : class, I
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     Task DeleteManyAsync(IEnumerable<TEntity> entities, bool autoSave = false, CancellationToken cancellationToken = default);
+    
+    /// <summary>
+    /// 删除
+    /// </summary>
+    /// <param name="wherePredicate"></param>
+    /// <param name="autoSave"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task DeleteAsync(Expression<Func<TEntity, bool>> wherePredicate, bool autoSave = false, CancellationToken cancellationToken = default);
     
     /// <summary>
     /// 批量删除

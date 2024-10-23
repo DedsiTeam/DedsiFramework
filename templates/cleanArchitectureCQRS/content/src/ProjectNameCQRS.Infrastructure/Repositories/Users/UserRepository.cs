@@ -6,8 +6,8 @@ using Volo.Abp.EntityFrameworkCore;
 
 namespace ProjectNameCQRS.Repositories.Users;
 
-public interface IUserRepository : IDedsiRepository<User, Guid>;
+public interface IUserRepository : IDedsiCqrsRepository<User, Guid>;
 
 public class UserRepository(IDbContextProvider<ProjectNameCQRSDbContext> dbContextProvider)
-    : DedsiEfCoreRepository<ProjectNameCQRSDbContext, User, Guid>(dbContextProvider),
+    : DedsiCqrsEfCoreRepository<ProjectNameCQRSDbContext, User, Guid>(dbContextProvider),
         IUserRepository;

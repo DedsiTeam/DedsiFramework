@@ -13,6 +13,7 @@ public class DedsiCqrsEfCoreRepository<TDbContext, TEntity, TKey>(IDbContextProv
     where TDbContext : IDedsiEfCoreDbContext
     where TEntity : class, IEntity<TKey>
 {
+    
     /// <inheritdoc />
     public async Task<int> DeleteManyAsync(Expression<Func<TEntity, bool>> wherePredicate, bool autoSave = false, CancellationToken cancellationToken = default)
     {

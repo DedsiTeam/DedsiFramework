@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Dedsi.Ddd.Domain.Queries;
 using Dedsi.EntityFrameworkCore.Queries;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,8 @@ namespace ProjectNameCQRS.Users.Queries;
 public interface IUserQuery : IDedsiQuery
 {
     Task<User?> GetByIdAsync(Guid id);
+
+    Task<bool> AnyAsync(Guid userId, CancellationToken cancellationToken);
 }
 
 public class UserQuery(IDbContextProvider<ProjectNameCQRSDbContext> dbContextProvider)
@@ -19,5 +22,10 @@ public class UserQuery(IDbContextProvider<ProjectNameCQRSDbContext> dbContextPro
     {
         var dbContext = await GetDbContextAsync();
         return await dbContext.Users.Include(b => b.UserRoles).FirstOrDefaultAsync(a => a.Id == id);
+    }
+
+    public Task<bool> AnyAsync(Guid userId, CancellationToken cancellationToken)
+    {
+        return AnyAsync<User>(a => a.Id == userId, cancellationToken);
     }
 }

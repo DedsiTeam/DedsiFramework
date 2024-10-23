@@ -10,7 +10,7 @@ public class DeleteUserCommandHandler(IUserRepository userRepository, IUserQuery
     public override async Task<bool> Handle(DeleteUserCommand command, CancellationToken cancellationToken)
     {
         var user = await userQuery.GetByIdAsync(command.id);
-        await userRepository.DeleteAsync(user);
+        await userRepository.DeleteAsync(user, cancellationToken: cancellationToken);
         return true;
     }
 }
