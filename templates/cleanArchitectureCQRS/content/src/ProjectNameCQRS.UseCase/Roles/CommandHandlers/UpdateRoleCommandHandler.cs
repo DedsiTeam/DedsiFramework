@@ -10,10 +10,7 @@ public class UpdateRoleCommandHandler(IRoleRepository roleRepository) : DedsiCom
     public override async Task<bool> Handle(UpdateRoleCommand command, CancellationToken cancellationToken)
     {
         var role = await roleRepository.GetAsync(a => a.Id == command.id, cancellationToken: cancellationToken);
-        if (role == null)
-        {
-            throw new UserFriendlyException("数据不存在！");
-        }
+        
         role.Update(command.RoleCode, command.RoleName);
 
         await roleRepository.UpdateAsync(role, cancellationToken: cancellationToken);

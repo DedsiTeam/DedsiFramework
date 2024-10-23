@@ -1,31 +1,28 @@
-using System.Linq.Expressions;
 using Dedsi.Ddd.Domain.Queries;
 using Dedsi.EntityFrameworkCore.Queries;
-using Microsoft.EntityFrameworkCore;
+using Mapster;
 using ProjectNameCQRS.EntityFrameworkCore;
+using ProjectNameCQRS.Repositories.Users;
+using ProjectNameCQRS.Users.Dtos;
 using Volo.Abp.EntityFrameworkCore;
 
 namespace ProjectNameCQRS.Users.Queries;
 
-public interface IUserQuery : IDedsiQuery
+public interface IUserQuery : IDedsiEfCoreQuery
 {
-    Task<User?> GetByIdAsync(Guid id);
-
-    Task<bool> AnyAsync(Guid userId, CancellationToken cancellationToken);
+    Task<UserDto> GetByidAsync(Guid id, CancellationToken cancellationToken = default);
 }
 
-public class UserQuery(IDbContextProvider<ProjectNameCQRSDbContext> dbContextProvider)
+public class UserQuery(
+    IDbContextProvider<ProjectNameCQRSDbContext> dbContextProvider,
+    IUserRepository userRepository)
     : DedsiEfCoreQuery<ProjectNameCQRSDbContext>(dbContextProvider),
         IUserQuery
 {
-    public async Task<User?> GetByIdAsync(Guid id)
+    public async Task<UserDto> GetByidAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        var dbContext = await GetDbContextAsync();
-        return await dbContext.Users.Include(b => b.UserRoles).FirstOrDefaultAsync(a => a.Id == id);
-    }
+        var user = await userRepository.GetAsync(id, true, cancellationToken);
 
-    public Task<bool> AnyAsync(Guid userId, CancellationToken cancellationToken)
-    {
-        return AnyAsync<User>(a => a.Id == userId, cancellationToken);
+        return user.Adapt<UserDto>();
     }
 }

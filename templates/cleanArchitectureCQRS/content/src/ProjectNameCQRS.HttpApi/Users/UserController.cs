@@ -16,7 +16,7 @@ public class UserController(IDedsiMediator dedsiMediator, IUserQuery userQuery) 
     /// <summary>
     /// 创建用户
     /// </summary>
-    /// <param name="command"></param>
+    /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost]
     public Task<Guid> CreateAsync(CreateUserInputDto input)
@@ -52,9 +52,9 @@ public class UserController(IDedsiMediator dedsiMediator, IUserQuery userQuery) 
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet("{id}")]
-    public Task<User?> GetAsync(Guid id)
+    public Task<UserDto> GetAsync(Guid id)
     {
-        return userQuery.GetByIdAsync(id);
+        return userQuery.GetByidAsync(id);
     }
 
     /// <summary>
