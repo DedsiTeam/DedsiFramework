@@ -5,7 +5,7 @@ using Volo.Abp.Modularity;
 namespace ProjectName;
 
 [DependsOn(
-    typeof(ProjectNameDomainModule),
+    typeof(ProjectNameCoreModule),
     typeof(DedsiAspNetCoreModule)
 )]
 public class ProjectNameHttpApiModule : AbpModule

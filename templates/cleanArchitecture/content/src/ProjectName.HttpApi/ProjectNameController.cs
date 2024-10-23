@@ -5,7 +5,7 @@ using Volo.Abp;
 namespace ProjectName;
 
 [ApiController]
-[Area(ProjectNameDomainOptions.ApplicationName)]
+[Area(ProjectNameCoreOptions.ApplicationName)]
 [Route("api/ProjectName/[controller]/[action]")]
 public abstract class ProjectNameController : DedsiControllerBase
 {

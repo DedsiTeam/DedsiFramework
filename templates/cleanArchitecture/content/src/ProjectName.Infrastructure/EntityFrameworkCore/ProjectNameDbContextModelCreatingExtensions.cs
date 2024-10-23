@@ -12,7 +12,7 @@ public static class ProjectNameDbContextModelCreatingExtensions
         
         builder.Entity<User>(b =>
         {
-            b.ToTable("Users", ProjectNameDomainOptions.DefaultDbSchema);
+            b.ToTable("Users", ProjectNameCoreOptions.DefaultDbSchema);
             b.HasKey(a => a.Id);
         });
 

@@ -17,7 +17,7 @@ namespace ProjectName;
 
 [DependsOn(
     // ProjectName
-    typeof(ProjectNameDomainModule),
+    typeof(ProjectNameCoreModule),
     typeof(ProjectNameInfrastructureModule),
     typeof(ProjectNameHttpApiModule),
     
@@ -49,7 +49,7 @@ public class ProjectNameHttpApiHostModule : AbpModule
         // 日志
         Configure<AbpAuditingOptions>(options =>
         {
-            options.ApplicationName = ProjectNameDomainOptions.ApplicationName;
+            options.ApplicationName = ProjectNameCoreOptions.ApplicationName;
             options.IsEnabledForGetRequests = true;
         });
         
@@ -83,7 +83,7 @@ public class ProjectNameHttpApiHostModule : AbpModule
         context.Services.AddSwaggerGen(options =>
         {
             options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "ProjectName.HttpApi.xml"), true);
-            options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "ProjectName.Domain.xml"), true);
+            options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "ProjectName.Core.xml"), true);
         });
         
         // 添加JWT身份验证服务

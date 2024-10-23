@@ -6,12 +6,6 @@ using Volo.Abp.Guids;
 
 namespace ProjectNameCQRS.Users.CommandHandlers;
 
-/// <summary>
-/// CreateUserCommand 处理处理器
-/// </summary>
-/// <param name="userRepository"></param>
-/// <param name="roleRepository"></param>
-/// <param name="guidGenerator"></param>
 public class CreateUserCommandHandler(
     IUserRepository userRepository,
     IRoleRepository roleRepository,
@@ -24,7 +18,7 @@ public class CreateUserCommandHandler(
         var role = await roleRepository.GetAsync(a => a.RoleCode == "OrdinaryUser", cancellationToken: cancellationToken);
 
         // 创建用户
-        var user = new User(guidGenerator.Create(), command.UserName, command.Account, "PassWork@" + DateTime.Now.Year, command.Email, role);
+        var user = new User(guidGenerator.Create(), command.UserName, command.Account, "PassWord@" + DateTime.Now.Year, command.Email, role);
 
         // 保存到数据库
         await userRepository.InsertAsync(user, cancellationToken: cancellationToken);

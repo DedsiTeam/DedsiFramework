@@ -8,7 +8,7 @@ public class DeleteRoleCommandHandler(IRoleRepository roleRepository) : DedsiCom
 {
     public override async Task<bool> Handle(DeleteRoleCommand command, CancellationToken cancellationToken)
     {
-        await roleRepository.DeleteManyAsync(a => a.Id == command.id, cancellationToken: cancellationToken);
+        await roleRepository.DeleteAsync(a => a.Id == command.id, cancellationToken: cancellationToken);
         return true;
     }
 }

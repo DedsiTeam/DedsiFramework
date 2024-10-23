@@ -5,7 +5,7 @@ using Volo.Abp.Data;
 
 namespace ProjectName.EntityFrameworkCore;
 
-[ConnectionStringName(ProjectNameDomainOptions.ConnectionStringName)]
+[ConnectionStringName(ProjectNameCoreOptions.ConnectionStringName)]
 public class ProjectNameDbContext(DbContextOptions<ProjectNameDbContext> options) : DedsiEfCoreDbContext<ProjectNameDbContext>(options)
 {
     public DbSet<User> Users { get; set; }
