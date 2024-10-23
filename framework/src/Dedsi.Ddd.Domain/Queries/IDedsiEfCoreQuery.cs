@@ -8,11 +8,9 @@ namespace Dedsi.Ddd.Domain.Queries;
 /// </summary>
 public interface IDedsiEfCoreQuery : IDedsiQuery
 {
-    Task<bool> AnyAsync<TEntity>(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)
-        where TEntity : class;
+    Task<bool> AnyAsync<TEntity>(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default) where TEntity : class;
 
-    Task<int> CountAsync<TEntity>(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)
-        where TEntity : class;
+    Task<int> CountAsync<TEntity>(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default) where TEntity : class;
     
     Task<int> CountAsync<TEntity>(CancellationToken cancellationToken) where TEntity : class;
 
