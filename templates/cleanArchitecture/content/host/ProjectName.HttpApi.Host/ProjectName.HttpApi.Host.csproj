@@ -8,8 +8,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.10" />
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.9.0" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.11" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="7.0.0" />
         
         <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="$(AbpFrameworkVersion)" />
         <PackageReference Include="Volo.Abp.Autofac" Version="$(AbpFrameworkVersion)" />
@@ -17,7 +17,7 @@
         <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="$(AbpFrameworkVersion)" />
 
         <PackageReference Include="Serilog.AspNetCore" Version="8.0.3" />
-        <PackageReference Include="Serilog.Sinks.Async" Version="2.0.0" />
+        <PackageReference Include="Serilog.Sinks.Async" Version="2.1.0" />
     </ItemGroup>
 
     <ItemGroup>
