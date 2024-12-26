@@ -5,6 +5,7 @@ namespace Dedsi.Ddd.CQRS.Mediators;
 
 public class DedsiMediator(IMediator mediator) : IDedsiMediator
 {
+    /// <inheritdoc />
     public virtual Task PublishAsync(IDedsiCommand command,CancellationToken cancellationToken = default)
     {
         return mediator.Send(command, cancellationToken);

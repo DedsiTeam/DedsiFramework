@@ -5,7 +5,7 @@ namespace Dedsi.Ddd.CQRS.Mediators;
 public interface IDedsiMediator
 {
     /// <summary>
-    /// 发布事件：无返回值
+    /// 发布命令：无返回值
     /// </summary>
     /// <param name="command"></param>
     /// <param name="cancellationToken"></param>
@@ -13,7 +13,7 @@ public interface IDedsiMediator
     Task PublishAsync(IDedsiCommand command, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 发布事件：有返回值
+    /// 发布命令：有返回值
     /// </summary>
     /// <param name="request"></param>
     /// <param name="cancellationToken"></param>
