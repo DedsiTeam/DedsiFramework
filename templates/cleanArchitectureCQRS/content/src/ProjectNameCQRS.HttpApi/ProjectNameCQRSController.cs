@@ -6,7 +6,5 @@ namespace ProjectNameCQRS;
 [ApiController]
 [Area(ProjectNameCQRSDomainOptions.ApplicationName)]
 [Route("api/ProjectNameCQRS/[controller]/[action]")]
-public abstract class ProjectNameCQRSController : DedsiControllerBase
-{
-    
-}
+[ApiExplorerSettings(GroupName = ProjectNameCQRSDomainOptions.ApplicationName)]
+public abstract class ProjectNameCQRSController : DedsiControllerBase;

@@ -14,7 +14,10 @@ public class UpdateUserCommandHandler(IUserRepository userRepository) : DedsiCom
         {
             throw new UserFriendlyException("数据不存在！");
         }
-        user.Update(command.UserName,command.Account,command.Email);
+
+        user.ChangeAccount(command.Account);
+        user.ChangeEmail(command.Email);
+        user.ChangeUserName(command.UserName);
 
         await userRepository.UpdateAsync(user, cancellationToken: cancellationToken);
 

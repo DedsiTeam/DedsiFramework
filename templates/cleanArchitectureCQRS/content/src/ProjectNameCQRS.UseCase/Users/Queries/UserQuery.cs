@@ -3,7 +3,6 @@ using Dedsi.EntityFrameworkCore.Queries;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 using ProjectNameCQRS.EntityFrameworkCore;
-using ProjectNameCQRS.Repositories.Users;
 using ProjectNameCQRS.Users.Dtos;
 using Volo.Abp.EntityFrameworkCore;
 
@@ -20,9 +19,9 @@ public class UserQuery(IDbContextProvider<ProjectNameCQRSDbContext> dbContextPro
 {
     public async Task<UserDto> GetByidAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        var dbSet = await GetDbSetAsync<User>();
+        var userDbSet = await GetDbSetAsync<User>();
         
-        var user = await dbSet.FirstOrDefaultAsync(a => a.Id == id, cancellationToken);
+        var user = await userDbSet.FirstOrDefaultAsync(a => a.Id == id, cancellationToken);
 
         return user.Adapt<UserDto>();
     }

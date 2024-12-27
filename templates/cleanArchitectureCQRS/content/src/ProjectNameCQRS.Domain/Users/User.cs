@@ -17,17 +17,30 @@ public class User : AggregateRoot<Guid>
 
     public string UserName { get; private set; }
 
+    public void ChangeUserName(string newUserName)
+    {
+        UserName = Check.NotNullOrWhiteSpace(newUserName, nameof(newUserName));
+    }
+
     public string Account { get; private set; }
+
+    public void ChangeAccount(string newAccount)
+    {
+        Account = Check.NotNullOrWhiteSpace(newAccount, nameof(newAccount));
+    }
 
     public string PassWord { get; private set; }
 
+    public void ChangePassWord(string newPassWord)
+    {
+        PassWord = Check.NotNullOrWhiteSpace(newPassWord, nameof(newPassWord));
+    }
+
     public string Email { get; private set; }
 
-    public void Update(string userName, string account, string email)
+    public void ChangeEmail(string newEmail)
     {
-        UserName = Check.NotNullOrWhiteSpace(userName, nameof(userName));
-        Account = Check.NotNullOrWhiteSpace(account, nameof(account));
-        Email = Check.NotNullOrWhiteSpace(email, nameof(email));
+        Email = Check.NotNullOrWhiteSpace(newEmail, nameof(newEmail));
     }
 
 }
