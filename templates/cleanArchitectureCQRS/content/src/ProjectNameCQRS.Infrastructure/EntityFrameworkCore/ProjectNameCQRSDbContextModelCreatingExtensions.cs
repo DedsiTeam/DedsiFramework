@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ProjectNameCQRS.Roles;
 using ProjectNameCQRS.Users;
 using Volo.Abp;
 
@@ -16,18 +15,5 @@ public static class ProjectNameCQRSDbContextModelCreatingExtensions
             b.ToTable("Users", ProjectNameCQRSDomainOptions.DbSchemaName);
             b.HasKey(a => a.Id);
         });
-
-        builder.Entity<Role>(b =>
-        {
-            b.ToTable("Roles", ProjectNameCQRSDomainOptions.DbSchemaName);
-            b.HasKey(a => a.Id);
-        });
-
-        builder.Entity<UserRole>(b =>
-        {
-            b.ToTable("UserRoles", ProjectNameCQRSDomainOptions.DbSchemaName);
-            b.HasKey(a => a.Id);
-        });
-
     }
 }

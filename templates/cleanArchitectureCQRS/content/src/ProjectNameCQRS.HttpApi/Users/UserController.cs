@@ -56,16 +56,4 @@ public class UserController(IDedsiMediator dedsiMediator, IUserQuery userQuery) 
     {
         return userQuery.GetByidAsync(id);
     }
-
-    /// <summary>
-    /// 设置用户角色
-    /// </summary>
-    /// <param name="command"></param>
-    /// <returns></returns>
-    [HttpPost]
-    public async Task<bool> SetUserRoleAsync(SetUserRoleCommand command)
-    {
-        await dedsiMediator.PublishAsync(command);
-        return true;
-    }
 }

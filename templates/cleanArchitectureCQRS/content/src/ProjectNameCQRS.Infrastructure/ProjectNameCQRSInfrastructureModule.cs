@@ -1,6 +1,5 @@
 ﻿using Dedsi.CleanArchitecture.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
-using ProjectNameCQRS.Emails;
 using ProjectNameCQRS.EntityFrameworkCore;
 using Volo.Abp.Modularity;
 
@@ -18,8 +17,5 @@ public class ProjectNameCQRSInfrastructureModule : AbpModule
         {
             options.AddDefaultRepositories(true);
         });
-
-        // 测试发送邮件
-        context.Services.AddTransient<IEmailSender, TestEmailSender>();
     }
 }

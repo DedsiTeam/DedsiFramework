@@ -1,5 +1,3 @@
-using ProjectNameCQRS.Roles;
-using ProjectNameCQRS.Users.DomainEvents;
 using Volo.Abp;
 using Volo.Abp.Domain.Entities;
 
@@ -7,7 +5,7 @@ namespace ProjectNameCQRS.Users;
 
 public class User : AggregateRoot<Guid>
 {
-    public User() { }
+    protected User() { }
 
     public User(Guid id, string userName, string account, string passWord, string email) : base(id)
     {
@@ -15,20 +13,6 @@ public class User : AggregateRoot<Guid>
         Account = account;
         PassWord = passWord;
         Email = email;
-        UserRoles = new List<UserRole>();
-    }
-
-    public User(Guid id, string userName, string account, string passWord, string email, Role role) : base(id)
-    {
-        UserName = userName;
-        Account = account;
-        PassWord = passWord;
-        Email = email;
-        UserRoles = new List<UserRole>()
-        {
-            new (Guid.NewGuid(),id, role.Id,role.RoleName)
-        };
-        AddLocalEvent(new CreateUserSendEmailEvent(this));
     }
 
     public string UserName { get; private set; }
@@ -39,18 +23,11 @@ public class User : AggregateRoot<Guid>
 
     public string Email { get; private set; }
 
-    public ICollection<UserRole> UserRoles { get; private set; }
-
     public void Update(string userName, string account, string email)
     {
         UserName = Check.NotNullOrWhiteSpace(userName, nameof(userName));
         Account = Check.NotNullOrWhiteSpace(account, nameof(account));
         Email = Check.NotNullOrWhiteSpace(email, nameof(email));
-    }
-
-    public void SetUserRole(UserRole userRole)
-    {
-        UserRoles.Add(userRole);
     }
 
 }

@@ -11,8 +11,4 @@
       <ProjectReference Include="..\ProjectName.Core\ProjectName.Core.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-        <PackageReference Include="Dedsi.CleanArchitecture.Infrastructure" Version="$(DedsiFrameworkVersion)" />
-    </ItemGroup>
-
 </Project>

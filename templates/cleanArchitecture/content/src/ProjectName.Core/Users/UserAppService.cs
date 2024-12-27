@@ -1,17 +1,21 @@
 using Dedsi.Ddd.Application.Contracts.Services;
 using Dedsi.Ddd.Application.Services;
+using Mapster;
+using ProjectName.Users.Dtos;
 
 namespace ProjectName.Users;
 
 public interface IUserAppService : IDedsiApplicationService
 {
-    Task<User> GetAsync();
+    Task<UserDto> GetByIdAsync(Guid id, CancellationToken cancellationToken);
 }
 
 public class UserAppService(IUserRepository userRepository) : DedsiApplicationService, IUserAppService
 {
-    public Task<User> GetAsync()
+    public async Task<UserDto> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
-        return userRepository.GetAsync(GuidGenerator.Create());
+        var user = await userRepository.GetFirstAsync(a => a.Id == id, cancellationToken);
+
+        return user.Adapt<UserDto>();
     }
 }

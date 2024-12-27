@@ -1,14 +1,7 @@
-using SqlSugar;
+﻿namespace ProjectName.Users.Dtos;
 
-namespace ProjectName.Users;
-
-[SugarTable("Users")]
-public class User
+public class UserDto
 {
-    /// <summary>
-    /// 主键
-    /// </summary>
-    [SugarColumn(IsPrimaryKey = true)]
     public Guid Id { get; set; }
     
     public string UserName { get; set; }

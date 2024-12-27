@@ -1,5 +1,5 @@
-using Dedsi.Ddd.Domain.Repositories;
+using SqlSugar;
 
 namespace ProjectName.Users;
 
-public interface IUserRepository : IDedsiRepository<User, Guid>;
+public interface IUserRepository : ISimpleClient<User>;

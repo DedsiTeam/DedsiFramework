@@ -1,10 +1,6 @@
-using Dedsi.EntityFrameworkCore.Repositories;
-using ProjectName.EntityFrameworkCore;
 using ProjectName.Users;
-using Volo.Abp.EntityFrameworkCore;
+using SqlSugar;
 
 namespace ProjectName.Repositories.Users;
 
-public class UserRepository(IDbContextProvider<ProjectNameDbContext> dbContextProvider)
-    : DedsiEfCoreRepository<ProjectNameDbContext, User, Guid>(dbContextProvider), 
-        IUserRepository;
+public class UserRepository(ISqlSugarClient sqlSugarClient) : SimpleClient<User>(sqlSugarClient), IUserRepository;
