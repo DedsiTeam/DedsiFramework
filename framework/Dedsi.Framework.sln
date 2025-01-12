@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dedsi.Ddd.CQRS", "src\Dedsi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dedsi.SqlSugar", "src\Dedsi.SqlSugar\Dedsi.SqlSugar.csproj", "{AB9DDD17-713F-4A72-93D1-CB807B081558}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dedsi.Ddd.Domain.Shared", "src\Dedsi.Ddd.Domain.Shared\Dedsi.Ddd.Domain.Shared.csproj", "{AA8F0BBA-5FD8-465E-A0FA-D1CB7238BED8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,7 @@ Global
 		{40B876EF-0D9F-44AF-959C-5CA15C01E210} = {E32F98D6-D9D2-4D64-B9F7-EFEB260E9BF4}
 		{8A61BDA4-6298-4B2B-B112-A9B1659A12BB} = {E32F98D6-D9D2-4D64-B9F7-EFEB260E9BF4}
 		{AB9DDD17-713F-4A72-93D1-CB807B081558} = {E32F98D6-D9D2-4D64-B9F7-EFEB260E9BF4}
+		{AA8F0BBA-5FD8-465E-A0FA-D1CB7238BED8} = {E32F98D6-D9D2-4D64-B9F7-EFEB260E9BF4}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C923A027-7770-4E11-9DD5-A7CDE8A721F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -93,5 +96,9 @@ Global
 		{AB9DDD17-713F-4A72-93D1-CB807B081558}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB9DDD17-713F-4A72-93D1-CB807B081558}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB9DDD17-713F-4A72-93D1-CB807B081558}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA8F0BBA-5FD8-465E-A0FA-D1CB7238BED8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA8F0BBA-5FD8-465E-A0FA-D1CB7238BED8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA8F0BBA-5FD8-465E-A0FA-D1CB7238BED8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA8F0BBA-5FD8-465E-A0FA-D1CB7238BED8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

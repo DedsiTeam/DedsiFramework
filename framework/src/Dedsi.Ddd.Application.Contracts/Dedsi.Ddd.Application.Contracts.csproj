@@ -6,6 +6,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Dedsi.Core\Dedsi.Core.csproj" />
+      <ProjectReference Include="..\Dedsi.Ddd.Domain.Shared\Dedsi.Ddd.Domain.Shared.csproj" />
     </ItemGroup>
 
     <ItemGroup>

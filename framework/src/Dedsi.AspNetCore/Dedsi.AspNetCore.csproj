@@ -13,6 +13,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Dedsi.Core\Dedsi.Core.csproj" />
+      <ProjectReference Include="..\Dedsi.Ddd.Application.Contracts\Dedsi.Ddd.Application.Contracts.csproj" />
     </ItemGroup>
 
 </Project>

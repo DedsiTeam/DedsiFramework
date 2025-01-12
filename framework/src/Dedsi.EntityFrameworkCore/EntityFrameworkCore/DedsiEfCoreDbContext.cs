@@ -1,3 +1,4 @@
+using Dedsi.Ddd.Domain.Shared.EntityIds;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
 
@@ -10,7 +11,16 @@ public abstract class DedsiEfCoreDbContext<TDbContext>(DbContextOptions<TDbConte
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
     {
         configurationBuilder
-            .Properties<Ulid>()
-            .HaveConversion<UlidConverter>();
+            .Properties<Int64StronglyTypedId>()
+            .HaveConversion<Int64StronglyTypedIdConverter>();
+        
+        configurationBuilder
+            .Properties<GuidStronglyTypedId>()
+            .HaveConversion<GuidStronglyTypedIdConverter>();
+        
+        configurationBuilder
+            .Properties<UlidStronglyTypedId>()
+            .HaveConversion<UlidStronglyTypedIdConverter>();
     }
 }
+
