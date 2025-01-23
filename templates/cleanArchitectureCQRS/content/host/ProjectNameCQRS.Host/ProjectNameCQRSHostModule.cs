@@ -80,6 +80,9 @@ public class ProjectNameCQRSHostModule : AbpModule
         // Swagger
         context.Services.AddSwaggerGen(options =>
         {
+            options.DocInclusionPredicate((docName, description) => true);
+            options.CustomSchemaIds(type => type.FullName);
+            
             options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "ProjectNameCQRS.HttpApi.xml"), true);
             options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "ProjectNameCQRS.UseCase.xml"), true);
         });

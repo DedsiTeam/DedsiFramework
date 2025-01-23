@@ -7,6 +7,11 @@ public class Program
 {
     public static async Task<int> Main(string[] args)
     {
+        Log.Logger = new LoggerConfiguration()
+            .WriteTo.Async(c => c.File(path:"Logs/logs.txt", rollingInterval:RollingInterval.Hour, retainedFileCountLimit: null))
+            .WriteTo.Async(c => c.Console())
+            .CreateBootstrapLogger();
+        
         try
         {
             Log.Information("ProjectName web host.");
@@ -28,10 +33,12 @@ public class Program
                         .WriteTo.Async(c => c.File(path:"Logs/logs.txt", rollingInterval:RollingInterval.Hour, retainedFileCountLimit: null))
                         .WriteTo.Async(c => c.Console());
                 });
+            
             await builder.AddApplicationAsync<ProjectNameCQRSHostModule>();
             var app = builder.Build();
             await app.InitializeApplicationAsync();
             await app.RunAsync();
+            
             return 0;
         }
         catch (Exception ex)

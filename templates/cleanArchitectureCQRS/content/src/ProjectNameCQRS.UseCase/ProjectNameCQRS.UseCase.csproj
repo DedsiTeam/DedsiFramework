@@ -10,7 +10,6 @@
 
     <ItemGroup>
         <PackageReference Include="Dedsi.Ddd.CQRS" Version="$(DedsiFrameworkVersion)" />
-        <PackageReference Include="Mapster" Version="7.4.0" />
     </ItemGroup>
 
     <ItemGroup>
