@@ -1,6 +1,5 @@
 using Dedsi.Ddd.Domain.Queries;
 using Dedsi.EntityFrameworkCore.Queries;
-using Mapster;
 using Microsoft.EntityFrameworkCore;
 using ProjectNameCQRS.EntityFrameworkCore;
 using ProjectNameCQRS.Users.Dtos;
@@ -23,6 +22,12 @@ public class UserQuery(IDbContextProvider<ProjectNameCQRSDbContext> dbContextPro
         
         var user = await userDbSet.FirstOrDefaultAsync(a => a.Id == id, cancellationToken);
 
-        return user.Adapt<UserDto>();
+        return new UserDto()
+        {
+            Id = user.Id,
+            UserName = user.UserName,
+            Account = user.Account,
+            Email = user.Email
+        };
     }
 }
