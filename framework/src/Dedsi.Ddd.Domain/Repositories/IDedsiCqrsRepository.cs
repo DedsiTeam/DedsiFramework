@@ -11,7 +11,7 @@ namespace Dedsi.Ddd.Domain.Repositories;
 public interface IDedsiCqrsRepository<TEntity, in TKey> where TEntity : class, IEntity<TKey>
 {
     /// <summary>
-    /// 
+    /// 插入一个
     /// </summary>
     /// <param name="entity"></param>
     /// <param name="autoSave"></param>
@@ -20,7 +20,7 @@ public interface IDedsiCqrsRepository<TEntity, in TKey> where TEntity : class, I
     Task<TEntity> InsertAsync(TEntity entity, bool autoSave = false, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 
+    /// 插入一组
     /// </summary>
     /// <param name="entities"></param>
     /// <param name="autoSave"></param>
@@ -29,7 +29,7 @@ public interface IDedsiCqrsRepository<TEntity, in TKey> where TEntity : class, I
     Task InsertManyAsync(IEnumerable<TEntity> entities, bool autoSave = false, CancellationToken cancellationToken = default);
     
     /// <summary>
-    /// 
+    /// 修改
     /// </summary>
     /// <param name="entity"></param>
     /// <param name="autoSave"></param>
@@ -38,7 +38,7 @@ public interface IDedsiCqrsRepository<TEntity, in TKey> where TEntity : class, I
     Task<TEntity> UpdateAsync(TEntity entity, bool autoSave = false, CancellationToken cancellationToken = default);
     
     /// <summary>
-    /// 
+    /// 修改一组
     /// </summary>
     /// <param name="entities"></param>
     /// <param name="autoSave"></param>
@@ -47,7 +47,7 @@ public interface IDedsiCqrsRepository<TEntity, in TKey> where TEntity : class, I
     Task UpdateManyAsync(IEnumerable<TEntity> entities, bool autoSave = false, CancellationToken cancellationToken = default);
     
     /// <summary>
-    /// 
+    /// 删除单个
     /// </summary>
     /// <param name="entity"></param>
     /// <param name="autoSave"></param>
@@ -56,7 +56,7 @@ public interface IDedsiCqrsRepository<TEntity, in TKey> where TEntity : class, I
     Task DeleteAsync(TEntity entity, bool autoSave = false, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// 
+    /// 删除一组
     /// </summary>
     /// <param name="entities"></param>
     /// <param name="autoSave"></param>
