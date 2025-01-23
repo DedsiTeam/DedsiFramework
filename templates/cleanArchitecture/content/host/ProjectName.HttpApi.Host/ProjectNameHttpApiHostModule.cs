@@ -67,6 +67,9 @@ public class ProjectNameHttpApiHostModule : AbpModule
         // Swagger
         context.Services.AddSwaggerGen(options =>
         {
+            options.DocInclusionPredicate((docName, description) => true);
+            options.CustomSchemaIds(type => type.FullName);
+            
             options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "ProjectName.HttpApi.xml"), true);
             options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "ProjectName.Core.xml"), true);
         });

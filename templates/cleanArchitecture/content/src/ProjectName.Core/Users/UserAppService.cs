@@ -1,6 +1,5 @@
 using Dedsi.Ddd.Application.Contracts.Services;
 using Dedsi.Ddd.Application.Services;
-using Mapster;
 using ProjectName.Users.Dtos;
 
 namespace ProjectName.Users;
@@ -16,6 +15,12 @@ public class UserAppService(IUserRepository userRepository) : DedsiApplicationSe
     {
         var user = await userRepository.GetFirstAsync(a => a.Id == id, cancellationToken);
 
-        return user.Adapt<UserDto>();
+        return new UserDto()
+        {
+            Id = user.Id,
+            UserName = user.UserName,
+            Account = user.Account,
+            Email = user.Email,
+        };
     }
 }
