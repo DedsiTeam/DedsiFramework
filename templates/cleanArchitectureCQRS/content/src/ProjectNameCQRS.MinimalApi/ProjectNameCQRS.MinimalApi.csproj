@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <RootNamespace>ProjectNameCQRS</RootNamespace>
@@ -14,7 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\ProjectNameCQRS.UseCase\ProjectNameCQRS.UseCase.csproj" />
+        <ProjectReference Include="..\ProjectNameCQRS.UseCase\ProjectNameCQRS.UseCase.csproj" />
     </ItemGroup>
 
 </Project>
