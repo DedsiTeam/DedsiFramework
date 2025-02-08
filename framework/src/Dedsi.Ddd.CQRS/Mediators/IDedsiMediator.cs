@@ -10,7 +10,7 @@ public interface IDedsiMediator
     /// <param name="command"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task PublishAsync(IDedsiCommand command, CancellationToken cancellationToken = default);
+    Task SendAsync(IDedsiCommand command, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// 发布命令：有返回值
@@ -19,5 +19,5 @@ public interface IDedsiMediator
     /// <param name="cancellationToken"></param>
     /// <typeparam name="TResponse"></typeparam>
     /// <returns></returns>
-    Task<TResponse> PublishAsync<TResponse>(IDedsiCommand<TResponse> request, CancellationToken cancellationToken = default);
+    Task<TResponse> SendAsync<TResponse>(IDedsiCommand<TResponse> request, CancellationToken cancellationToken = default);
 }
