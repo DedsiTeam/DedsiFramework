@@ -28,6 +28,6 @@ public static class UserApi
     /// <returns></returns>
     private static Task CreateAsync([FromBody] CreateUserInputDto input, IDedsiMediator dedsiMediator, HttpContext httpContext)
     {
-        return dedsiMediator.PublishAsync(new CreateUserCommand(input.UserName, input.Account, input.Email));
+        return dedsiMediator.SendAsync(new CreateUserCommand(input.UserName, input.Account, input.Email));
     }
 }

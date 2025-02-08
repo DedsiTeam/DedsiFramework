@@ -10,7 +10,7 @@ namespace ProjectNameCQRS;
     typeof(ProjectNameCQRSDomainModule),
     typeof(ProjectNameCQRSInfrastructureModule),
     
-    typeof(DedsiDddCQRSModule)
+    typeof(DedsiDddCqrsModule)
 )]
 public class ProjectNameCQRSUseCaseModule : AbpModule
 {
