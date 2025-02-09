@@ -12,7 +12,7 @@ namespace Dedsi.Ddd.CQRS;
     typeof(AbpSecurityModule),
     typeof(AbpEventBusAbstractionsModule)    
 )]
-public class DedsiDddCQRSModule : AbpModule
+public class DedsiDddCqrsModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {

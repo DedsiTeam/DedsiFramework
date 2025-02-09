@@ -34,8 +34,17 @@ public class Program
                         .WriteTo.Async(c => c.Console());
                 });
             
+            
+            // Minimal Apis
+            builder.Services.AddEndpointsApiExplorer();
+            
             await builder.AddApplicationAsync<ProjectNameCQRSHostModule>();
+            
             var app = builder.Build();
+            
+            // Minimal Apis
+            app.MapProjectNameCQRSMinimalApis();
+            
             await app.InitializeApplicationAsync();
             await app.RunAsync();
             
