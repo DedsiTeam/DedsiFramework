@@ -5,7 +5,7 @@ namespace ProjectNameCQRS;
 
 public static class ProjectNameCQRSMinimalApi
 {
-    public const string ApiPrefix = "api/ProjectNameCQRS";
+    public const string ApiPrefix = "api/ProjectNameCQRS/";
     
     /// <summary>
     /// Map ProjectNameCQRS MinimalApis

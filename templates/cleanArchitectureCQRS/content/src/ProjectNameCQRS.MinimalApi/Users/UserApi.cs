@@ -13,7 +13,7 @@ public static class UserApi
     public static void MapUserApis(this IEndpointRouteBuilder builder)
     {
         var api = builder
-            .MapGroup(ProjectNameCQRSMinimalApi.ApiPrefix + "/minimal-api/user")
+            .MapGroup(ProjectNameCQRSMinimalApi.ApiPrefix + "user")
             .WithTags("User");
 
         api.MapPost("/Create", CreateAsync);
