@@ -9,10 +9,10 @@ public class User : AggregateRoot<Guid>
 
     public User(Guid id, string userName, string account, string passWord, string email) : base(id)
     {
-        UserName = userName;
-        Account = account;
-        PassWord = passWord;
-        Email = email;
+        ChangeUserName(userName);
+        ChangeAccount(account);
+        ChangePassWord(passWord);
+        ChangeEmail(email);
     }
 
     public string UserName { get; private set; }
