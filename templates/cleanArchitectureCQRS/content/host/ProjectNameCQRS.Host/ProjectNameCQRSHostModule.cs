@@ -142,8 +142,8 @@ public class ProjectNameCQRSHostModule : AbpModule
         app.UseAuditing();
         app.UseConfiguredEndpoints(endpoints =>
         {
-            // AuthorizeAttribute
-            endpoints.MapControllers().RequireAuthorization();
+            // Minimal Apis
+            endpoints.MapProjectNameCQRSMinimalApis();
         });
 
     }

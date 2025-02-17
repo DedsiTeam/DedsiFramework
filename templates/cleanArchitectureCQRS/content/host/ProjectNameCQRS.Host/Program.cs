@@ -42,10 +42,8 @@ public class Program
             
             var app = builder.Build();
             
-            // Minimal Apis
-            app.MapProjectNameCQRSMinimalApis();
-            
             await app.InitializeApplicationAsync();
+            
             await app.RunAsync();
             
             return 0;
