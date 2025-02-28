@@ -6,7 +6,4 @@ namespace ProjectNameCQRS;
 [DependsOn(
     typeof(DedsiCleanArchitectureDomainModule)    
 )]
-public class ProjectNameCQRSDomainModule : AbpModule
-{
-    
-}
+public class ProjectNameCQRSDomainModule : AbpModule;

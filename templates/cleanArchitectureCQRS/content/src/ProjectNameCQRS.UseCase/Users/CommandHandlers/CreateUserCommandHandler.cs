@@ -1,8 +1,16 @@
 ﻿using Dedsi.Ddd.CQRS.CommandHandlers;
+using Dedsi.Ddd.CQRS.Commands;
 using ProjectNameCQRS.Repositories.Users;
-using ProjectNameCQRS.Users.Commands;
 
 namespace ProjectNameCQRS.Users.CommandHandlers;
+
+/// <summary>
+/// 命令：创建用户
+/// </summary>
+/// <param name="UserName"></param>
+/// <param name="Account"></param>
+/// <param name="Email"></param>
+public record CreateUserCommand(string UserName, string Account, string Email) : DedsiCommand<Guid>;
 
 public class CreateUserCommandHandler(IUserRepository userRepository)
     : DedsiCommandHandler<CreateUserCommand, Guid>

@@ -1,6 +1,6 @@
-namespace ProjectNameCQRS.Users.Dtos;
+namespace ProjectNameCQRS.Users.Requests;
 
-public class CreateUserInputDto
+public class CreateUserRequest
 {
     public string UserName { get; set; }
 
@@ -10,5 +10,3 @@ public class CreateUserInputDto
 
     public string Email { get; set; }
 }
-
-public class UpdateUserInputDto : UserDto;
