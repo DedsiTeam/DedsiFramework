@@ -18,7 +18,7 @@ namespace ProjectNameCQRS;
 
 [DependsOn(
     // ProjectName
-    typeof(ProjectNameCQRSMinimalApiModule),
+    typeof(ProjectNameCQRSHttpApiModule),
 
     typeof(AbpEntityFrameworkCoreSqlServerModule),
     typeof(AbpAspNetCoreMvcModule),
@@ -84,7 +84,7 @@ public class ProjectNameCQRSHostModule : AbpModule
             options.DocInclusionPredicate((docName, description) => true);
             options.CustomSchemaIds(type => type.FullName);
             
-            options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "ProjectNameCQRS.MinimalApi.xml"), true);
+            options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "ProjectNameCQRS.HttpApi.xml"), true);
             options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "ProjectNameCQRS.UseCase.xml"), true);
         });
         
@@ -149,8 +149,8 @@ public class ProjectNameCQRSHostModule : AbpModule
         
         app.UseConfiguredEndpoints(endpoints =>
         {
-            // Minimal Apis
-            endpoints.MapProjectNameCQRSMinimalApis();
+            // AuthorizeAttribute
+            endpoints.MapControllers().RequireAuthorization();
         });
 
     }

@@ -2,19 +2,19 @@
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Modularity;
 
-namespace ProjectName;
+namespace ProjectNameCQRS;
 
 [DependsOn(
-    typeof(ProjectNameCoreModule),
+    typeof(ProjectNameCQRSUseCaseModule),
     typeof(DedsiAspNetCoreModule)
 )]
-public class ProjectNameHttpApiModule : AbpModule
+public class ProjectNameCQRSHttpApiModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {
         PreConfigure<IMvcBuilder>(mvcBuilder =>
         {
-            mvcBuilder.AddApplicationPartIfNotExists(typeof(ProjectNameHttpApiModule).Assembly);
+            mvcBuilder.AddApplicationPartIfNotExists(typeof(ProjectNameCQRSHttpApiModule).Assembly);
         });
     }
 }
