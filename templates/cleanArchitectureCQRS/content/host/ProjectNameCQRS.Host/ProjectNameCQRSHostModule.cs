@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using Dedsi.AspNetCore.MinimalApis;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.EntityFrameworkCore;
@@ -142,6 +143,9 @@ public class ProjectNameCQRSHostModule : AbpModule
         app.UseAuditing();
         //  请求管道中启用 UOW 的中间件
         app.UseUnitOfWork();
+        
+        // 自定义错误中间件
+        app.UseMiddleware<CrtadgAiExceptionMiddleware>();
         
         app.UseConfiguredEndpoints(endpoints =>
         {
