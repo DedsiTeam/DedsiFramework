@@ -7,7 +7,7 @@ using ProjectNameCQRS.Users.Responses;
 
 namespace ProjectNameCQRS.Users;
 
-public class UserController(IUserQuery userQuery,IDedsiMediator dedsiMediator) : ProjectNameController
+public class UserController(IUserQuery userQuery,IDedsiMediator dedsiMediator) : ProjectNameCQRSController
 {
     /// <summary>
     /// 创建用户
