@@ -33,17 +33,11 @@ public class Program
                         .WriteTo.Async(c => c.File(path:"Logs/logs.txt", rollingInterval:RollingInterval.Hour, retainedFileCountLimit: null))
                         .WriteTo.Async(c => c.Console());
                 });
-            
-            
-            // Minimal Apis
-            builder.Services.AddEndpointsApiExplorer();
-            
+
             await builder.AddApplicationAsync<ProjectNameCQRSHostModule>();
             
             var app = builder.Build();
-            
             await app.InitializeApplicationAsync();
-            
             await app.RunAsync();
             
             return 0;
