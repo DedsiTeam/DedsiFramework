@@ -140,6 +140,9 @@ public class ProjectNameCQRSHostModule : AbpModule
         app.UseAuthorization();
 
         app.UseAuditing();
+        //  请求管道中启用 UOW 的中间件
+        app.UseUnitOfWork();
+        
         app.UseConfiguredEndpoints(endpoints =>
         {
             // Minimal Apis
