@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using Dedsi.AspNetCore.MinimalApis;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.EntityFrameworkCore;
@@ -93,19 +92,18 @@ public class ProjectNameCQRSHostModule : AbpModule
             .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
-                var secretByte = Encoding.UTF8.GetBytes(configuration["JwtOptions:SecretKey"]!);
                 options.TokenValidationParameters = new TokenValidationParameters()
                 {
+                    ValidateLifetime = true,
+                    
                     ValidateIssuer = true,
                     ValidIssuer = configuration["JwtOptions:Issuer"],
 
                     ValidateAudience = true,
                     ValidAudience = configuration["JwtOptions:Audience"],
 
-                    ValidateLifetime = true,
-
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(secretByte)
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtOptions:SecurityKey"]!))
                 };
             });
     }
@@ -139,14 +137,8 @@ public class ProjectNameCQRSHostModule : AbpModule
         
         app.UseAuthentication();
         app.UseAuthorization();
-
         app.UseAuditing();
-        //  请求管道中启用 UOW 的中间件
-        app.UseUnitOfWork();
-        
-        // 自定义错误中间件
-        app.UseMiddleware<CrtadgAiExceptionMiddleware>();
-        
+
         app.UseConfiguredEndpoints(endpoints =>
         {
             // AuthorizeAttribute

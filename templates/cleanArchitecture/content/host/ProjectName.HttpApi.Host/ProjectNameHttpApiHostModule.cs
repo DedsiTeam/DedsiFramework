@@ -125,8 +125,8 @@ public class ProjectNameHttpApiHostModule : AbpModule
         
         app.UseAuthentication();
         app.UseAuthorization();
-
         app.UseAuditing();
+
         app.UseConfiguredEndpoints(endpoints =>
         {
             // AuthorizeAttribute

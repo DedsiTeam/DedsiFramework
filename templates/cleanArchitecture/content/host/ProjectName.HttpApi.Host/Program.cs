@@ -35,6 +35,7 @@ public class Program
                 });
             
             await builder.AddApplicationAsync<ProjectNameHttpApiHostModule>();
+            
             var app = builder.Build();
             await app.InitializeApplicationAsync();
             await app.RunAsync();
@@ -48,7 +49,7 @@ public class Program
         }
         finally
         {
-            Log.CloseAndFlush();
+            await Log.CloseAndFlushAsync();
         }
     }
 }
