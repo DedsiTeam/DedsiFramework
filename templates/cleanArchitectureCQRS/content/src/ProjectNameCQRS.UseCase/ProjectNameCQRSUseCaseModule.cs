@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-using Dedsi.Ddd.CQRS;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Dedsi.Ddd.CQRS;
 using Volo.Abp.Modularity;
 
 namespace ProjectNameCQRS;
@@ -12,11 +10,4 @@ namespace ProjectNameCQRS;
     
     typeof(DedsiDddCqrsModule)
 )]
-public class ProjectNameCQRSUseCaseModule : AbpModule
-{
-    public override void ConfigureServices(ServiceConfigurationContext context)
-    {
-        // MediatR
-        context.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
-    }
-}
+public class ProjectNameCQRSUseCaseModule : AbpModule;
