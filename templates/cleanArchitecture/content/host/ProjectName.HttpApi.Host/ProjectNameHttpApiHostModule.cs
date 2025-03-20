@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
@@ -27,6 +28,11 @@ namespace ProjectName;
 )]
 public class ProjectNameHttpApiHostModule : AbpModule
 {
+    private readonly string[] _moduleNames =
+    [
+        "ProjectName"
+    ];
+    
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         var configuration = context.Services.GetConfiguration();
@@ -70,8 +76,44 @@ public class ProjectNameHttpApiHostModule : AbpModule
             options.DocInclusionPredicate((docName, description) => true);
             options.CustomSchemaIds(type => type.FullName);
             
-            options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "ProjectName.HttpApi.xml"), true);
-            options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "ProjectName.Core.xml"), true);
+            foreach (var moduleName in _moduleNames)
+            {
+                options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, moduleName + ".HttpApi.xml"), true);
+                options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, moduleName + ".Core.xml"), true);
+            }
+
+            #region Bearer Token
+            options.AddSecurityDefinition("BearerToken", new OpenApiSecurityScheme
+            {
+                Type = SecuritySchemeType.Http,
+                Scheme = "bearer",
+                BearerFormat = "JWT",
+                Description = "请输入Token!"
+            });
+            options.AddSecurityRequirement(new OpenApiSecurityRequirement
+            {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "BearerToken" }
+                    },
+                    []
+                }
+            });
+            #endregion
+            
+            #region swagger 分组
+            options.DocInclusionPredicate((doc, api) =>
+            {
+                if (api.GroupName == "*") { return true; }
+                return doc == api.GroupName;
+            });
+        
+            foreach (var moduleName in _moduleNames)
+            {
+                options.SwaggerDoc(moduleName, new OpenApiInfo { Title = moduleName + " Module Api", Version = "v1" });
+            }
+            #endregion
         });
         
         // 添加JWT身份验证服务
@@ -121,6 +163,10 @@ public class ProjectNameHttpApiHostModule : AbpModule
         {
             options.DocExpansion(DocExpansion.None);
             options.DefaultModelExpandDepth(-1);
+            foreach (var moduleName in _moduleNames)
+            {
+                options.SwaggerEndpoint($"/swagger/{moduleName}/swagger.json",moduleName + " Module Api v1");
+            }
         });
         
         app.UseAuthentication();
