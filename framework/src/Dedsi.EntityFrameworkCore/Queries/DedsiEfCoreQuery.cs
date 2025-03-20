@@ -9,19 +9,31 @@ namespace Dedsi.EntityFrameworkCore.Queries;
 /// </summary>
 /// <param name="dbContextProvider"></param>
 /// <typeparam name="TDbContext"></typeparam>
-public class DedsiEfCoreQuery<TDbContext>(IDbContextProvider<TDbContext> dbContextProvider) : IDedsiQuery
-    where TDbContext : IDedsiEfCoreDbContext
+public class DedsiEfCoreQuery<TDbContext>(IDbContextProvider<TDbContext> dbContextProvider) : IDedsiQuery where TDbContext : IDedsiEfCoreDbContext
 {
     /// <summary>
     /// 
     /// </summary>
     /// <returns></returns>
     protected virtual Task<TDbContext> GetDbContextAsync() => dbContextProvider.GetDbContextAsync();
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TEntity"></typeparam>
+    /// <returns></returns>
+    protected virtual async Task<DbSet<TEntity>> GetDbSetAsync<TEntity>() where TEntity : class
+    {
+        return (await GetDbContextAsync()).Set<TEntity>();
+    }
     
     /// <summary>
     /// 
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
     /// <returns></returns>
-    protected virtual async ValueTask<DbSet<TEntity>> GetDbSetAsync<TEntity>() where TEntity : class => (await GetDbContextAsync()).Set<TEntity>();
+    protected virtual async Task<IQueryable<TEntity>> GetNoTrackingQueryable<TEntity>() where TEntity : class
+    {
+        return (await GetDbSetAsync<TEntity>()).AsNoTracking();
+    }
 }
