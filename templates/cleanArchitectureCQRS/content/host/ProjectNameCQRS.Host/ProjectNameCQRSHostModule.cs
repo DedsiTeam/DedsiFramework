@@ -29,7 +29,7 @@ public class ProjectNameCQRSHostModule : AbpModule
 {
     private readonly string[] _moduleNames =
     [
-        ProjectNameCQRSDomainOptions.ApplicationName
+        "ProjectNameCQRS"
     ];
 
     private readonly string[] _useCaseModuleNames =
@@ -95,9 +95,12 @@ public class ProjectNameCQRSHostModule : AbpModule
             options.DocInclusionPredicate((docName, description) => true);
             options.CustomSchemaIds(type => type.FullName);
             
-            options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "ProjectNameCQRS.HttpApi.xml"), true);
-            options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "ProjectNameCQRS.UseCase.xml"), true);
-            
+            foreach (var moduleName in _moduleNames)
+            {
+                options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, moduleName + ".HttpApi.xml"), true);
+                options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, moduleName + ".UseCase.xml"), true);
+            }
+
             #region Bearer Token
             options.AddSecurityDefinition("BearerToken", new OpenApiSecurityScheme
             {
