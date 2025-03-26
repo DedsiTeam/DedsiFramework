@@ -1,7 +1,6 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -48,7 +47,7 @@ public class AuthorizationController(IConfiguration configuration) : ProjectName
 
         return new LoginResultDto()
         {
-            Token = JwtBearerDefaults.AuthenticationScheme + " " + token
+            Token = token
         };
     }
 }
