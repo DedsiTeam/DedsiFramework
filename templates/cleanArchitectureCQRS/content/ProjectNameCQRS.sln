@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectNameCQRS.UseCase", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectNameCQRS.HttpApi", "src\ProjectNameCQRS.HttpApi\ProjectNameCQRS.HttpApi.csproj", "{A549BEB2-CD58-43BF-8C3D-014FEACE8FA5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectNameCQRS.Shared", "src\ProjectNameCQRS.Shared\ProjectNameCQRS.Shared.csproj", "{23200D23-11BE-4671-A0EF-EB2CA0D62433}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{A549BEB2-CD58-43BF-8C3D-014FEACE8FA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A549BEB2-CD58-43BF-8C3D-014FEACE8FA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A549BEB2-CD58-43BF-8C3D-014FEACE8FA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23200D23-11BE-4671-A0EF-EB2CA0D62433}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23200D23-11BE-4671-A0EF-EB2CA0D62433}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23200D23-11BE-4671-A0EF-EB2CA0D62433}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23200D23-11BE-4671-A0EF-EB2CA0D62433}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,5 +59,6 @@ Global
 		{69FBA34B-8170-4669-B52B-7E23008FCBE5} = {BC04B74F-7CAC-4ACC-BFD9-6DED68564777}
 		{26C9A27E-8C32-4403-9E72-F3F336CA68E5} = {AF96C03E-E3CE-4E4B-8A3F-7C117BA602AA}
 		{A549BEB2-CD58-43BF-8C3D-014FEACE8FA5} = {AF96C03E-E3CE-4E4B-8A3F-7C117BA602AA}
+		{23200D23-11BE-4671-A0EF-EB2CA0D62433} = {AF96C03E-E3CE-4E4B-8A3F-7C117BA602AA}
 	EndGlobalSection
 EndGlobal

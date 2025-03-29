@@ -99,6 +99,7 @@ public class ProjectNameCQRSHostModule : AbpModule
             {
                 options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, moduleName + ".HttpApi.xml"), true);
                 options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, moduleName + ".UseCase.xml"), true);
+                options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, moduleName + ".Shared.xml"), true);
             }
 
             #region Bearer Token
@@ -130,7 +131,7 @@ public class ProjectNameCQRSHostModule : AbpModule
         
             foreach (var moduleName in _moduleNames)
             {
-                options.SwaggerDoc(moduleName, new OpenApiInfo { Title = moduleName + " Module Api", Version = "v1" });
+                options.SwaggerDoc(moduleName, new OpenApiInfo { Title = $"{moduleName} Module Api", Version = "v1" });
             }
             #endregion
         });
@@ -186,7 +187,7 @@ public class ProjectNameCQRSHostModule : AbpModule
             options.DefaultModelExpandDepth(-1);
             foreach (var moduleName in _moduleNames)
             {
-                options.SwaggerEndpoint($"/swagger/{moduleName}/swagger.json",moduleName + " Module Api v1");
+                options.SwaggerEndpoint($"/swagger/{moduleName}/swagger.json", $"{moduleName} Module Api v1");
             }
         });
         

@@ -1,9 +1,8 @@
 ﻿using Dedsi.Ddd.CQRS.Mediators;
 using Microsoft.AspNetCore.Mvc;
 using ProjectNameCQRS.Users.CommandHandlers;
+using ProjectNameCQRS.Users.Dtos;
 using ProjectNameCQRS.Users.Queries;
-using ProjectNameCQRS.Users.Requests;
-using ProjectNameCQRS.Users.Responses;
 
 namespace ProjectNameCQRS.Users;
 
@@ -15,7 +14,7 @@ public class UserController(IUserQuery userQuery,IDedsiMediator dedsiMediator) :
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost]
-    public Task<Guid> CreateAsync(CreateUserRequest input)
+    public Task<Guid> CreateAsync(CreateUserRequestDto input)
     {
         return dedsiMediator.SendAsync(new CreateUserCommand(input.UserName, input.Account, input.Email), HttpContext.RequestAborted);
     }
@@ -26,7 +25,7 @@ public class UserController(IUserQuery userQuery,IDedsiMediator dedsiMediator) :
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet("{id}")]
-    public Task<UserInfoResponse> GetAsync(Guid id)
+    public Task<UserInfoResponseDto> GetAsync(Guid id)
     {
         return userQuery.GetByidAsync(id, HttpContext.RequestAborted);
     }

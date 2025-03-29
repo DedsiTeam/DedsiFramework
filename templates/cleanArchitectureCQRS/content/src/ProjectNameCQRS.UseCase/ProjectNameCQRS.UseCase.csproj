@@ -14,6 +14,7 @@
     <ItemGroup>
       <ProjectReference Include="..\ProjectNameCQRS.Domain\ProjectNameCQRS.Domain.csproj" />
       <ProjectReference Include="..\ProjectNameCQRS.Infrastructure\ProjectNameCQRS.Infrastructure.csproj" />
+      <ProjectReference Include="..\ProjectNameCQRS.Shared\ProjectNameCQRS.Shared.csproj" />
     </ItemGroup>
 
 </Project>

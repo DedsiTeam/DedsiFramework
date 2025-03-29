@@ -1,6 +1,6 @@
-﻿namespace ProjectNameCQRS.Users.Responses;
+﻿namespace ProjectNameCQRS.Users.Dtos;
 
-public class UserInfoResponse
+public class UserInfoResponseDto
 {
     public Guid Id { get; set; }
     
