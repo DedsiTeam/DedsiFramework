@@ -6,6 +6,7 @@ namespace ProjectNameCQRS;
 [DependsOn(
     // ProjectNameCQRS
     typeof(ProjectNameCQRSDomainModule),
+    typeof(ProjectNameCQRSSharedModule),
     typeof(ProjectNameCQRSInfrastructureModule),
     
     typeof(DedsiDddCqrsModule)

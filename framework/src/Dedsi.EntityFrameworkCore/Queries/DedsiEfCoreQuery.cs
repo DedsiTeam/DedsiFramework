@@ -32,7 +32,7 @@ public class DedsiEfCoreQuery<TDbContext>(IDbContextProvider<TDbContext> dbConte
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
     /// <returns></returns>
-    protected virtual async Task<IQueryable<TEntity>> GetNoTrackingQueryable<TEntity>() where TEntity : class
+    protected virtual async Task<IQueryable<TEntity>> GetNoTrackingQueryableAsync<TEntity>() where TEntity : class
     {
         return (await GetDbSetAsync<TEntity>()).AsNoTracking();
     }
