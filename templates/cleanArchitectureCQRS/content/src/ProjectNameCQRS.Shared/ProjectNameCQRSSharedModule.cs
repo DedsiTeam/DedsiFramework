@@ -1,9 +1,9 @@
-﻿using Volo.Abp.Domain;
+﻿using Dedsi.Ddd.Domain.Shared;
 using Volo.Abp.Modularity;
 
 namespace ProjectNameCQRS;
 
 [DependsOn(
-    typeof(AbpDddDomainSharedModule)    
+    typeof(DedsiDddDomainSharedModule)    
 )]
 public class ProjectNameCQRSSharedModule: AbpModule;
