@@ -10,6 +10,7 @@
     <ItemGroup>
         <PackageReference Include="Dedsi.Ddd.Domain.Shared" Version="$(DedsiFrameworkVersion)" />
         <PackageReference Include="Dedsi.Ddd.Application.Contracts" Version="$(DedsiFrameworkVersion)" />
-    </ItemGroup>
+		<PackageReference Include="Dedsi.Ddd.CQRS" Version="$(DedsiFrameworkVersion)" />
+	</ItemGroup>
 
 </Project>
