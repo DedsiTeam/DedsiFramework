@@ -6,7 +6,4 @@ namespace ProjectName;
 [DependsOn(
     typeof(DedsiCleanArchitectureDomainModule)    
 )]
-public class ProjectNameCoreModule : AbpModule
-{
-    
-}
+public class ProjectNameCoreModule : AbpModule;
