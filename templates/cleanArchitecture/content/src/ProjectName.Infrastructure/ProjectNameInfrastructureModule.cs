@@ -3,12 +3,6 @@
 namespace ProjectName;
 
 [DependsOn(
-
+    typeof(ProjectNameCoreModule)
 )]
-public class ProjectNameInfrastructureModule : AbpModule
-{
-    public override void ConfigureServices(ServiceConfigurationContext context)
-    {
-
-    }
-}
+public class ProjectNameInfrastructureModule : AbpModule;
