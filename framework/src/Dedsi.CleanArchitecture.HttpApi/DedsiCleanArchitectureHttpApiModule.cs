@@ -6,7 +6,4 @@ namespace Dedsi.CleanArchitecture.HttpApi;
 [DependsOn(
     typeof(AbpAspNetCoreMvcModule)
 )]
-public class DedsiCleanArchitectureHttpApiModule : AbpModule
-{
-    
-}
+public class DedsiCleanArchitectureHttpApiModule : AbpModule;

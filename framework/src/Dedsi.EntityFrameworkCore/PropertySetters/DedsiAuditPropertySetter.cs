@@ -26,5 +26,4 @@ public class DedsiAuditPropertySetter(
             ObjectHelper.TrySetProperty(hasCreationNameObject, x => x.CreatorName, () => CurrentUser.Name);
         }
     }
-
 }

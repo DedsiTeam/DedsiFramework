@@ -1,17 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-    <PropertyGroup>
-
-    </PropertyGroup>
-
     <ItemGroup>
       <ProjectReference Include="..\Dedsi.Core\Dedsi.Core.csproj" />
       <ProjectReference Include="..\Dedsi.Ddd.Domain.Shared\Dedsi.Ddd.Domain.Shared.csproj" />
     </ItemGroup>
-
     <ItemGroup>
       <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="$(AbpFrameworkVersion)" />
       <PackageReference Include="Volo.Abp.FluentValidation" Version="$(AbpFrameworkVersion)" />
     </ItemGroup>
-
 </Project>

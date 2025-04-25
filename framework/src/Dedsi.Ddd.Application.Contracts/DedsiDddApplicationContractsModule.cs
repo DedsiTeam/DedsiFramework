@@ -8,7 +8,4 @@ namespace Dedsi.Ddd.Application.Contracts;
     typeof(AbpFluentValidationModule),
     typeof(AbpDddApplicationContractsModule)
 )]
-public class DedsiDddApplicationContractsModule : AbpModule
-{
-    
-}
+public class DedsiDddApplicationContractsModule : AbpModule;

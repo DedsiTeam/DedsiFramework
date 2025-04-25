@@ -1,6 +1,6 @@
 namespace Dedsi.Ddd.Domain;
 
-public class DedsiDddDomainOptions
+public class DedsiDddDomainConsts
 {
     public const string DefaultDbSchema = "dbo";
 }

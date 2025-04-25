@@ -6,7 +6,4 @@ namespace Dedsi.Ddd.Domain;
 [DependsOn(
     typeof(AbpDddDomainModule)
 )]
-public class DedsiDddDomainModule : AbpModule
-{
-    
-}
+public class DedsiDddDomainModule : AbpModule;
