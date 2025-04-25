@@ -7,7 +7,6 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using Volo.Abp;
-using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Auditing;
 using Volo.Abp.Autofac;
 using Volo.Abp.EntityFrameworkCore;
@@ -18,11 +17,9 @@ using Volo.Abp.Modularity;
 namespace ProjectNameCQRS;
 
 [DependsOn(
-    // ProjectName
     typeof(ProjectNameCQRSHttpApiModule),
 
     typeof(AbpEntityFrameworkCoreSqlServerModule),
-    typeof(AbpAspNetCoreMvcModule),
     typeof(AbpAutofacModule)
 )]
 public class ProjectNameCQRSHostModule : AbpModule
@@ -59,7 +56,7 @@ public class ProjectNameCQRSHostModule : AbpModule
         // 日志
         Configure<AbpAuditingOptions>(options =>
         {
-            options.ApplicationName = ProjectNameCQRSDomainOptions.ApplicationName;
+            options.ApplicationName = ProjectNameCQRSDomainConsts.ApplicationName;
             options.IsEnabledForGetRequests = true;
         });
         

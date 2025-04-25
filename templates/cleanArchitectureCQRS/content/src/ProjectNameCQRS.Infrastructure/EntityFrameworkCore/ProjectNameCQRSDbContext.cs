@@ -5,7 +5,7 @@ using Volo.Abp.Data;
 
 namespace ProjectNameCQRS.EntityFrameworkCore;
 
-[ConnectionStringName(ProjectNameCQRSDomainOptions.ConnectionStringName)]
+[ConnectionStringName(ProjectNameCQRSDomainConsts.ConnectionStringName)]
 public class ProjectNameCQRSDbContext(DbContextOptions<ProjectNameCQRSDbContext> options) 
     : DedsiEfCoreDbContext<ProjectNameCQRSDbContext>(options)
 {
