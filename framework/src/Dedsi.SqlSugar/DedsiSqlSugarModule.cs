@@ -8,7 +8,4 @@ namespace Dedsi.SqlSugar;
     typeof(DedsiDddDomainModule),
     typeof(AbpAspNetCoreMvcModule)
 )]
-public class DedsiSqlSugarModule : AbpModule
-{
-    
-}
+public class DedsiSqlSugarModule : AbpModule;

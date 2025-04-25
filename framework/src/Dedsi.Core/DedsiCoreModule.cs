@@ -2,10 +2,4 @@
 
 namespace Dedsi.Core;
 
-[DependsOn(
-
-)]
-public class DedsiCoreModule : AbpModule
-{
-    
-}
+public class DedsiCoreModule : AbpModule;

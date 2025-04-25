@@ -1,8 +1,9 @@
 using Dedsi.Ddd.CQRS.Commands;
+using Volo.Abp.DependencyInjection;
 
 namespace Dedsi.Ddd.CQRS.Mediators;
 
-public interface IDedsiMediator
+public interface IDedsiMediator : ITransientDependency
 {
     /// <summary>
     /// 发布命令：无返回值

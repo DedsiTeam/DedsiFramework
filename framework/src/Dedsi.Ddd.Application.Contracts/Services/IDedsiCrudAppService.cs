@@ -4,7 +4,4 @@ public interface IDedsiCrudAppService<in TKey,in TGetListInput, TGetOutputDto, T
     : IDedsiReadOnlyAppService<TKey, TGetListInput, TGetOutputDto, TGetListOutputDto>,
         IDedsiCreateUpdateAppService<TKey, TCreateInput, TCreateOutputDto, TUpdateInput, TUpdateOutputDto>,
         IDedsiDeleteAppService<TKey>,
-        IDedsiViewDataAppService<TViewData>
-{
-    
-}
+        IDedsiViewDataAppService<TViewData>;

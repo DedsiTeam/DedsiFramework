@@ -8,7 +8,4 @@ namespace Dedsi.Ddd.Application;
     typeof(AbpDddApplicationModule),
     typeof(DedsiDddApplicationContractsModule)
 )]
-public class DedsiDddApplicationModule : AbpModule
-{
-    
-}
+public class DedsiDddApplicationModule : AbpModule;

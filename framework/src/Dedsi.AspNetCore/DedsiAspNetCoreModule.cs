@@ -1,5 +1,4 @@
 ﻿using Dedsi.Core;
-using Volo.Abp.AspNetCore;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Modularity;
 
@@ -9,7 +8,4 @@ namespace Dedsi.AspNetCore;
     typeof(AbpAspNetCoreMvcModule),
     typeof(DedsiCoreModule)
 )]
-public class DedsiAspNetCoreModule : AbpModule
-{
-    
-}
+public class DedsiAspNetCoreModule : AbpModule;

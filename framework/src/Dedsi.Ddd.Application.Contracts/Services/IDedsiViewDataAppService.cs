@@ -1,6 +1,6 @@
 namespace Dedsi.Ddd.Application.Contracts.Services;
 
-public interface IDedsiViewDataAppService<T>
+public interface IDedsiViewDataAppService<T>: IDedsiApplicationService
 {
     /// <summary>
     /// 获得页面数据源

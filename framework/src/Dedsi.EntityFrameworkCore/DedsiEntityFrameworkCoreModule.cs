@@ -8,6 +8,4 @@ namespace Dedsi.EntityFrameworkCore;
     typeof(AbpDapperModule),
     typeof(AbpEntityFrameworkCoreModule)
 )]
-public class DedsiEntityFrameworkCoreModule : AbpModule
-{
-}
+public class DedsiEntityFrameworkCoreModule : AbpModule;

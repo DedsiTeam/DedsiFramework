@@ -8,7 +8,4 @@ namespace Dedsi.CleanArchitecture.Infrastructure;
     typeof(DedsiCleanArchitectureDomainModule),
     typeof(DedsiEntityFrameworkCoreModule)
 )]
-public class DedsiCleanArchitectureInfrastructureModule : AbpModule
-{
-    
-}
+public class DedsiCleanArchitectureInfrastructureModule : AbpModule;

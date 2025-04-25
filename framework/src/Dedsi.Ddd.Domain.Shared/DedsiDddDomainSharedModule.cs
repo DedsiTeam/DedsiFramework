@@ -6,7 +6,4 @@ namespace Dedsi.Ddd.Domain.Shared;
 [DependsOn(
     typeof(AbpDddDomainSharedModule)
 )]
-public class DedsiDddDomainSharedModule: AbpModule
-{
-    
-}
+public class DedsiDddDomainSharedModule: AbpModule;
