@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ProjectNameCQRS;
 
 [ApiController]
-[Area(ProjectNameCQRSDomainOptions.ApplicationName)]
+[Area(ProjectNameCQRSDomainConsts.ApplicationName)]
 [Route("api/ProjectNameCQRS/[controller]/[action]")]
-[ApiExplorerSettings(GroupName = ProjectNameCQRSDomainOptions.ApplicationName)]
+[ApiExplorerSettings(GroupName = ProjectNameCQRSDomainConsts.ApplicationName)]
 public abstract class ProjectNameCQRSController : DedsiControllerBase;

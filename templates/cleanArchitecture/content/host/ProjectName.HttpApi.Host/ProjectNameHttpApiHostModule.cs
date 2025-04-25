@@ -40,7 +40,7 @@ public class ProjectNameHttpApiHostModule : AbpModule
         // 日志
         Configure<AbpAuditingOptions>(options =>
         {
-            options.ApplicationName = ProjectNameCoreOptions.ApplicationName;
+            options.ApplicationName = ProjectNameCoreConsts.ApplicationName;
             options.IsEnabledForGetRequests = true;
         });
         

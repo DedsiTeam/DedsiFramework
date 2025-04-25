@@ -12,7 +12,7 @@ public static class ProjectNameCQRSDbContextModelCreatingExtensions
 
         builder.Entity<User>(b =>
         {
-            b.ToTable("Users", ProjectNameCQRSDomainOptions.DbSchemaName);
+            b.ToTable("Users", ProjectNameCQRSDomainConsts.DbSchemaName);
             b.HasKey(a => a.Id);
         });
     }

@@ -2,7 +2,7 @@
 
 namespace ProjectNameCQRS;
 
-public class ProjectNameCQRSDomainOptions : DedsiCleanArchitectureDomainOptions
+public class ProjectNameCQRSDomainConsts : DedsiCleanArchitectureDomainConsts
 {
     public const string ApplicationName = "ProjectName";
     

@@ -2,7 +2,7 @@
 
 namespace ProjectName;
 
-public class ProjectNameCoreOptions : DedsiCleanArchitectureDomainOptions
+public class ProjectNameCoreConsts : DedsiCleanArchitectureDomainConsts
 {
     public const string ApplicationName = "ProjectName";
     
