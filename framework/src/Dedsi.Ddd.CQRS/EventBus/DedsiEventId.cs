@@ -4,7 +4,7 @@
 /// 事件Id
 /// </summary>
 /// <param name="Id"></param>
-public record DedsiEventId(Guid EventId);
+public record DedsiEventId(Guid Value);
 
 public static class DedsiEventIdExtensions
 {
