@@ -1,33 +1,37 @@
-﻿using Dedsi.Ddd.CQRS.Commands;
+﻿using Dedsi.Ddd.CQRS.CommandEventRecorders;
+using Dedsi.Ddd.CQRS.Commands;
 using MediatR;
-using Microsoft.Extensions.Logging;
 
 namespace Dedsi.Ddd.CQRS.Mediators;
 
-public class DedsiMediator(ILogger<DedsiMediator> logger, IMediator mediator) : IDedsiMediator
+public class DedsiMediator(
+    ICqrsCeRecorder cqrsCeRecorder,
+    IMediator mediator) : IDedsiMediator
 {
     /// <inheritdoc />
-    public virtual Task SendAsync(IDedsiCommand command, CancellationToken cancellationToken = default)
+    public virtual async Task SendAsync(IDedsiCommand command, CancellationToken cancellationToken = default)
     {
-        logger.LogInformation("---------------------------------------- IDedsiMediator SendAsync() -------------------------------------------------------");
-        logger.LogInformation($"CommandId = {command.CommandId.CommandId}");
-        logger.LogInformation($"CommandName = {command.GetType().Name}");
-        logger.LogInformation(command.GetType().FullName);
-        logger.LogInformation("---------------------------------------- IDedsiMediator SendAsync() -------------------------------------------------------");
+        await cqrsCeRecorder.RecorderAsync(
+            command.CommandId.Value, 
+            command.GetType().Name, 
+            command.GetType().FullName,
+            RecorderDataSource.Command,
+            cancellationToken);
 
-        return mediator.Send(command, cancellationToken);
+        await mediator.Send(command, cancellationToken);
     }
 
     /// <inheritdoc />
-    public virtual Task<TResponse> SendAsync<TResponse>(IDedsiCommand<TResponse> command,CancellationToken cancellationToken = default)
+    public virtual async Task<TResponse> SendAsync<TResponse>(IDedsiCommand<TResponse> command,CancellationToken cancellationToken = default)
     {
-        logger.LogInformation("---------------------------------------- IDedsiMediator SendAsync<TResponse>() -------------------------------------------------------");
-        logger.LogInformation($"CommandId = {command.CommandId.CommandId}");
-        logger.LogInformation($"CommandName = {command.GetType().Name}");
-        logger.LogInformation(command.GetType().FullName);
-        logger.LogInformation("---------------------------------------- IDedsiMediator SendAsync<TResponse>() -------------------------------------------------------");
+        await cqrsCeRecorder.RecorderAsync(
+            command.CommandId.Value,
+            command.GetType().Name,
+            command.GetType().FullName,
+            RecorderDataSource.Command,
+            cancellationToken);
 
-        return mediator.Send(command, cancellationToken);
+        return await mediator.Send(command, cancellationToken);
     }
 
 }

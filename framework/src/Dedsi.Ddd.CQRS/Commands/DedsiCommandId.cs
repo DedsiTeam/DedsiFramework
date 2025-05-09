@@ -1,6 +1,6 @@
 ﻿namespace Dedsi.Ddd.CQRS.Commands;
 
-public record DedsiCommandId(Guid CommandId);
+public record DedsiCommandId(Guid Value);
 
 public static class DedsiCommandIdExtensions
 {

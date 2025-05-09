@@ -1,7 +1,10 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+﻿using Dedsi.Ddd.CQRS.CommandEventRecorders;
+using Dedsi.Ddd.Domain.Shared.EntityIds;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Volo.Abp.DependencyInjection;
+using Volo.Abp.Domain.Entities;
+using Volo.Abp.Domain.Entities.Events;
 using Volo.Abp.EventBus;
 using Volo.Abp.EventBus.Local;
 using Volo.Abp.MultiTenancy;
@@ -11,7 +14,7 @@ namespace Dedsi.Ddd.CQRS.EventBus;
 
 [ExposeServices(typeof(ILocalEventBus), typeof(DedsiLocalEventBus))]
 public class DedsiLocalEventBus(
-        ILogger<DedsiLocalEventBus> logger,
+        ICqrsCeRecorder cqrsCeRecorder,
         IOptions<AbpLocalEventBusOptions> options,
         IServiceScopeFactory serviceScopeFactory,
         ICurrentTenant currentTenant,
@@ -19,6 +22,13 @@ public class DedsiLocalEventBus(
         IEventHandlerInvoker eventHandlerInvoker) 
     : LocalEventBus(options, serviceScopeFactory, currentTenant, unitOfWorkManager, eventHandlerInvoker)
 {
+
+    private string[] _abpEventDataNames = [
+        typeof(EntityCreatedEventData<object>).Name,
+        typeof(EntityDeletedEventData<object>).Name,
+        typeof(EntityUpdatedEventData<object>).Name,
+    ];
+
     /// <summary>
     /// 需要发布之前记录日志
     /// </summary>
@@ -26,17 +36,55 @@ public class DedsiLocalEventBus(
     /// <param name="eventData"></param>
     /// <param name="onUnitOfWorkComplete"></param>
     /// <returns></returns>
-    public override Task PublishAsync(Type eventType, object eventData, bool onUnitOfWorkComplete = true)
+    public override async Task PublishAsync(Type eventType, object eventData, bool onUnitOfWorkComplete = true)
     {
+        var cancellationToken = CancellationToken.None;
+
         if (eventData is IDedsiEvent dedsiEvent)
         {
-            logger.LogInformation("---------------------------------------- ILocalEventBus PublishAsync() -------------------------------------------------------");
-            logger.LogInformation($"EventId = {dedsiEvent.EventId.EventId}");
-            logger.LogInformation($"EventName = {eventType.Name}");
-            logger.LogInformation(eventType.FullName);
-            logger.LogInformation("---------------------------------------- ILocalEventBus PublishAsync() -------------------------------------------------------");
+            await cqrsCeRecorder.RecorderAsync(
+                dedsiEvent.EventId.Value, 
+                eventType.Name, 
+                eventType.FullName,
+                RecorderDataSource.Event,
+                cancellationToken);
+        }
+        else if (_abpEventDataNames.Any(a => a == eventType.Name))
+        {
+            var entity = eventType.GetProperty("Entity").GetValue(eventData);
+
+            var a = entity.GetType().BaseType.Name;
+
+            // 如果是聚合根
+            if (entity.GetType().BaseType.Name == typeof(AggregateRoot<object>).Name)
+            {
+                var idProperty = entity.GetType().GetProperty("Id");
+                if (idProperty != null)
+                {
+                    var idValue = idProperty.GetValue(entity);
+
+                    if (idValue is IGuidStronglyTypedId guidTypedId)
+                    {
+                        await cqrsCeRecorder.RecorderAsync(
+                            guidTypedId.Id,
+                            eventType.Name,
+                            eventType.FullName,
+                            RecorderDataSource.Event,
+                            cancellationToken);
+                    } 
+                    else if (idValue is Guid guid) {
+                        await cqrsCeRecorder.RecorderAsync(
+                            guid,
+                            eventType.Name,
+                            eventType.FullName,
+                            RecorderDataSource.Event,
+                            cancellationToken);
+                    }
+
+                }
+            }
         }
 
-        return base.PublishAsync(eventType, eventData, onUnitOfWorkComplete);
+        await base.PublishAsync(eventType, eventData, onUnitOfWorkComplete);
     }
 }
