@@ -14,7 +14,7 @@ public class Program
         
         try
         {
-            Log.Information("ProjectName web host.");
+            Log.Information("程序已启动！");
             var builder = WebApplication.CreateBuilder(args);
             builder.Host
                 .AddAppSettingsSecretsJson()
@@ -44,7 +44,7 @@ public class Program
         }
         catch (Exception ex)
         {
-            Log.Fatal(ex, "ProjectName Host terminated unexpectedly!");
+            Log.Fatal(ex, "主机意外终止!");
             return 1;
         }
         finally
