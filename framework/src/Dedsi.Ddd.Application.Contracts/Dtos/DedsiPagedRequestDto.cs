@@ -26,5 +26,10 @@ public class DedsiPagedRequestDto : PagedResultRequestDto
     public override int MaxResultCount => PageSize;
 
     public override int SkipCount => (PageIndex - 1) * PageSize;
+
+    /// <summary>
+    /// 是否导出：注意需要在Controller中设置为true，才能导出数据,前端无需赋值
+    /// </summary>
+    public bool IsExport { get; set; } = false;
 }
 
