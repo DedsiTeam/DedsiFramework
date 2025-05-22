@@ -6,6 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DotNetCore.CAP" Version="8.3.4" />
+    <PackageReference Include="DotNetCore.CAP.RabbitMQ" Version="8.3.4" />
+    <PackageReference Include="DotNetCore.CAP.SqlServer" Version="8.3.4" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Dedsi.AspNetCore\Dedsi.AspNetCore.csproj" />
   </ItemGroup>
 
