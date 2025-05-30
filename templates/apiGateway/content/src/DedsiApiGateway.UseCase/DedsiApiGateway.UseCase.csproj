@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>DedsiApiGateway</RootNamespace>
+        <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\DedsiApiGateway.Domain\DedsiApiGateway.Domain.csproj" />
+      <ProjectReference Include="..\DedsiApiGateway.Infrastructure\DedsiApiGateway.Infrastructure.csproj" />
+      <ProjectReference Include="..\DedsiApiGateway.Shared\DedsiApiGateway.Shared.csproj" />
+    </ItemGroup>
+
+</Project>
