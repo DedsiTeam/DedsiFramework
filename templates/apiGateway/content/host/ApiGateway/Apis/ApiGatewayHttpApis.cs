@@ -7,15 +7,15 @@ public static class ApiGatewayHttpApis
 {
     public static void MapApiGatewayHttpApis(this IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapGet("/api/gateway", (IProxyConfigProvider proxyConfigProvider) =>
+        endpoints.MapPost("/api/gateway/RefreshConfig", (IProxyConfigProvider proxyConfigProvider) =>
         {
-            if (proxyConfigProvider is ApiGatewayProxyConfigProvider)
+            if (proxyConfigProvider is ApiGatewayProxyConfigProvider apiGatewayProxyConfigProvider)
             {
-                ((ApiGatewayProxyConfigProvider)proxyConfigProvider).RefreshConfig();
-                return Results.Ok("API Gateway configuration refreshed successfully.");
+                apiGatewayProxyConfigProvider.RefreshConfig();
+                return Results.Ok(true);
             }
 
-            return Results.BadRequest("Invalid proxy config provider.");
+            return Results.Ok(false);
         });
     }
 }

@@ -23,8 +23,12 @@ public class AgClusterConfigRepository(IDbContextProvider<ApiGatewayDbContext> d
             .Include(a => a.Destinations)
             .FirstOrDefaultAsync(a => a.ClusterId == clusterId, cancellationToken);
 
-        await DeleteAsync(entity);
+        if (entity != null)
+        {
+            await DeleteAsync(entity, false, cancellationToken);
+            return true;
+        }
 
-        return true;
+        return false;
     }
 }

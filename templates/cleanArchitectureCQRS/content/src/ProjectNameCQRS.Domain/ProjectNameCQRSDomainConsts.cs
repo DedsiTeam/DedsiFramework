@@ -4,13 +4,13 @@ namespace ProjectNameCQRS;
 
 public class ProjectNameCQRSDomainConsts : DedsiCleanArchitectureDomainConsts
 {
-    public const string ApplicationName = "ProjectName";
+    public const string ApplicationName = "ProjectNameCQRS";
     
-    public const string MobileApplicationName = "ProjectName.Mobile";
+    public const string MobileApplicationName = "ProjectNameCQRS.Mobile";
     
-    public const string ConnectionStringName = "ProjectNameDB";
+    public const string ConnectionStringName = "ProjectNameCQRSDB";
     
-    public const string DbSchemaName  = "ProjectName";
+    public const string DbSchemaName  = "ProjectNameCQRS";
 
-    public const string DbTablePrefix = "ProjectName";
+    public const string DbTablePrefix = "ProjectNameCQRS";
 }

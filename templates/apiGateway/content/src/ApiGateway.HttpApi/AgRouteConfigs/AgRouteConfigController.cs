@@ -15,4 +15,12 @@ public class AgRouteConfigController(IDedsiMediator dedsiMediator) : ApiGatewayC
     {
         return dedsiMediator.SendAsync(new CreateAgRouteConfigCommamd(request.RouteId, request.ClusterId, request.Match), HttpContext.RequestAborted);
     }
+
+    [HttpPost]
+    public Task<bool> DeleteByRouteIdAsync(DeleteByRouteIdRequestDto request)
+    {
+        return dedsiMediator.SendAsync(new DeleteByRouteIdCommamd(request.RouteId), HttpContext.RequestAborted);
+    }
 }
+
+public record DeleteByRouteIdRequestDto(string RouteId);
