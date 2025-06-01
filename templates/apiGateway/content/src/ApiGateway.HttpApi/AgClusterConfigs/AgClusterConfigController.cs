@@ -31,6 +31,28 @@ public class AgClusterConfigController(
     {
         return dedsiMediator.SendAsync(new DeleteByClusterIdCommamd(request.ClusterId), HttpContext.RequestAborted);
     }
+
+    [HttpPost]
+    public async Task<GetPagedResponseDto> GetPagedAsync(GetPagedRequestDto request)
+    {
+        var result = await agClusterConfigQuery.GetPagedAsync(request.pageIndex, request.pageSize, request.ClusterId, HttpContext.RequestAborted);
+    
+        var items = result.Item2.Select(a => new AgClusterConfigResponseDto()
+        {
+            ClusterId = a.ClusterId,
+            Destinations = a.Destinations.Select(d => new AgClusterDestinationConfigResponseDto
+            {
+                DestinationId = d.DestinationId,
+                Address = d.Address
+            }).ToList()
+        }).ToArray();
+
+        return new GetPagedResponseDto(result.Item1, items);
+    }
 }
 
 public record DeleteByClusterIdRequestDto(string ClusterId);
+
+public record GetPagedRequestDto(int pageIndex, int pageSize, string? ClusterId);
+
+public record GetPagedResponseDto(int TotalCount, AgClusterConfigResponseDto[] Items);
