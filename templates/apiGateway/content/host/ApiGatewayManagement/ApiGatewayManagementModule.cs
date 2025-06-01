@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using System.Text;
+using ApiGateway;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +15,7 @@ using Volo.Abp.EntityFrameworkCore.SqlServer;
 using Volo.Abp.Json;
 using Volo.Abp.Modularity;
 
-namespace ApiGateway;
+namespace ApiGatewayManagement;
 
 [DependsOn(
     typeof(ApiGatewayHttpApiModule),
@@ -22,7 +23,7 @@ namespace ApiGateway;
     typeof(AbpEntityFrameworkCoreSqlServerModule),
     typeof(AbpAutofacModule)
 )]
-public class ApiGatewayHostModule : AbpModule
+public class ApiGatewayManagementModule : AbpModule
 {
     private readonly string[] _moduleNames =
     [
@@ -189,14 +190,10 @@ public class ApiGatewayHostModule : AbpModule
         });
         
         app.UseAuthentication();
+        app.UseAntiforgery();
         app.UseAuthorization();
         app.UseAuditing();
 
-        app.UseConfiguredEndpoints(endpoints =>
-        {
-            // AuthorizeAttribute
-            // endpoints.MapControllers().RequireAuthorization();
-        });
-
+        app.UseConfiguredEndpoints();
     }
 }
