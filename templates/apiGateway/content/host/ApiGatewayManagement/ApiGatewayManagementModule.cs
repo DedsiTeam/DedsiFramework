@@ -1,12 +1,9 @@
 ﻿using System.Reflection;
 using System.Text;
 using ApiGateway;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Dedsi.AspNetCore;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.SwaggerUI;
 using Volo.Abp;
 using Volo.Abp.Auditing;
 using Volo.Abp.Autofac;
@@ -18,18 +15,14 @@ using Volo.Abp.Modularity;
 namespace ApiGatewayManagement;
 
 [DependsOn(
-    typeof(ApiGatewayHttpApiModule),
+    typeof(ApiGatewayUseCaseModule),
 
+    typeof(DedsiAspNetCoreModule),
     typeof(AbpEntityFrameworkCoreSqlServerModule),
     typeof(AbpAutofacModule)
 )]
 public class ApiGatewayManagementModule : AbpModule
 {
-    private readonly string[] _moduleNames =
-    [
-        "ApiGateway"
-    ];
-
     private readonly string[] _useCaseModuleNames =
     [
         "ApiGateway.UseCase"
@@ -87,73 +80,6 @@ public class ApiGatewayManagementModule : AbpModule
             });
         });
 
-        // Swagger
-        context.Services.AddSwaggerGen(options =>
-        {
-            options.DocInclusionPredicate((docName, description) => true);
-            options.CustomSchemaIds(type => type.FullName);
-            
-            foreach (var moduleName in _moduleNames)
-            {
-                options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, moduleName + ".HttpApi.xml"), true);
-                options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, moduleName + ".UseCase.xml"), true);
-                options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, moduleName + ".Shared.xml"), true);
-            }
-
-            #region Bearer Token
-            options.AddSecurityDefinition("BearerToken", new OpenApiSecurityScheme
-            {
-                Type = SecuritySchemeType.Http,
-                Scheme = "bearer",
-                BearerFormat = "JWT",
-                Description = "请输入Token!"
-            });
-            options.AddSecurityRequirement(new OpenApiSecurityRequirement
-            {
-                {
-                    new OpenApiSecurityScheme
-                    {
-                        Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "BearerToken" }
-                    },
-                    []
-                }
-            });
-            #endregion
-        
-            #region swagger 分组
-            options.DocInclusionPredicate((doc, api) =>
-            {
-                if (api.GroupName == "*") { return true; }
-                return doc == api.GroupName;
-            });
-        
-            foreach (var moduleName in _moduleNames)
-            {
-                options.SwaggerDoc(moduleName, new OpenApiInfo { Title = $"{moduleName} Module Api", Version = "v1" });
-            }
-            #endregion
-        });
-        
-        // 添加JWT身份验证服务
-        context.Services
-            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters()
-                {
-                    ValidateLifetime = true,
-                    
-                    ValidateIssuer = true,
-                    ValidIssuer = configuration["JwtOptions:Issuer"],
-
-                    ValidateAudience = true,
-                    ValidAudience = configuration["JwtOptions:Audience"],
-
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtOptions:SecurityKey"]!))
-                };
-            });
-        
         // MediatR
         context.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(_useCaseModuleNames.Select(Assembly.Load).ToArray()));
     }
@@ -178,17 +104,6 @@ public class ApiGatewayManagementModule : AbpModule
         app.UseRouting();
         app.UseCors();
 
-        app.UseSwagger();
-        app.UseSwaggerUI(options =>
-        {
-            options.DocExpansion(DocExpansion.None);
-            options.DefaultModelExpandDepth(-1);
-            foreach (var moduleName in _moduleNames)
-            {
-                options.SwaggerEndpoint($"/swagger/{moduleName}/swagger.json", $"{moduleName} Module Api v1");
-            }
-        });
-        
         app.UseAuthentication();
         app.UseAntiforgery();
         app.UseAuthorization();
