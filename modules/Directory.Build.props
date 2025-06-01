@@ -1,0 +1,19 @@
+<Project>
+    <PropertyGroup>
+        <LangVersion>latest</LangVersion>
+        <Version>9.1.300</Version>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <PackageIcon>logo.png</PackageIcon>
+        <Authors>Cohen Wang</Authors>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="..\..\..\..\logo.png">
+            <Pack>True</Pack>
+            <PackagePath></PackagePath>
+            <Link>logo.png</Link>
+        </None>
+    </ItemGroup>
+	
+</Project>
