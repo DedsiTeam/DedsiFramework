@@ -114,11 +114,19 @@ public class DedsiUser : AggregateRoot<string>
     /// <summary>
     /// 创建新用户的构造函数
     /// </summary>
-    public DedsiUser(string id, string userName, string loginAccount, string loginPwd): base(id)
+    public DedsiUser(
+        string id, 
+        string userName, 
+        string loginAccount, 
+        string loginPwd,
+        string email,
+        string phone): base(id)
     {
         ChangeUserName(userName);
         ChangeLoginAccount(loginAccount);
         ChangeLoginAccountPwd(loginPwd);
+        ChangeEmail(email);
+        ChangePhone(phone);
         IsDeleted = false;
     }
 

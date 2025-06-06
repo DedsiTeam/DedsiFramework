@@ -8,6 +8,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Ulid" Version="1.3.4" />
+    </ItemGroup>
+
+    <ItemGroup>
       <ProjectReference Include="..\DedsiIdentity.Domain\DedsiIdentity.Domain.csproj" />
       <ProjectReference Include="..\DedsiIdentity.Infrastructure\DedsiIdentity.Infrastructure.csproj" />
       <ProjectReference Include="..\DedsiIdentity.Shared\DedsiIdentity.Shared.csproj" />
