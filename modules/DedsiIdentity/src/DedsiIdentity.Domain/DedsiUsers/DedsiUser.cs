@@ -163,4 +163,4 @@ public record UserRole(Guid DedsiUserId, Guid RoleId, string Name);
 /// <summary>
 /// 用户的权限类
 /// </summary>
-public record UserPermission(Guid DedsiUserId, Guid DedsiPermissionId, string Name, string Code);
+public record UserPermission(Guid DedsiUserId, Guid PermissionId, string Name, string Code);

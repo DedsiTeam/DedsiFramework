@@ -153,7 +153,7 @@ public class RolePermission
 /// <summary>
 /// 子角色类
 /// </summary>
-public record ChildRole(Guid RoleParentId, Guid RoleId, string Name);
+public record ChildRole(Guid DedsiRoleId, Guid RoleId, string Name);
 
 
 /// <summary>
