@@ -1,0 +1,6 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<ItemGroup>
+		<PackageReference Include="Dedsi.EntityFrameworkCore" Version="$(DedsiFrameworkVersion)" />
+		<PackageReference Include="Dedsi.Ddd.CQRS" Version="$(DedsiFrameworkVersion)" />
+	</ItemGroup>
+</Project>

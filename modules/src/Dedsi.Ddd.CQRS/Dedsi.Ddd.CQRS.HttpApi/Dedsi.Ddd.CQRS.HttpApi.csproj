@@ -1,6 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\framework\src\Dedsi.AspNetCore\Dedsi.AspNetCore.csproj" />
-    <ProjectReference Include="..\..\..\..\framework\src\Dedsi.Ddd.CQRS\Dedsi.Ddd.CQRS.csproj" />
-  </ItemGroup>
-</Project>

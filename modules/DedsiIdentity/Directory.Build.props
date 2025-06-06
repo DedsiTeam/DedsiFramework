@@ -1,0 +1,18 @@
+<Project>
+    <PropertyGroup>
+		<Version>9.2.0</Version>
+		<LangVersion>latest</LangVersion>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Authors>Cohen Wang</Authors>
+        <NoWarn>$(NoWarn);CS1591;</NoWarn>
+    </PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\..\..\..\logo.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+			<Link>logo.png</Link>
+		</None>
+	</ItemGroup>
+</Project>
