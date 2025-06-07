@@ -1,5 +1,4 @@
-﻿using DedsiIdentity.DedsiPermissions;
-using DedsiIdentity.DedsiRoles;
+﻿using DedsiIdentity.DedsiRoles;
 using DedsiIdentity.DedsiUsers;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp;
@@ -75,14 +74,6 @@ public static class DedsiIdentityDbContextModelCreatingExtensions
         {
             b.ToTable("MutuallyExclusiveRoles", DedsiIdentityDomainConsts.DbSchemaName);
             b.HasKey(x => new { x.DedsiRoleId, x.RoleId });
-        });
-        #endregion
-
-        #region DedsiPermission
-        builder.Entity<DedsiPermission>(b =>
-        {
-            b.ToTable("DedsiPermissions", DedsiIdentityDomainConsts.DbSchemaName);
-            b.HasKey(x => x.Id);
         });
         #endregion
     }
