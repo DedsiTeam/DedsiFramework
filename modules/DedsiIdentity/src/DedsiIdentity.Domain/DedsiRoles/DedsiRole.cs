@@ -3,6 +3,9 @@ using Volo.Abp.Domain.Entities;
 
 namespace DedsiIdentity.DedsiRoles;
 
+/// <summary>
+/// 角色
+/// </summary>
 public class DedsiRole : AggregateRoot<string>
 {
     /// <summary>

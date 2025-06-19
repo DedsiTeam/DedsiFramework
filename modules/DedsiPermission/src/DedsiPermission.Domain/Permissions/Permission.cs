@@ -17,30 +17,27 @@ public class Permission : AggregateRoot<string>
     /// </summary>
     /// <param name="id">权限ID</param>
     /// <param name="permissionName">权限名称</param>
-    /// <param name="permissionCode">权限标识</param>
     /// <param name="permissionDescription">权限描述</param>
     /// <param name="permissionType">权限类型</param>
-    /// <param name="isEnabled">是否启用</param>
     /// <param name="parentId">父ID</param>
     public Permission(
         string id,
         string permissionName,
-        string permissionCode,
         string permissionDescription,
         PermissionType permissionType,
         string permissionGroupCode,
         string permissionGroupName,
-        bool isEnabled,
         string? parentId = null) : base(id)
     {
         ChangeParentId(parentId);
         ChangePermissionName(permissionName);
-        ChangePermissionCode(permissionCode);
         ChangePermissionDescription(permissionDescription);
         ChangePermissionType(permissionType);
         ChangePermissionGroupCode(permissionGroupCode);
         ChangePermissionGroupName(permissionGroupName);
+        
         EnabledPermission();
+        IsDelete = false;
     }
 
     /// <summary>
@@ -67,19 +64,6 @@ public class Permission : AggregateRoot<string>
     public void ChangePermissionName(string permissionName)
     {
         PermissionName = Check.NotNullOrWhiteSpace(permissionName, nameof(PermissionName));
-    }
-
-    /// <summary>
-    /// 权限标识
-    /// </summary>
-    public string PermissionCode { get; protected set; }
-
-    /// <summary>
-    /// 更改权限标识
-    /// </summary>
-    public void ChangePermissionCode(string permissionCode)
-    {
-        PermissionCode = Check.NotNullOrWhiteSpace(permissionCode, nameof(PermissionCode));
     }
 
     /// <summary>
@@ -144,6 +128,16 @@ public class Permission : AggregateRoot<string>
     public void DisablePermission()
     {
         IsEnabled = false;
+    }
+
+    /// <summary>
+    /// 是否删除
+    /// </summary>
+    public bool IsDelete { get; protected set; }
+
+    public void DeletePermission()
+    {
+        IsDelete = true;
     }
 
     /// <summary>
