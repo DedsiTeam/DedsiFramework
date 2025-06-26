@@ -16,10 +16,9 @@ jobs:
           dotnet-version: |
             9.0.x
           global-json-file: ./framework/global.json
-      - name: Restore dependencies
-        run: dotnet restore
       - name: Build
         run: dotnet build -c Release --no-restore
+        working-directory: ./framework/src/
       - name: Pack NuGet
         run: dotnet pack -c Release -o ./  -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
       - name: Push NuGet
