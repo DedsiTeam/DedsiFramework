@@ -15,7 +15,7 @@ jobs:
         with:
           dotnet-version: |
             9.0.x
-          global-json-file: global.json
+          global-json-file: ./framework/global.json
       - name: Restore dependencies
         run: dotnet restore
       - name: Build
