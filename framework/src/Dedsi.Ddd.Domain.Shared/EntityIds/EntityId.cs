@@ -1,5 +1,3 @@
-using Yitter.IdGenerator;
-
 namespace Dedsi.Ddd.Domain.Shared.EntityIds;
 
 public class EntityId : IEntityId;
@@ -16,13 +14,6 @@ public record StronglyTypedId<TSource> : IStronglyTypedId<TSource>
     public override string ToString()
     {
         return $"Id = {Id}.";
-    }
-}
-
-public record Int64StronglyTypedId(long Id) : StronglyTypedId<Int64>(Id), IInt64StronglyTypedId
-{
-    public Int64StronglyTypedId() : this(YitIdHelper.NextId())
-    {
     }
 }
 
