@@ -5,21 +5,41 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+
 jobs:
-  build:
+  build-and-publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: |
-            9.0.x
+          dotnet-version: 9.0.x
           global-json-file: ./framework/global.json
-      - name: Build
-        run: dotnet build -c Release --no-restore
-        working-directory: ./framework/src/
-      - name: Pack NuGet
-        run: dotnet pack -c Release -o ./  -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
-      - name: Push NuGet
-        run: dotnet nuget push '*.nupkg' -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }} --skip-duplicate
+
+      - name: Restore dependencies
+        run: |
+          for csproj in $(find ./framework/src -name "*.csproj"); do
+            dotnet restore "$csproj"
+          done
+
+      - name: Build all projects
+        run: |
+          for csproj in $(find ./framework/src -name "*.csproj"); do
+            dotnet build "$csproj" -c Release --no-restore
+          done
+
+      - name: Pack all projects
+        run: |
+          for csproj in $(find ./framework/src -name "*.csproj"); do
+            dotnet pack "$csproj" -c Release -o ./nupkgs -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
+          done
+
+      - name: Push all NuGet packages
+        run: |
+          for nupkg in ./nupkgs/*.nupkg; do
+            dotnet nuget push "$nupkg" -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }} --skip-duplicate
+          done
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
