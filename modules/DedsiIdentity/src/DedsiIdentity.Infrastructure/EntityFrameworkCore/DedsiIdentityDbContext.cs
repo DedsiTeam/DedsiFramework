@@ -12,6 +12,7 @@ public class DedsiIdentityDbContext(DbContextOptions<DedsiIdentityDbContext> opt
 {
 
     public DbSet<DedsiUser> DedsiUsers { get; set; }
+    
     public DbSet<DedsiRole> DedsiRoles { get; set; }
 
 
