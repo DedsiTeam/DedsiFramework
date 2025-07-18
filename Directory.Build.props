@@ -1,15 +1,15 @@
 <Project>
     <PropertyGroup>
-		<Version>9.2.100</Version>
-		<LangVersion>latest</LangVersion>
-		<TargetFramework>net9.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <Version>9.2.2</Version>
+        <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <PackageIcon>logo.png</PackageIcon>
         <Authors>Cohen Wang</Authors>
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="..\..\..\..\logo.png">
+        <None Include="..\..\logo.png">
             <Pack>True</Pack>
             <PackagePath></PackagePath>
             <Link>logo.png</Link>
