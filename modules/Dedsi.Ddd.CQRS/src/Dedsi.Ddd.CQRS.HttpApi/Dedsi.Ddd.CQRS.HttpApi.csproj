@@ -1,6 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-  <ItemGroup>
-	  <PackageReference Include="Dedsi.AspNetCore" Version="$(DedsiFrameworkVersion)" />
-	  <PackageReference Include="Dedsi.Ddd.CQRS" Version="$(DedsiFrameworkVersion)" />
-  </ItemGroup>
-</Project>

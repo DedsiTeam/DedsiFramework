@@ -16,23 +16,23 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 9.0.x
-          global-json-file: ./framework/global.json
+          global-json-file: ./global.json
 
       - name: Restore dependencies
         run: |
-          for csproj in $(find ./framework/src -name "*.csproj"); do
+          for csproj in $(find ./src -name "*.csproj"); do
             dotnet restore "$csproj"
           done
 
       - name: Build all projects
         run: |
-          for csproj in $(find ./framework/src -name "*.csproj"); do
+          for csproj in $(find ./src -name "*.csproj"); do
             dotnet build "$csproj" -c Release --no-restore
           done
 
       - name: Pack all projects
         run: |
-          for csproj in $(find ./framework/src -name "*.csproj"); do
+          for csproj in $(find ./src -name "*.csproj"); do
             dotnet pack "$csproj" -c Release -o ./nupkgs -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
           done
 
