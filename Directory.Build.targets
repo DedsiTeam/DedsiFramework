@@ -1,6 +1,6 @@
 <Project>
     <PropertyGroup>
 		<MicrosoftVersion>9.0.7</MicrosoftVersion>
-		<AbpFrameworkVersion>9.2.2</AbpFrameworkVersion>
+		<AbpFrameworkVersion>9.2.3</AbpFrameworkVersion>
     </PropertyGroup>
 </Project>
