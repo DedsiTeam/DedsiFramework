@@ -6,7 +6,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Dedsi.AspNetCore\Dedsi.AspNetCore.csproj" />
+        <PackageReference Include="FastEndpoints" Version="7.0.1" />
+        <ProjectReference Include="..\Dedsi.AspNetCore\Dedsi.AspNetCore.csproj" />
     </ItemGroup>
 
 </Project>
