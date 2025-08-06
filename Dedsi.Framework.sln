@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dedsi.Ddd.Domain.Shared", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dedsi.CAP", "src\Dedsi.CAP\Dedsi.CAP.csproj", "{35396B9B-8630-41D4-A619-0DEE88219EE1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dedsi.FastEndpoints", "src\Dedsi.FastEndpoints\Dedsi.FastEndpoints.csproj", "{A5A3A848-8E87-4378-9478-9F378A6D9E09}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -89,6 +91,10 @@ Global
 		{35396B9B-8630-41D4-A619-0DEE88219EE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35396B9B-8630-41D4-A619-0DEE88219EE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35396B9B-8630-41D4-A619-0DEE88219EE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5A3A848-8E87-4378-9478-9F378A6D9E09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5A3A848-8E87-4378-9478-9F378A6D9E09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5A3A848-8E87-4378-9478-9F378A6D9E09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5A3A848-8E87-4378-9478-9F378A6D9E09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -107,5 +113,6 @@ Global
 		{AB9DDD17-713F-4A72-93D1-CB807B081558} = {E32F98D6-D9D2-4D64-B9F7-EFEB260E9BF4}
 		{AA8F0BBA-5FD8-465E-A0FA-D1CB7238BED8} = {E32F98D6-D9D2-4D64-B9F7-EFEB260E9BF4}
 		{35396B9B-8630-41D4-A619-0DEE88219EE1} = {E32F98D6-D9D2-4D64-B9F7-EFEB260E9BF4}
+		{A5A3A848-8E87-4378-9478-9F378A6D9E09} = {E32F98D6-D9D2-4D64-B9F7-EFEB260E9BF4}
 	EndGlobalSection
 EndGlobal
