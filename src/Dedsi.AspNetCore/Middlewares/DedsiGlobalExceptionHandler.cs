@@ -9,7 +9,7 @@ namespace Dedsi.AspNetCore.Middlewares;
 /// 全局异常中间件
 /// </summary>
 /// <param name="logger"></param>
-public class DedsiGlobalExceptionHandler(ILogger logger) : IExceptionHandler
+public class DedsiGlobalExceptionHandler(ILogger<DedsiGlobalExceptionHandler> logger) : IExceptionHandler
 {
     public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
     {
