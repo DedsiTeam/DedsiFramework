@@ -1,5 +1,4 @@
 ﻿using Dedsi.Ddd.CQRS.CommandEventRecorders;
-using Dedsi.Ddd.Domain.Shared.EntityIds;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Volo.Abp.DependencyInjection;
@@ -63,16 +62,7 @@ public class DedsiLocalEventBus(
                 {
                     var idValue = idProperty.GetValue(entity);
 
-                    if (idValue is IGuidStronglyTypedId guidTypedId)
-                    {
-                        await cqrsCeRecorder.RecorderAsync(
-                            guidTypedId.Id,
-                            eventType.Name,
-                            eventType.FullName,
-                            RecorderDataSource.Event,
-                            cancellationToken);
-                    } 
-                    else if (idValue is Guid guid) {
+                    if (idValue is Guid guid) {
                         await cqrsCeRecorder.RecorderAsync(
                             guid,
                             eventType.Name,

@@ -5,7 +5,7 @@ namespace Dedsi.Ddd.Application.Contracts.Dtos;
 /// <summary>
 /// 分页查询出参
 /// </summary>
-public class DedsiPagedResultDto<TDto> : PagedResultDto<TDto>
+public class DedsiPagedResultDto<TRowDto> : PagedResultDto<TRowDto>
 {
 
     public DedsiPagedResultDto()
@@ -13,7 +13,7 @@ public class DedsiPagedResultDto<TDto> : PagedResultDto<TDto>
     }
 
 
-    public DedsiPagedResultDto(long totalCount, IReadOnlyList<TDto> items) : base(totalCount, items)
+    public DedsiPagedResultDto(long totalCount, IReadOnlyList<TRowDto> items) : base(totalCount, items)
     {
     }
 }
