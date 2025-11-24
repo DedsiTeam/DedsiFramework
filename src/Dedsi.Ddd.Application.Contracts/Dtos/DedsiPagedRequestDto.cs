@@ -1,17 +1,14 @@
-﻿using Volo.Abp.Application.Dtos;
-
-namespace Dedsi.Ddd.Application.Contracts.Dtos;
+﻿namespace Dedsi.Ddd.Application.Contracts.Dtos;
 
 /// <summary>
 /// 分页查询入参
 /// </summary>
 public class DedsiPagedRequestDto
 {
-
     /// <summary>
     /// 当前第几页
     /// </summary>
-    public int PadeIndex { get; set; }
+    public int PageIndex { get; set; }
 
     /// <summary>
     /// 每页多少条
@@ -25,12 +22,12 @@ public class DedsiPagedRequestDto
 
     public int GetSkipCount()
     {
-        if (PadeIndex < 1)
+        if (PageIndex < 1)
         {
             return 0;
         }
 
-        return (PadeIndex - 1) * PageSize;
+        return (PageIndex - 1) * PageSize;
     }
 
 }
