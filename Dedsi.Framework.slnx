@@ -1,0 +1,18 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Dedsi.AspNetCore/Dedsi.AspNetCore.csproj" />
+    <Project Path="src/Dedsi.CAP/Dedsi.CAP.csproj" />
+    <Project Path="src/Dedsi.CleanArchitecture.Domain/Dedsi.CleanArchitecture.Domain.csproj" />
+    <Project Path="src/Dedsi.CleanArchitecture.HttpApi/Dedsi.CleanArchitecture.HttpApi.csproj" />
+    <Project Path="src/Dedsi.CleanArchitecture.Infrastructure/Dedsi.CleanArchitecture.Infrastructure.csproj" />
+    <Project Path="src/Dedsi.Core/Dedsi.Core.csproj" />
+    <Project Path="src/Dedsi.Ddd.Application.Contracts/Dedsi.Ddd.Application.Contracts.csproj" />
+    <Project Path="src/Dedsi.Ddd.Application/Dedsi.Ddd.Application.csproj" />
+    <Project Path="src/Dedsi.Ddd.CQRS/Dedsi.Ddd.CQRS.csproj" />
+    <Project Path="src/Dedsi.Ddd.Domain.Shared/Dedsi.Ddd.Domain.Shared.csproj" />
+    <Project Path="src/Dedsi.Ddd.Domain/Dedsi.Ddd.Domain.csproj" />
+    <Project Path="src/Dedsi.EntityFrameworkCore/Dedsi.EntityFrameworkCore.csproj" />
+    <Project Path="src/Dedsi.FastEndpoints/Dedsi.FastEndpoints.csproj" />
+    <Project Path="src/Dedsi.SqlSugar/Dedsi.SqlSugar.csproj" />
+  </Folder>
+</Solution>

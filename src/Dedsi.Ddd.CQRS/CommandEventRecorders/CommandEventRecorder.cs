@@ -23,7 +23,7 @@ public class CommandEventRecorder : Entity<Guid>, IDedsiCreationAuditedObject
         CreationTime = DateTime.Now;
     }
 
-    public string? CreatorName { get; private set; }
+    public string CreatorName { get; private set; }
 
     public Guid? CreatorId { get; private set; }
 
