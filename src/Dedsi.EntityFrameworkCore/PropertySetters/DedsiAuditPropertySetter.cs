@@ -21,7 +21,7 @@ public class DedsiAuditPropertySetter(
 
     private void SetCreatorName(object targetObject)
     {
-        if (targetObject is IHasCreationName hasCreationNameObject)
+        if (targetObject is IDedsiHasCreationName hasCreationNameObject)
         {
             ObjectHelper.TrySetProperty(hasCreationNameObject, x => x.CreatorName, () => CurrentUser.Name);
         }
