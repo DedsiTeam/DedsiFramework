@@ -6,64 +6,37 @@ namespace Dedsi.Ddd.Domain.Repositories;
 /// <summary>
 /// CRQS 仓储
 /// </summary>
-/// <typeparam name="TEntity"></typeparam>
+/// <typeparam name="TDomain"></typeparam>
 /// <typeparam name="TKey"></typeparam>
-public interface IDedsiCqrsRepository<TEntity, in TKey> where TEntity : class, IEntity<TKey>
+public interface IDedsiCqrsRepository<TDomain, in TKey> where TDomain : class, IEntity<TKey>
 {
     /// <summary>
     /// 插入一个
     /// </summary>
-    /// <param name="entity"></param>
+    /// <param name="domain"></param>
     /// <param name="autoSave"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<TEntity> InsertAsync(TEntity entity, bool autoSave = false, CancellationToken cancellationToken = default);
+    Task<TDomain> InsertAsync(TDomain domain, bool autoSave = false, CancellationToken cancellationToken = default);
 
-    /// <summary>
-    /// 插入一组
-    /// </summary>
-    /// <param name="entities"></param>
-    /// <param name="autoSave"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    Task InsertManyAsync(IEnumerable<TEntity> entities, bool autoSave = false, CancellationToken cancellationToken = default);
-    
     /// <summary>
     /// 修改
     /// </summary>
-    /// <param name="entity"></param>
+    /// <param name="domain"></param>
     /// <param name="autoSave"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<TEntity> UpdateAsync(TEntity entity, bool autoSave = false, CancellationToken cancellationToken = default);
-    
-    /// <summary>
-    /// 修改一组
-    /// </summary>
-    /// <param name="entities"></param>
-    /// <param name="autoSave"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    Task UpdateManyAsync(IEnumerable<TEntity> entities, bool autoSave = false, CancellationToken cancellationToken = default);
-    
+    Task<TDomain> UpdateAsync(TDomain domain, bool autoSave = false, CancellationToken cancellationToken = default);
+
     /// <summary>
     /// 删除单个
     /// </summary>
-    /// <param name="entity"></param>
+    /// <param name="domain"></param>
     /// <param name="autoSave"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task DeleteAsync(TEntity entity, bool autoSave = false, CancellationToken cancellationToken = default);
+    Task DeleteAsync(TDomain domain, bool autoSave = false, CancellationToken cancellationToken = default);
 
-    /// <summary>
-    /// 删除一组
-    /// </summary>
-    /// <param name="entities"></param>
-    /// <param name="autoSave"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    Task DeleteManyAsync(IEnumerable<TEntity> entities, bool autoSave = false, CancellationToken cancellationToken = default);
-    
     /// <summary>
     /// 删除
     /// </summary>
@@ -71,16 +44,7 @@ public interface IDedsiCqrsRepository<TEntity, in TKey> where TEntity : class, I
     /// <param name="autoSave"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task DeleteAsync(Expression<Func<TEntity, bool>> wherePredicate, bool autoSave = false, CancellationToken cancellationToken = default);
-    
-    /// <summary>
-    /// 批量删除
-    /// </summary>
-    /// <param name="wherePredicate"></param>
-    /// <param name="autoSave"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    Task<int> DeleteManyAsync(Expression<Func<TEntity, bool>> wherePredicate, bool autoSave = false, CancellationToken cancellationToken = default);
+    Task DeleteAsync(Expression<Func<TDomain, bool>> wherePredicate, bool autoSave = false, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// 单个查询
@@ -89,7 +53,7 @@ public interface IDedsiCqrsRepository<TEntity, in TKey> where TEntity : class, I
     /// <param name="includeDetails"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate, bool includeDetails = true, CancellationToken cancellationToken = default);
+    Task<TDomain> GetAsync(Expression<Func<TDomain, bool>> predicate, bool includeDetails = true, CancellationToken cancellationToken = default);
     
     /// <summary>
     /// 通过主键Id查询
@@ -98,5 +62,5 @@ public interface IDedsiCqrsRepository<TEntity, in TKey> where TEntity : class, I
     /// <param name="includeDetails"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<TEntity> GetAsync(TKey id, bool includeDetails = true, CancellationToken cancellationToken = default);
+    Task<TDomain> GetAsync(TKey id, bool includeDetails = true, CancellationToken cancellationToken = default);
 }

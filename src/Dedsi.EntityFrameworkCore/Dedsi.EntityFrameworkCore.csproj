@@ -2,7 +2,6 @@
 
     <ItemGroup>
 		<PackageReference Include="Volo.Abp.EntityFrameworkCore" Version="$(AbpFrameworkVersion)" />
-		<PackageReference Include="Volo.Abp.Dapper" Version="$(AbpFrameworkVersion)" />
     </ItemGroup>
 
     <ItemGroup>
