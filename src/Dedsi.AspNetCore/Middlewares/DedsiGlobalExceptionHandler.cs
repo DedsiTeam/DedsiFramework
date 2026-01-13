@@ -13,7 +13,8 @@ public class DedsiGlobalExceptionHandler(ILogger<DedsiGlobalExceptionHandler> lo
 {
     public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
     {
-        string code = "500";
+        // 默认错误码
+        string code = "global-error-500";
 
         if (exception is UserFriendlyException userFriendlyException && !string.IsNullOrWhiteSpace(userFriendlyException.Code))
         {
@@ -34,6 +35,10 @@ public class DedsiGlobalExceptionHandler(ILogger<DedsiGlobalExceptionHandler> lo
     }
 }
 
+/// <summary>
+/// 
+/// </summary>
+/// <param name="Error"></param>
 public record DedsiErrorData(DedsiErrorMessage Error);
 
 /// <summary>
@@ -41,7 +46,4 @@ public record DedsiErrorData(DedsiErrorMessage Error);
 /// </summary>
 /// <param name="Message"></param>
 /// <param name="Code">如果有业务状态码就使用</param>
-public record DedsiErrorMessage(string Message,string Code)
-{
-    public string ServiceTime => DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-}
+public record DedsiErrorMessage(string Message, string Code);

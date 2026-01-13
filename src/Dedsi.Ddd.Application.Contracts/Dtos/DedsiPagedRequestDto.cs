@@ -1,4 +1,6 @@
-﻿namespace Dedsi.Ddd.Application.Contracts.Dtos;
+﻿using System.Text.Json.Serialization;
+
+namespace Dedsi.Ddd.Application.Contracts.Dtos;
 
 /// <summary>
 /// 分页查询入参
@@ -18,6 +20,7 @@ public class DedsiPagedRequestDto
     /// <summary>
     /// 是否导出：注意需要在Controller中设置为true，才能导出数据,前端无需赋值
     /// </summary>
+    [JsonIgnore]
     public bool IsExport { get; set; } = false;
 
     public int GetSkipCount()

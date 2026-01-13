@@ -1,6 +1,6 @@
 <Project>
     <PropertyGroup>
-		<CapVersion>10.0.0</CapVersion>
+		<CapVersion>10.0.1</CapVersion>
 		<MicrosoftVersion>10.0.1</MicrosoftVersion>
 		<AbpFrameworkVersion>10.0.2</AbpFrameworkVersion>
     </PropertyGroup>

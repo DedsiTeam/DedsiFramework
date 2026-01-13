@@ -15,15 +15,27 @@ public class DedsiAuditPropertySetter(
 {
     public override void SetCreationProperties(object targetObject)
     {
-        SetCreatorName(targetObject);
+        // abp
         base.SetCreationProperties(targetObject);
-    }
 
-    private void SetCreatorName(object targetObject)
-    {
-        if (targetObject is IDedsiHasCreationName hasCreationNameObject)
+        if (targetObject is IDedsiHasCreationName dedsiHasCreationName)
         {
-            ObjectHelper.TrySetProperty(hasCreationNameObject, x => x.CreatorName, () => CurrentUser.Name);
+            if (CurrentUser.Name.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException($"CurrentUser.Name = {CurrentUser.Name}£¬²»´æÔÚÖµ¡£");
+            }
+
+            ObjectHelper.TrySetProperty(dedsiHasCreationName, x => x.CreatorName, () => CurrentUser.Name);
+        }
+
+        if (targetObject is IDedsiHasCreationId dedsiMayHaveCreator)
+        {
+            SetCreatorId(dedsiMayHaveCreator);
+        }
+
+        if (targetObject is IDedsiHasCreationTime dedsiHasCreationTime)
+        {
+            SetCreationTime(dedsiHasCreationTime);
         }
     }
 }

@@ -13,7 +13,7 @@ public abstract class DedsiControllerBase : AbpControllerBase
     /// <returns></returns>
     protected FileContentResult FileByExcel(byte[] bytes,string fileName)
     {
-        return File(bytes,"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",fileName);
+        return File(bytes,"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
     }
     
     /// <summary>
@@ -24,7 +24,7 @@ public abstract class DedsiControllerBase : AbpControllerBase
     /// <returns></returns>
     protected FileStreamResult FileByExcel(Stream fileStream,string fileName)
     {
-        return File(fileStream,"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",fileName);
+        return File(fileStream,"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
     }
 
     /// <summary>
