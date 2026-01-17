@@ -25,10 +25,8 @@ public class DedsiPagedRequestDto
 
     public int GetSkipCount()
     {
-        if (PageIndex < 1)
-        {
-            return 0;
-        }
+        if (PageIndex < 1) { PageIndex = 1; }
+        if (PageSize > 1000 || PageSize < 1) { PageSize = 10; }
 
         return (PageIndex - 1) * PageSize;
     }
