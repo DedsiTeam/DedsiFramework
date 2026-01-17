@@ -25,7 +25,7 @@ public class CommandEventRecorder : Entity<Guid>, IDedsiCreationAuditedObject
 
     public string CreatorName { get; private set; }
 
-    public Guid? CreatorId { get; private set; }
+    public Guid CreatorId { get; private set; }
 
     public DateTime CreationTime { get; private set; }
 
