@@ -6,11 +6,11 @@ namespace Dedsi.Ddd.Domain.Entities;
 public class DedsiAggregateRoot<TKey> : AggregateRoot<TKey>, IDedsiCreationAuditedObject
 {
 
-    public string CreatorName { get; private set; }
+    public string CreatorName { get; protected set; }
 
-    public Guid CreatorId { get; private set; }
+    public Guid CreatorId { get; protected set; }
 
-    public DateTime CreationTime { get; private set; }
+    public DateTime CreationTime { get; protected set; }
 
     public DedsiAggregateRoot()
     {
