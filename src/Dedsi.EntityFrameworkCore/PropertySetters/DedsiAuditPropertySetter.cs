@@ -22,7 +22,7 @@ public class DedsiAuditPropertySetter(
         {
             if (CurrentUser.Name.IsNullOrWhiteSpace())
             {
-                throw new ArgumentException($"CurrentUser.Name = {CurrentUser.Name}，不存在值。");
+                throw new ArgumentException($"CurrentUser.Name 不存在值。");
             }
 
             ObjectHelper.TrySetProperty(dedsiHasCreationName, x => x.CreatorName, () => CurrentUser.Name);
@@ -30,12 +30,17 @@ public class DedsiAuditPropertySetter(
 
         if (targetObject is IDedsiHasCreationId dedsiMayHaveCreator)
         {
-            SetCreatorId(dedsiMayHaveCreator);
+            if (!CurrentUser.Id.HasValue)
+            {
+                throw new ArgumentException($"CurrentUser.Id 不存在值。");
+            }
+
+            ObjectHelper.TrySetProperty(dedsiMayHaveCreator, x => x.CreatorId, () => CurrentUser.Id);
         }
 
         if (targetObject is IDedsiHasCreationTime dedsiHasCreationTime)
         {
-            SetCreationTime(dedsiHasCreationTime);
+            ObjectHelper.TrySetProperty(dedsiHasCreationTime, x => x.CreationTime, () => Clock.Now);
         }
     }
 }
