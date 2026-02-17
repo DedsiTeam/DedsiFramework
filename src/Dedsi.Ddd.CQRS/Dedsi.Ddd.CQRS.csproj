@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="12.5.0" />
+    <PackageReference Include="MediatR" Version="14.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.9" />
     <PackageReference Include="Volo.Abp.Core" Version="$(AbpFrameworkVersion)" />
     <PackageReference Include="Volo.Abp.Guids" Version="$(AbpFrameworkVersion)" />
