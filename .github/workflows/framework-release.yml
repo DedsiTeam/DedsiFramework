@@ -9,13 +9,15 @@ on:
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: 9.0.x
           global-json-file: ./global.json
 
       - name: Restore dependencies
@@ -36,9 +38,18 @@ jobs:
             dotnet pack "$csproj" -c Release -o ./nupkgs -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
           done
 
+      - name: NuGet login (Trusted Publishing)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: NuGet/login@v1
+        id: nuget-login
+        with:
+          user: ${{ secrets.NUGET_USER }}
+
       - name: Push all NuGet packages
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        env:
+          NUGET_API_KEY: ${{ steps.nuget-login.outputs.NUGET_API_KEY }}
         run: |
           for nupkg in ./nupkgs/*.nupkg; do
-            dotnet nuget push "$nupkg" -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }} --skip-duplicate
+            dotnet nuget push "$nupkg" -s https://api.nuget.org/v3/index.json -k "$NUGET_API_KEY" --skip-duplicate
           done
