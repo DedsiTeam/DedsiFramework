@@ -8,11 +8,13 @@
     <Project Path="src/Dedsi.Core/Dedsi.Core.csproj" />
     <Project Path="src/Dedsi.Ddd.Application.Contracts/Dedsi.Ddd.Application.Contracts.csproj" />
     <Project Path="src/Dedsi.Ddd.Application/Dedsi.Ddd.Application.csproj" />
-    <Project Path="src/Dedsi.Ddd.CQRS/Dedsi.Ddd.CQRS.csproj" />
     <Project Path="src/Dedsi.Ddd.Domain.Shared/Dedsi.Ddd.Domain.Shared.csproj" />
     <Project Path="src/Dedsi.Ddd.Domain/Dedsi.Ddd.Domain.csproj" />
     <Project Path="src/Dedsi.EntityFrameworkCore/Dedsi.EntityFrameworkCore.csproj" />
     <Project Path="src/Dedsi.FastEndpoints/Dedsi.FastEndpoints.csproj" />
     <Project Path="src/Dedsi.SqlSugar/Dedsi.SqlSugar.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Dedsi.Framework.Tests/Dedsi.Framework.Tests.csproj" />
   </Folder>
 </Solution>

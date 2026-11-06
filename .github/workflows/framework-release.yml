@@ -21,21 +21,31 @@ jobs:
           global-json-file: ./global.json
 
       - name: Restore dependencies
-        run: |
-          for csproj in $(find ./src -name "*.csproj"); do
-            dotnet restore "$csproj"
-          done
+        run: dotnet restore Dedsi.Framework.slnx -p:NuGetAudit=true -p:NuGetAuditMode=all -warnaserror:NU1901,NU1902,NU1903,NU1904
 
-      - name: Build all projects
-        run: |
-          for csproj in $(find ./src -name "*.csproj"); do
-            dotnet build "$csproj" -c Release --no-restore
-          done
+      - name: Build solution
+        run: dotnet build Dedsi.Framework.slnx -c Release --no-restore
+
+      - name: Test
+        run: >-
+          dotnet test Dedsi.Framework.slnx -c Release --no-build
+          --logger "trx;LogFileName=tests.trx"
+          --collect:"XPlat Code Coverage"
+          --settings tests/coverage.runsettings
+          --results-directory TestResults
+
+      - name: Upload test results and coverage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: TestResults/
+          if-no-files-found: warn
 
       - name: Pack all projects
         run: |
           for csproj in $(find ./src -name "*.csproj"); do
-            dotnet pack "$csproj" -c Release -o ./nupkgs -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
+            dotnet pack "$csproj" -c Release --no-build -o ./nupkgs -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
           done
 
       - name: NuGet login (Trusted Publishing)
@@ -51,5 +61,5 @@ jobs:
           NUGET_API_KEY: ${{ steps.nuget-login.outputs.NUGET_API_KEY }}
         run: |
           for nupkg in ./nupkgs/*.nupkg; do
-            dotnet nuget push "$nupkg" -s https://api.nuget.org/v3/index.json -k "$NUGET_API_KEY" --skip-duplicate
+            dotnet nuget push "$nupkg" -s https://api.nuget.org/v3/index.json -k "$NUGET_API_KEY"
           done

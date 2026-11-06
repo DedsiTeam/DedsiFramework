@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.8.1" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5" PrivateAssets="all" />
+    <PackageReference Include="Moq" Version="4.20.72" />
+    <PackageReference Include="coverlet.collector" Version="6.0.4" PrivateAssets="all" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="$(AbpFrameworkVersion)" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="$(AbpFrameworkVersion)" />
+    <ProjectReference Include="../../src/Dedsi.Ddd.Application/Dedsi.Ddd.Application.csproj" />
+    <ProjectReference Include="../../src/Dedsi.CleanArchitecture.Infrastructure/Dedsi.CleanArchitecture.Infrastructure.csproj" />
+    <ProjectReference Include="../../src/Dedsi.CleanArchitecture.HttpApi/Dedsi.CleanArchitecture.HttpApi.csproj" />
+    <ProjectReference Include="../../src/Dedsi.SqlSugar/Dedsi.SqlSugar.csproj" />
+    <ProjectReference Include="../../src/Dedsi.CAP/Dedsi.CAP.csproj" />
+    <ProjectReference Include="../../src/Dedsi.FastEndpoints/Dedsi.FastEndpoints.csproj" />
+    <Using Include="Xunit" />
+    <Using Include="Moq" />
+    <Using Include="Dedsi.Framework.Tests.Infrastructure" />
+  </ItemGroup>
+</Project>

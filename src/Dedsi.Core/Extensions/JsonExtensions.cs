@@ -5,6 +5,17 @@ namespace Dedsi.Core.Extensions;
 
 public static class JsonExtensions
 {
+    private static readonly JsonSerializerOptions DefaultOptions = new()
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        PropertyNameCaseInsensitive = true,
+        Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+    };
+
+    private static readonly JsonSerializerOptions NormalOptions = new()
+    {
+        Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+    };
     /// <summary>
     ///  完整 JSON 序列化
     /// </summary>
@@ -12,11 +23,7 @@ public static class JsonExtensions
     /// <returns></returns>
     public static string ToJsonByNormal(this object obj)
     {
-        var options = new JsonSerializerOptions()
-        {
-            PropertyNamingPolicy = null
-        };
-        return obj.ToJson(options);
+        return obj.ToJson(NormalOptions);
     }
     
     /// <summary>
@@ -28,9 +35,18 @@ public static class JsonExtensions
     /// <exception cref="InvalidOperationException"></exception>
     public static T MapToObjectFromJson<T>(this string json)
     {
-        return JsonSerializer.Deserialize<T>(json) ?? throw new InvalidOperationException();
+        return json.MapToObjectFromJson<T>(DefaultOptions);
     }
 
+
+    /// <summary>
+    /// 按调用者指定的配置反序列化，不修改配置。
+    /// </summary>
+    public static T MapToObjectFromJson<T>(this string json, JsonSerializerOptions options)
+    {
+        ArgumentNullException.ThrowIfNull(options);
+        return JsonSerializer.Deserialize<T>(json, options) ?? throw new InvalidOperationException();
+    }
 
     /// <summary>
     /// 转为 json 字符串，默认驼峰命名
@@ -39,7 +55,7 @@ public static class JsonExtensions
     /// <returns></returns>
     public static string ToJson(this object obj)
     {
-        return obj.ToJson(JsonNamingPolicy.CamelCase);
+        return obj.ToJson(DefaultOptions);
     }
 
     /// <summary>
@@ -61,11 +77,11 @@ public static class JsonExtensions
     /// 转为 json 字符串
     /// </summary>
     /// <param name="obj"></param>
-    /// <param name="option"></param>
+    /// <param name="options">原样使用调用者配置，支持复用和只读配置。</param>
     /// <returns></returns>
     public static string ToJson(this object obj, JsonSerializerOptions options)
     {
-        options.Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
+        ArgumentNullException.ThrowIfNull(options);
         return JsonSerializer.Serialize(obj, options);
     }
 

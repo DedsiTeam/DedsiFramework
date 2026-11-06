@@ -6,7 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DotNetCore.CAP" Version="$(CapVersion)" />
+    <!-- 显式提升传递依赖，修复 PKCS 已知漏洞；需随生产 NuGet 包传递给使用方。 -->
+      <PackageReference Include="System.Security.Cryptography.Pkcs" Version="$(MicrosoftVersion)" />
+      <PackageReference Include="DotNetCore.CAP" Version="$(CapVersion)" />
     <PackageReference Include="DotNetCore.CAP.RabbitMQ" Version="$(CapVersion)" />
     <PackageReference Include="DotNetCore.CAP.SqlServer" Version="$(CapVersion)" />
   </ItemGroup>

@@ -1,4 +1,5 @@
 ﻿using Dedsi.Ddd.Domain.Repositories;
+using Dedsi.Core.Paging;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Domain.Entities;
@@ -27,6 +28,7 @@ public abstract class DedsiEfCoreRepository<TDbContext,TEntity, TKey>(IDbContext
         int pageSize = 10,
         CancellationToken cancellationToken = default)
     {
+        var skipCount = DedsiPaging.GetSkipCount(pageIndex, pageSize);
         cancellationToken = GetCancellationToken(cancellationToken);
         
         var whereQueryable = (await GetQueryableAsync()).Where(wherePredicate);
@@ -36,7 +38,7 @@ public abstract class DedsiEfCoreRepository<TDbContext,TEntity, TKey>(IDbContext
         whereQueryable = isReverse ? whereQueryable.OrderByDescending(orderPredicate) : whereQueryable.OrderBy(orderPredicate);
 
         var dbList = await whereQueryable
-            .Skip((pageIndex - 1) * pageSize)
+            .Skip(skipCount)
             .Take(pageSize)
             .ToListAsync(cancellationToken);
 
@@ -48,14 +50,16 @@ public abstract class DedsiEfCoreRepository<TDbContext,TEntity, TKey>(IDbContext
     {
         cancellationToken = GetCancellationToken(cancellationToken);
         
-        var count = await (await GetQueryableAsync()).Where(wherePredicate).ExecuteDeleteAsync(cancellationToken);
+        var entities = await (await GetQueryableAsync()).Where(wherePredicate).ToListAsync(cancellationToken);
+        await base.DeleteManyAsync(entities, autoSave, cancellationToken);
+        return entities.Count;
+    }
 
-        if (autoSave)
-        {
-            await SaveChangesAsync(cancellationToken);
-        }
-
-        return count;
+    /// <inheritdoc />
+    public virtual async Task<int> DeleteDirectWithCountAsync(Expression<Func<TEntity, bool>> wherePredicate, CancellationToken cancellationToken = default)
+    {
+        cancellationToken = GetCancellationToken(cancellationToken);
+        return await (await GetQueryableAsync()).Where(wherePredicate).ExecuteDeleteAsync(cancellationToken);
     }
 
     /// <inheritdoc />
