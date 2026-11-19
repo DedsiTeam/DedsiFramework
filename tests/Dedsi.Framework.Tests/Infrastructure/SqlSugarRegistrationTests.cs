@@ -10,6 +10,42 @@ namespace Dedsi.Framework.Tests.Infrastructure;
 
 public class SqlSugarRegistrationTests
 {
+    [Fact]
+    [Trait("Category", "Integration")]
+    public void Registered_sqlite_client_executes_queries_and_rolls_back_transactions()
+    {
+        var environment = new Mock<IWebHostEnvironment>();
+        environment.SetupGet(x => x.EnvironmentName).Returns("Production");
+        var services = new ServiceCollection();
+        services.AddSingleton(environment.Object);
+        services.AddSingleton<IHostEnvironment>(environment.Object);
+        var context = new ServiceConfigurationContext(services);
+        context.ConfigureSqlSugar(new ConnectionConfig
+        {
+            DbType = DbType.Sqlite,
+            ConnectionString = "Data Source=:memory:",
+            IsAutoCloseConnection = false
+        });
+        using var provider = services.BuildServiceProvider();
+        using var scope = provider.CreateScope();
+        var client = scope.ServiceProvider.GetRequiredService<ISqlSugarClient>();
+        client.Ado.ExecuteCommand("CREATE TABLE UpgradeProbe (Id INTEGER PRIMARY KEY, Name TEXT NOT NULL)");
+        client.Ado.ExecuteCommand("INSERT INTO UpgradeProbe (Id, Name) VALUES (@id, @name)",
+            new SugarParameter("@id", 1), new SugarParameter("@name", "before"));
+        client.Ado.BeginTran();
+        try
+        {
+            client.Ado.ExecuteCommand("UPDATE UpgradeProbe SET Name = @name WHERE Id = @id",
+                new SugarParameter("@name", "after"), new SugarParameter("@id", 1));
+            Assert.Equal("after", client.Ado.GetString("SELECT Name FROM UpgradeProbe WHERE Id = 1"));
+        }
+        finally
+        {
+            client.Ado.RollbackTran();
+        }
+        Assert.Equal("before", client.Ado.GetString("SELECT Name FROM UpgradeProbe WHERE Id = 1"));
+    }
+
     [Theory]
     [InlineData(true, "Development")]
     [InlineData(false, "Production")]

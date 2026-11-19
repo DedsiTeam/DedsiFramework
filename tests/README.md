@@ -1,7 +1,23 @@
 # DedsiFramework 测试
 
 测试针对框架自身的行为，不要求外部 SQL Server、MySQL、RabbitMQ，也不访问真实业务数据。
-使用 .NET 10、xUnit、Moq 和 Coverlet。测试项目不打包为 NuGet。
+使用 .NET 11、xUnit、Moq 和 Coverlet。测试项目不打包为 NuGet。
+本地需安装 .NET 11 SDK（最低 11.0.100）；本地与 CI 均通过根目录的 `global.json` 选择 SDK。
+
+## .NET 11 依赖对齐
+
+直接引用的包保持最新稳定版本，不使用预览版本。2026-11-19 核查时，CAP 10.0.2、SqlSugarCore 5.1.4.221、Ulid 1.4.1 和 xunit 2.9.3 均已是对应包的最新稳定版。
+
+部分上游包仍以旧版 .NET 组件作为最低依赖，因此在实际使用它们的生产模块中显式引用 `$(MicrosoftVersion)`（11.0.0）：
+
+- CAP：EF Core Relational、ConfigurationManager、RateLimiting。
+- SqlSugar：Microsoft.Data.Sqlite、Bcl.Cryptography、PerformanceCounter、DirectoryServices.Protocols、Memory.Data、Runtime.Caching；这些引用同时提升相关的配置、事件日志及数据保护组件。
+- Domain、Application、AspNetCore：HybridCache。三个入口可分别加载，因此分别声明版本，不增加层间项目依赖。
+- AspNetCore：Bcl.Cryptography。
+
+上述引用会进入生产 NuGet 包的依赖列表，以便使用方继承版本要求。第三方传递依赖（如数据库驱动、身份组件）继续遵循上游约束，不统一强制升级其主版本。`xunit` 与 `xunit.v3` 是不同包，本轮保留现有 xUnit v2 测试框架。
+
+本轮在 .NET 11 下通过 160 项测试（0 失败、0 跳过），包括新增的 SqlSugar 内存 SQLite 查询与事务回滚、ABP HybridCache 缓存命中与失效验证；同时验证 Release 构建、覆盖率采集和生产 NuGet 打包。外部 SQL Server、MySQL、Oracle、RabbitMQ 的真实连接与业务流仍需要在使用方环境执行集成验证。
 
 ## 运行
 
@@ -44,7 +60,8 @@ dotnet test Dedsi.Framework.slnx -c Release \
 | 应用服务事务 | 经真实 ABP 代理调用，验证自动提交、已刷入数据的异常回滚、加入外层工作单元且不提前提交 |
 | EntityFrameworkCore | 创建审计、保留外部赋值、私有 setter、兼容 ABP 审计；SQLite 分页、筛选、排序、无跟踪、软删除过滤、SQL 参数化、取消 |
 | AspNetCore | Excel/PDF 文件响应、异常 JSON 结构、业务错误码、友好消息 |
-| SqlSugar | SQL Server/MySQL 配置、每个作用域独立的客户端，不打开数据库连接 |
+| SqlSugar | SQL Server/MySQL 配置与客户端作用域；经框架注册的内存 SQLite 客户端执行参数化查询与事务回滚 |
+| 缓存 | ABP 注册的 HybridCache 缓存命中与移除后的重新生成 |
 | 模块组合 | 加载所有 Dedsi 模块后的自定义服务注册；Domain / Infrastructure 单独加载不引入 Application 层，显式组合仍可加载 Application |
 
 SQLite 测试每例创建独立应用、连接和数据库；工作单元在测试方法的异步上下文内建立。测试模块关闭自身程序集的自动服务扫描，避免测试替身被注册进生产服务接口。
@@ -104,7 +121,7 @@ Configure<DedsiExceptionHandlingOptions>(options =>
 
 此配置仅影响 `DedsiGlobalExceptionHandler`，不替换 ABP 原生异常处理器。
 - `DedsiPagedRequestDto.IsExport` 改为公开读取、私有赋值，并保留 `[JsonIgnore]`。Query / Form / JSON 均不能开启它。原来的 `request.IsExport = true` 需要改成 `request.EnableExport()`，仅在服务端确认导出权限后调用。
-- CAP 和 SqlSugar 显式引用 `System.Security.Cryptography.Pkcs`，版本跟随 `MicrosoftVersion`（当前 10.0.14），覆盖 SqlClient / Oracle 传递引入的旧版。这些引用会写入生产 NuGet 包的依赖列表，不能设置为 `PrivateAssets=all`。修复依据：[PKCS 安全公告](https://github.com/advisories/GHSA-846f-f764-76mx)。
+- CAP 和 SqlSugar 显式引用 `System.Security.Cryptography.Pkcs`，版本跟随 `MicrosoftVersion`（当前 11.0.0），覆盖 SqlClient / Oracle 传递引入的旧版。这些引用会写入生产 NuGet 包的依赖列表，不能设置为 `PrivateAssets=all`。修复依据：[PKCS 安全公告](https://github.com/advisories/GHSA-846f-f764-76mx)。
 - CI 在还原时审计直接和传递依赖，将 NU1901～NU1904 作为错误阻止发布。手动核对可运行 `dotnet list Dedsi.Framework.slnx package --include-transitive --vulnerable`；审计结果受所配置包源和当时公开公告影响。
 - 审查 #2、#3、#11 的测试已转为常规用例，并补充授权、并发、业务码映射、已开始响应、取消、大小写字段和 Form 绑定场景。
 
@@ -153,7 +170,7 @@ using (currentPrincipalAccessor.Change(new ClaimsPrincipal(new ClaimsIdentity(
 
 现有发布工作流依次执行整个解决方案的还原、Release 构建、测试，再打包发布。测试失败会阻止后续打包发布；无论成功或失败均尝试上传 TRX 和 Cobertura 报告。只打包 `src` 下的生产项目。
 
-发布遇到已存在的包版本会失败，不再用 `--skip-duplicate` 静默跳过。版本由 `Directory.Build.props` 统一维护；本轮保留已有的 10.7.1，不执行实际发布。
+发布遇到已存在的包版本会失败，不再用 `--skip-duplicate` 静默跳过。版本由 `Directory.Build.props` 统一维护，当前为 11.0.0；目标框架为 `net11.0`，ABP 与 Microsoft 依赖版本均为 11.0.0。
 
 本轮兼容性以调整前的当前代码为基准：CQRS 继续移除，保留现有公开方法、审计构造函数、分页修正规则和错误响应结构。前几轮涉及 IsExport、领域依赖及删除语义的迁移说明仍适用于尚未完成迁移的更早项目。
 

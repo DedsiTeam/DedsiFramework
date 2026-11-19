@@ -13,6 +13,7 @@ using Dedsi.SqlSugar;
 using Dedsi.FastEndpoints;
 using Dedsi.CAP;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Caching.Hybrid;
 using Volo.Abp;
 using Volo.Abp.Auditing;
 using Volo.Abp.Application;
@@ -68,6 +69,23 @@ public class ModuleTests
         Assert.IsType<LocalEventBus>(provider.GetRequiredService<ILocalEventBus>());
         Assert.Contains(app.Modules, module => module.Type == typeof(DedsiDddApplicationModule));
         Assert.Contains(app.Modules, module => module.Type == typeof(AbpDddApplicationModule));
+    }
+
+    [Fact]
+    public async Task Abp_module_uses_hybrid_cache_and_invalidates_entries()
+    {
+        var services = new ServiceCollection();
+        using var app = services.AddApplication<AllModules>();
+        using var provider = services.BuildServiceProvider();
+        var cache = provider.GetRequiredService<HybridCache>();
+        var calls = 0;
+        ValueTask<string> CreateValue(CancellationToken _) => new($"value-{++calls}");
+
+        Assert.Equal("value-1", await cache.GetOrCreateAsync("upgrade-probe", CreateValue));
+        Assert.Equal("value-1", await cache.GetOrCreateAsync("upgrade-probe", CreateValue));
+        await cache.RemoveAsync("upgrade-probe");
+        Assert.Equal("value-2", await cache.GetOrCreateAsync("upgrade-probe", CreateValue));
+        Assert.Equal(2, calls);
     }
 
     [Fact]

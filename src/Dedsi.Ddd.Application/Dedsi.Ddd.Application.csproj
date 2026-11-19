@@ -6,6 +6,8 @@
 
     <ItemGroup>
       <PackageReference Include="Volo.Abp.Ddd.Application" Version="$(AbpFrameworkVersion)" />
+      <!-- 应用层可独立加载，需要单独对齐 ABP 带入的缓存组件。 -->
+      <PackageReference Include="Microsoft.Extensions.Caching.Hybrid" Version="$(MicrosoftVersion)" />
     </ItemGroup>
 
 </Project>

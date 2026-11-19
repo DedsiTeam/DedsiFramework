@@ -5,6 +5,13 @@
     </ItemGroup>
 
     <ItemGroup>
+      <!-- 将 SqlSugar 及数据库驱动带入的 .NET 组件对齐到目标框架。 -->
+      <PackageReference Include="Microsoft.Data.Sqlite" Version="$(MicrosoftVersion)" />
+      <PackageReference Include="Microsoft.Bcl.Cryptography" Version="$(MicrosoftVersion)" />
+      <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="$(MicrosoftVersion)" />
+      <PackageReference Include="System.DirectoryServices.Protocols" Version="$(MicrosoftVersion)" />
+      <PackageReference Include="System.Memory.Data" Version="$(MicrosoftVersion)" />
+      <PackageReference Include="System.Runtime.Caching" Version="$(MicrosoftVersion)" />
       <!-- 显式提升传递依赖，修复 PKCS 已知漏洞；需随生产 NuGet 包传递给使用方。 -->
       <PackageReference Include="System.Security.Cryptography.Pkcs" Version="$(MicrosoftVersion)" />
       <PackageReference Include="SqlSugarCore" Version="5.1.4.221" />

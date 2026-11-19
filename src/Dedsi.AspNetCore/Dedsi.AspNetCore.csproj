@@ -1,6 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <ItemGroup>
       <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="$(MicrosoftVersion)" />
+      <!-- ABP MVC 独立加载时也使用 .NET 11 的缓存和加密组件。 -->
+      <PackageReference Include="Microsoft.Extensions.Caching.Hybrid" Version="$(MicrosoftVersion)" />
+      <PackageReference Include="Microsoft.Bcl.Cryptography" Version="$(MicrosoftVersion)" />
       <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="$(AbpFrameworkVersion)" />
     </ItemGroup>
 
