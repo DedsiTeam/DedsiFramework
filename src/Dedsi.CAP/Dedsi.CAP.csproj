@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <!-- 将 CAP 带入的 .NET 组件对齐到目标框架，并传递给 NuGet 使用方。 -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="$(MicrosoftVersion)" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="$(MicrosoftVersion)" />
+    <PackageReference Include="System.Threading.RateLimiting" Version="$(MicrosoftVersion)" />
     <!-- 显式提升传递依赖，修复 PKCS 已知漏洞；需随生产 NuGet 包传递给使用方。 -->
       <PackageReference Include="System.Security.Cryptography.Pkcs" Version="$(MicrosoftVersion)" />
       <PackageReference Include="DotNetCore.CAP" Version="$(CapVersion)" />

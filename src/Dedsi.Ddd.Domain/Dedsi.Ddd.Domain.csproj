@@ -7,6 +7,8 @@
 
     <ItemGroup>
       <PackageReference Include="Volo.Abp.Ddd.Domain" Version="$(AbpFrameworkVersion)" />
+      <!-- 覆盖 ABP Caching 的旧版最低依赖。 -->
+      <PackageReference Include="Microsoft.Extensions.Caching.Hybrid" Version="$(MicrosoftVersion)" />
     </ItemGroup>
 
 </Project>
